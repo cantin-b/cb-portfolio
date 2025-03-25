@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pm2:start": "pm2 start npm --name 'cb-portfolio' -- start",
+    "pm2:startup": "pm2 startup && pm2 save",
+    "pm2:restart": "pm2 restart cb-portfolio",
+    "pm2:stop": "pm2 stop cb-portfolio",
+    "pm2:delete": "pm2 delete cb-portfolio"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.0",
