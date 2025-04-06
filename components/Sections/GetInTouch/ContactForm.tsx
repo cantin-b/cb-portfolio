@@ -21,6 +21,7 @@ import {
   Link,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { GOOGLE_CALENDAR } from '../../../lib/constants'
 
 const ContactForm = ({
   formData,
@@ -116,7 +117,7 @@ const ContactForm = ({
             <Text textAlign="center" fontSize="sm" pt={2}>
               <Trans i18nKey="contact.form.alternative" components={{
                 1: <Link
-                  href={process.env.GOOGLE_CALENDAR}
+                  href={GOOGLE_CALENDAR}
                   isExternal
                   fontWeight="medium"
                   color={useColorModeValue('#319795', '#9DECF9')}
