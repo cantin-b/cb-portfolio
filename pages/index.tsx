@@ -17,6 +17,10 @@ import About from 'components/Sections/About'
 import Experience from 'components/Sections/Experience'
 import ScrollMore from 'components/Misc/ScrollMore'
 import { Article } from 'types/article'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import type { UserConfig } from 'next-i18next'
+import i18nConfig from '../next-i18next.config' 
+
 // These are on bottom sections so no need to render it instantly
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
 
@@ -92,6 +96,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
                   lg: 'row',
                 }}
               >
+                {/* <About professionalYears={professionalYears} /> */}
                 <About />
                 <Avatar />
               </Box>
@@ -128,3 +133,11 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
 }
 
 export default Portfolio
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'], i18nConfig as UserConfig))
+    }
+  }
+}

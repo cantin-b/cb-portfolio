@@ -1,4 +1,6 @@
 import { memo, useState } from 'react'
+import { useTranslation, Trans } from 'react-i18next'
+import { useHasMounted } from 'hooks/useHasMounted'
 import { Heading, Text, Stack, Link, Icon, Box } from '@chakra-ui/react'
 import { Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
@@ -15,6 +17,9 @@ const GetInTouch = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const hasMounted = useHasMounted()
+  const { t } = useTranslation('common')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -59,15 +64,15 @@ const GetInTouch = () => {
       })
 
       if (res.ok) {
-        alert('Thank you! Your message has been sent.')
+        alert(t('contact.form.success'))
         setFormData({ name: '', email: '', message: '' })
         // Redirect to homepage after successful submit
         window.location.href = '/#'
       } else {
-        alert('Failed to send message.')
+        alert(t('contact.form.fail'))
       }
     } catch (error) {
-      alert('An error occurred. Please try again later.')
+      alert(t('contact.form.error'))
     } finally {
       setIsSubmitting(false)
     }
@@ -87,36 +92,15 @@ const GetInTouch = () => {
       >
         contact{' '}
       </Heading>
-      <Text variant="description">
-        Have a project in mind or something you'd like to discuss? I'm always open to hearing about new ideas
-        and opportunities. Feel free to reach out using the form below or{' '}
-        <Link
-          href="mailto:hello@cantinbartel.dev"
-          target="_blank"
-          rel="noreferrer"
-        >
-          email
-        </Link>
-        .
-        You can also check out my{' '}
-        <Link
-          href="https://github.com/cantin-b/cantin-b/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </Link>{' '}
-        or connect with me on{' '}
-        <Link
-          href="https://www.linkedin.com/in/cantin-bartel/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          LinkedIn
-        </Link>
-        .
-
-      </Text>
+      {hasMounted && (
+        <Text variant="description" textAlign="justify">
+          <Trans i18nKey="contact.intro" components={{
+            1: <Link href="mailto:hello@cantinbartel.dev" isExternal color="teal.200" />,
+            2: <Link href="https://github.com/cantin-b/cantin-b/" isExternal color="teal.200" />,
+            3: <Link href="https://www.linkedin.com/in/cantin-bartel/" isExternal color="teal.200" />,
+            }} />
+        </Text>
+      )}
       <ContactForm
         formData={formData}
         errors={errors}
@@ -135,7 +119,7 @@ const GetInTouch = () => {
           variant="description"
           textDecoration="none"
           rel="noreferrer"
-          href="https://github.com/klawingco/kl_portfolio"
+          href="https://github.com/cantin-b"
           target="_blank"
           _focus={{ boxShadow: 'none' }}
         >

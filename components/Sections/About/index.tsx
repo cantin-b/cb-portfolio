@@ -5,7 +5,8 @@ import Detail from './Detail'
 
 const SkillSetModal = dynamic(() => import('./SkillSetModal'))
 
-const AboutSection = () => {
+// const AboutSection = ({ professionalYears }): { professionalYears: number } => {
+const AboutSection = ()=> {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>

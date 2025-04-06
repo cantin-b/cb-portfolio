@@ -22,6 +22,7 @@ import { BiRightArrow } from 'react-icons/bi'
 import styles from './styles.module.css'
 import { ExperiencesList } from 'config/experience'
 import { mobileBreakpointsMap } from 'config/theme'
+import { useTranslation } from 'next-i18next'
 
 const ExperienceTab = () => {
   const { colorMode } = useColorMode()
@@ -46,6 +47,9 @@ const ExperienceTab = () => {
     lg: 'auto',
     xl: 'auto',
   })
+
+  const { t } = useTranslation('common')
+
   return (
     <Tabs id="experienceTabs" orientation={tabOrientation} isLazy>
       <TabList
@@ -95,7 +99,7 @@ const ExperienceTab = () => {
                   fontWeight="bold"
                   variant="description"
                 >
-                  {company.position}
+                  {t(company.position)}
                 </Text>
                 <Text as="span">
                   <Link
@@ -115,7 +119,7 @@ const ExperienceTab = () => {
                     variant="description"
                   >
                     {' '}
-                    {company.subDetail}
+                    {company.subDetail && t(company.subDetail)}
                   </Text>
                 </Text>
                 <Text fontSize="smaller">{company.duration}</Text>
@@ -134,8 +138,12 @@ const ExperienceTab = () => {
                       color={emphasis}
                       display="block"
                     />
-                    <Text as="span" display="block" variant="description">
-                      {roleDesc}
+                    <Text 
+                      as="span" 
+                      display="block" 
+                      variant="description"
+                      textAlign="justify">
+                      {t(roleDesc)}
                     </Text>
                   </ListItem>
                 ))}

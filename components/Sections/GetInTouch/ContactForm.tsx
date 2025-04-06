@@ -6,6 +6,8 @@ type ContactFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
+import { useTranslation, Trans } from 'next-i18next'
+import { useHasMounted } from 'hooks/useHasMounted';
 import {
   Box,
   Button,
@@ -27,6 +29,8 @@ const ContactForm = ({
   handleChange,
   handleSubmit
 }: ContactFormProps) => {
+  const hasMounted = useHasMounted()
+  const { t } = useTranslation('common')
   return (
     <Box
       maxW="lg"
@@ -40,20 +44,20 @@ const ContactForm = ({
       <form onSubmit={handleSubmit}>
         <Stack spacing={6}>
           <Heading size="lg" textAlign="center">
-            Get In Touch
+            {t('contact.form.title')}
           </Heading>
           <Text textAlign="center" color="gray.500">
-            Let’s collaborate on your next big idea.
+            {t('contact.form.subtitle')}
           </Text>
 
           <FormControl id="name">
-            <FormLabel>Name</FormLabel>
+            <FormLabel>{t('contact.form.name.label')}</FormLabel>
             <Input
               name="name"
-              placeholder="Your name"
+              placeholder={t('contact.form.name.placeholder')}
               value={formData.name}
               onChange={handleChange}
-              isInvalid={!!errors.name} 
+              isInvalid={!!errors.name}
               focusBorderColor={useColorModeValue('#319795', '#9DECF9')}
             />
             {errors.name && (
@@ -63,14 +67,14 @@ const ContactForm = ({
             )}
           </FormControl>
           <FormControl id="email">
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t('contact.form.email.label')}</FormLabel>
             <Input
               name="email"
               type="email"
-              placeholder="Your email"
+              placeholder={t('contact.form.email.placeholder')}
               value={formData.email}
               onChange={handleChange}
-              isInvalid={!!errors.email} 
+              isInvalid={!!errors.email}
               focusBorderColor={useColorModeValue('#319795', '#9DECF9')}
             />
             {errors.email && (
@@ -80,10 +84,10 @@ const ContactForm = ({
             )}
           </FormControl>
           <FormControl id="message">
-            <FormLabel>Message</FormLabel>
+            <FormLabel>{t('contact.form.message.label')}</FormLabel>
             <Textarea
               name="message"
-              placeholder="Project details: What do you need help with?"
+              placeholder={t('contact.form.message.placeholder')}
               rows={6}
               value={formData.message}
               onChange={handleChange}
@@ -106,23 +110,23 @@ const ContactForm = ({
             opacity={isSubmitting ? 0.7 : 1}
             transition="opacity 0.3s"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {isSubmitting ? t('contact.form.button.sending') : t('contact.form.button.send')}
           </Button>
-          <Text textAlign="center" fontSize="sm" pt={2}>
-            Prefer to schedule a call?{' '}
-            <Link
-              href={process.env.GOOGLE_CALENDAR}
-              isExternal
-              fontWeight="medium"
-              color={useColorModeValue('#319795', '#9DECF9')}
-              _hover={{
-                textDecoration: 'underline',
-                color: useColorModeValue('#2c8583', '#8dd7e3'),
-              }}
-            >
-              Book a Meeting with Google Meet
-            </Link>
-          </Text>
+          {hasMounted && (
+            <Text textAlign="center" fontSize="sm" pt={2}>
+              <Trans i18nKey="contact.form.alternative" components={{
+                1: <Link
+                  href={process.env.GOOGLE_CALENDAR}
+                  isExternal
+                  fontWeight="medium"
+                  color={useColorModeValue('#319795', '#9DECF9')}
+                  _hover={{
+                    textDecoration: 'underline',
+                    color: useColorModeValue('#2c8583', '#8dd7e3'),
+                  }} />,
+              }} />
+            </Text>
+          )}
         </Stack>
       </form>
     </Box>

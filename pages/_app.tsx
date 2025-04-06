@@ -4,8 +4,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { AnimatePresence } from 'framer-motion'
 import theme from 'config/theme'
 import FavIconProvider from 'components/Misc/FavIconProvider'
+import { appWithTranslation } from 'next-i18next'
 
-function KLSite({ Component, pageProps }: AppProps): JSX.Element {
+function CBSite({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <AnimatePresence mode="wait">
       <ChakraProvider theme={theme}>
@@ -16,4 +17,4 @@ function KLSite({ Component, pageProps }: AppProps): JSX.Element {
     </AnimatePresence>
   )
 }
-export default KLSite
+export default appWithTranslation(CBSite)

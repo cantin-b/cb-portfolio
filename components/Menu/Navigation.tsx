@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   Container,
   Button,
@@ -8,6 +9,7 @@ import {
   useColorMode,
   useColorModeValue,
   useBreakpointValue,
+  Text
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { motion, useCycle } from 'framer-motion'
@@ -16,6 +18,8 @@ import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
 import { easing, menuAnim } from 'config/animations'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
+// ----------
+import { useRouter } from 'next/router'
 
 const Navigation = () => {
   const { toggleColorMode, colorMode } = useColorMode()
@@ -37,6 +41,30 @@ const Navigation = () => {
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
   const Icon = IsDark ? SunIcon : MoonIcon
+
+  const router = useRouter()
+  const currentLocale = router.locale
+  const currentPath = router.asPath
+  const newLocale = currentLocale === 'en' ? 'fr' : 'en'
+
+  const { t } = useTranslation('common')
+
+  const getTargetDomain = () => {
+    if (typeof window === 'undefined') return ''
+    const currentHost = window.location.hostname
+
+    if (newLocale === 'fr') {
+      return currentHost.includes('localhost') ? 'fr.localhost:3000' : 'fr.cantinbartel.dev'
+    } else {
+      return currentHost.includes('localhost') ? 'localhost:3000' : 'www.cantinbartel.dev'
+    }
+  }
+
+  const handleLanguageSwitch = () => {
+    const target = `http://${getTargetDomain()}${currentPath}`
+    window.location.href = target
+  }
+
   const onMenuItemClick = useCallback(
     (e: React.MouseEvent<any>) => {
       e.stopPropagation()
@@ -48,6 +76,29 @@ const Navigation = () => {
   )
   const scrollDirection = useScrollDirection()
 
+  const LanguageToggleButton = (
+    <Button
+      onClick={handleLanguageSwitch}
+      variant="ghost"
+      fontSize="sm"
+      fontWeight="normal"
+      opacity={0.8}
+      _hover={{ opacity: 1 }}
+      marginLeft={-0.5}
+    >
+      <Text
+        as="span"
+        fontWeight="bold"
+        textDecoration="underline"
+        color={IsDark ? '#9DECF9' : "#319795"}
+      >
+        {currentLocale?.toUpperCase()}
+      </Text>
+      <Text as="span" mx={1} opacity={0.5}>/</Text>
+      <Text as="span" opacity={0.6}>{newLocale.toUpperCase()}</Text>
+    </Button>
+  )
+
   return (
     <>
       <Box
@@ -58,14 +109,18 @@ const Navigation = () => {
         zIndex={100}
         top="3%"
       >
-        <IconButton
-          aria-label="Color Mode"
-          variant="ghost"
-          icon={<Icon />}
-          boxShadow="none"
-          onClick={toggleColorMode}
-          padding={0}
-        />
+        <Flex align="center">
+          <IconButton
+            aria-label="Color Mode"
+            variant="ghost"
+            icon={<Icon />}
+            boxShadow="none"
+            onClick={toggleColorMode}
+            padding={0}
+          />
+          <Text mx={2}>|</Text>
+          {LanguageToggleButton}
+        </Flex>
         <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
       </Box>
       <MotionContainer
@@ -132,7 +187,7 @@ const Navigation = () => {
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
-              About
+              {t('navigation.about')}
             </Button>
           </Box>
           <Box
@@ -153,7 +208,7 @@ const Navigation = () => {
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
-              Experience
+              {t('navigation.experience')}
             </Button>
           </Box>
           <Box
@@ -174,19 +229,23 @@ const Navigation = () => {
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
-              Contact
+              {t('navigation.contact')}
             </Button>
           </Box>
           {!isMobile && (
             <Box>
-              <IconButton
-                marginX={1}
-                aria-label="Color Mode"
-                variant="ghost"
-                icon={<Icon />}
-                boxShadow="none"
-                onClick={toggleColorMode}
-              />
+              <Flex align="center">
+                <IconButton
+                  marginX={1}
+                  aria-label="Color Mode"
+                  variant="ghost"
+                  icon={<Icon />}
+                  boxShadow="none"
+                  onClick={toggleColorMode}
+                />
+                <Text mx={2}>|</Text>
+                {LanguageToggleButton}
+              </Flex>
             </Box>
           )}
         </Flex>

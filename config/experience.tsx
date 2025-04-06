@@ -11,7 +11,7 @@ export type CompanyDetail = {
     light: string
     dark?: string
   }
-  roles?: JSX.Element[]
+  roles?: string[]
 }
 
 export const Experiences: {
@@ -20,73 +20,53 @@ export const Experiences: {
   freelance: {
     name: 'Freelance',
     longName: 'Independent Freelance Projects',
-    subDetail: 'Remote full-stack development services for global clients',
+    subDetail: 'experience.jobs.freelance.sub-detail',
     url: '/#',
-    position: 'Full-Stack Developer',
+    position: 'experience.jobs.freelance.position',
     duration: 'Oct 2023 - Present',
     logo: {
       light: '/logos/CB_logo.png',
       dark: '/logos/CB_logo_dark.png',
     },
     roles: [
-      <>
-        Work on frontend integration and responsive UI implementation.
-      </>,
-      <>
-        Create and integrate RESTful APIs with third-party services.
-      </>,
-      <>
-        Build full-stack web applications using modern technologies like React, Node.js, and Next.js.
-      </>,
-      <>
-        Develop custom e-commerce plateforms using WooCommerce.
-      </>,
-      <>
-        Handle VPS-based deployment, NGINX reverse proxy, and process management with PM2 in a Linux environment.
-      </>,
+      'experience.jobs.freelance.missions.0',
+      'experience.jobs.freelance.missions.1',
+      'experience.jobs.freelance.missions.2',
+      'experience.jobs.freelance.missions.3',
+      'experience.jobs.freelance.missions.4',
     ],
   },
   wizito: {
     name: 'Wizito',
     longName: 'Wizito SAS',
-    subDetail: 'B2B Photo Booth Rental Services Paris & Lyon - France',
+    subDetail: 'experience.jobs.wizito.sub-detail',
     url: 'https://www.wizito.com/en',
-    position: 'Full-Stack Developer',
+    position: 'experience.jobs.wizito.position',
     duration: 'Sep 2021 - Sep 2023',
     logo: {
       light: '/logos/wizito_logo_black.png',
       dark: '/logos/wizito_logo_white.png',
     },
     roles: [
-      <>
-        Modernized a legacy codebase and improved overall maintainability.
-      </>,
-      <>
-        Helped migrate a monolithic Ruby app into Express and Strapi-based microservices.
-      </>,
-      <>
-        Built frontend layouts from mockups for the English-market website.
-      </>,
-      <>
-        Developed frontend features for the internal back-office used by company staff.
-      </>,
+      'experience.jobs.wizito.missions.0',
+      'experience.jobs.wizito.missions.1',
+      'experience.jobs.wizito.missions.2',
+      'experience.jobs.wizito.missions.3',
     ],
   },
   sabca: {
     name: 'Sabca',
     longName: 'Sabca - Sabena Engineering',
-    subDetail: 'F-16 maintenance site in Gosselies - Belgium',
+    subDetail: 'experience.jobs.sabca.sub-detail',
     url: 'https://www.sabena-engineering.com/defence/',
-    position: 'F-16 Aircraft Technician',
+    position: 'experience.jobs.sabca.position',
     duration: 'Sep 2018 - Mar 2021',
     logo: {
       light: '/logos/sabca_logo.png',
       dark: '/logos/sabca_logo_dark.png',
     },
     roles: [
-      <>
-        Worked as an aircraft technician on F-16 fighter jets for both the Belgian and Dutch military fleets.
-      </>,
+      'experience.jobs.sabca.missions.0',
     ],
   }
 }

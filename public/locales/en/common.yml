@@ -1,0 +1,92 @@
+navigation:
+  about: "About"
+  experience: "Experience"
+  contact: "Contact"
+sidebar:
+  greeting: "Hi there! I'm"
+  role: "Full-Stack Developer"
+  thanks: "Thanks for stopping by!"
+  description: "I’m passionate about building elegant, high-performance websites and web applications."
+  idea: "Thinking about your next project?"
+  support: I’d be happy to help you bring it to life.
+  button: "Get in touch"
+about:
+  title: "what i do"
+  description: >
+    Over the past {{professionalYears}}, I’ve been building and maintaining web applications 
+    as a <b>Full-Stack Developer</b>, solving real-world problems using clean code and modern 
+    tools. I work across the stack, from modernizing legacy codebases and implementing
+    <b>frontend</b> integration, to integrating <b>APIs</b> and building <b>backend</b> features.
+  tech-stack-button: "See my full tech stack"
+  modal: 
+    title: "Full Skill Set List"
+    languages: "Languages"
+    devops: "DevOps & Deployment"
+    databases: "Databases"
+experience:
+  title: "background"
+  description: >
+    I started working as a developer in September 2021, first for a French startup, then as a 
+    freelancer. It's a profession I'm passionate about.
+  jobs:
+    freelance:
+      position: "Full-Stack Developer"
+      company: "Freelance"
+      sub-detail: "Remote full-stack development services for global clients"
+      date: "Oct 2023 - Present"
+      missions:
+        - "Work on frontend integration and responsive UI implementation."
+        - "Create and integrate RESTful APIs with third-party services."
+        - "Build full-stack web applications using modern technologies like React, Node.js, and Next.js."
+        - "Develop custom e-commerce plateforms using WooCommerce."
+        - "Handle VPS-based deployment, NGINX reverse proxy, and process management with PM2 in a Linux environment."
+
+    wizito:
+      position: "Développeur Full-Stack"
+      company: "Wizito"
+      sub-detail: "B2B Photo Booth Rental Services Paris & Lyon - France"
+      date: "Sep 2021 – Sep 2023"
+      missions:
+        - "Modernized a legacy codebase and improved overall maintainability."
+        - "Helped migrate a monolithic Ruby app into Express and Strapi-based microservices."
+        - "Built frontend layouts from mockups for the English-market website."
+        - "Developed frontend features for the internal back-office used by company staff."
+    sabca:
+      position: "F-16 Aircraft Technician"
+      company: "Sabca"
+      sub-detail: "F-16 maintenance site in Gosselies - Belgium"
+      date: "Sep 2018 – Mar 2021"
+      missions:
+        - "Worked as an aircraft technician on F-16 fighter jets for both the Belgian and Dutch military fleets."
+education:
+  title: "education"
+  computer-science: 
+    title: "Bachelor of Computer Science"
+    school: "Conservatoire National des Arts et Métiers • France"
+  aircraft-engineering:
+    title: "Bachelor of Aircraft Engineering"
+    school: "Haute École Condorcet • Belgium"
+contact:
+  title: "contact"
+  intro: >
+    Have a project in mind or something you'd like to discuss? I'm always open to hearing about new ideas and opportunities.  
+    Feel free to reach out using the form below or via <1>email</1>. You can also check out my <2>GitHub</2> or connect with me on <3>LinkedIn</3>.
+  form:
+    title: "Get In Touch"
+    subtitle: "Let’s collaborate on your next big idea."
+    name:
+      label: "Name"
+      placeholder: "Your name"
+    email:
+      label: "Email"
+      placeholder: "Your email"
+    message:
+      label: "Message"
+      placeholder: "Project details: What do you need help with?"
+    button: 
+      send: "Send Message"
+      sending: "Sending..."
+    alternative: "Prefer to schedule a call? <1>Book a Meeting with Google Meet</1>"
+    success: "Thank you! Your message has been sent."
+    fail: "Failed to send message."
+    error: "An error occurred. Please try again later."

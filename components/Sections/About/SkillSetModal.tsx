@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import styles from './styles.module.css'
 import { Skill, Skills, splitSkills } from 'config/skills'
+import { useTranslation, UseTranslation } from 'next-i18next'
 
 type ISkillSetModal = {
   isOpen: boolean
@@ -33,6 +34,7 @@ const SkillList = ({
 }) => {
   const emphasis = useColorModeValue('teal.500', 'cyan.200')
   const [colOne, colTwo = []] = columns
+
   return (
     <>
       <Heading as="div" size="sm" paddingBottom={1} variant="description">
@@ -84,6 +86,7 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
     Skills.database.slice(0, 2),
     Skills.database.slice(2),
   ]
+  const { t } = useTranslation('common')
   
   return (
     <Modal
@@ -94,14 +97,14 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Full Skill Set List</ModalHeader>
+        <ModalHeader>{t('about.modal.title')}</ModalHeader>
         <ModalCloseButton />
         <ModalBody className={styles.skillModal}>
-          <SkillList title="Languages" columns={languages} />
+          <SkillList title={t('about.modal.languages')} columns={languages} />
           <SkillList title="Backend" columns={backendCols} />
           <SkillList title="Frontend" columns={frontendCols} />
-          <SkillList title="DevOps & Deployment" columns={devopsCols} />
-          <SkillList title="Databases" columns={dataBaseCols} />
+          <SkillList title={t('about.modal.devops')} columns={devopsCols} />
+          <SkillList title={t('about.modal.databases')} columns={dataBaseCols} />
           <SkillList title="CMS & eCommerce" columns={cmsCols} />
         </ModalBody>
       </ModalContent>

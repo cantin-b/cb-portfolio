@@ -1,0 +1,97 @@
+navigation:
+  about: "À propos"
+  experience: "Expérience"
+  contact: "Contact"
+sidebar:
+  greeting: "Bonjour ! Je suis"
+  name: "Cantin"
+  role: "Développeur Full-Stack"
+  thanks: "Merci pour votre visite!"
+  description: "Passionné par le développement, je conçois des sites et des applications web à la fois performants et élégants."
+  idea: "Un besoin, une idée ?" 
+  support: "Je serais ravi de vous accompagner."
+  button: "Me contacter"
+about:
+  title: "ce que je fais"
+  description: >
+    Depuis plus de {{professionalYears}} ans, je développe et maintiens des applications web en tant
+    que <b>Développeur Full-Stack</b>, en résolvant des problématiques concrètes à l’aide d'd’outils modernes et d’un code  propre et bien structuré. J’interviens sur l’ensemble de la stack technique, de la modernisation de bases de code existantes et de l’intégration <b>frontend</b>, à l’intégration d’<b>APIs</b> et au développement de fonctionnalités <b>backend</b>.
+  tech-stack-button: "Voir ma stack technique"
+  modal: 
+    title: "Liste des compétences"
+    languages: "Langages"
+    devops: "DevOps & Déploiement"
+    databases: "Bases de données"
+
+experience:
+  title: "parcours"
+  description: >
+    J’ai commencé à travailler comme développeur en septembre 2021, d’abord pour une startup française,
+    puis en tant que freelance. C’est un métier qui me passionne.
+  jobs:
+    freelance:
+      position: "Développeur Full-Stack"
+      company: "#Freelance"
+      sub-detail: "Services de développement full-stack"
+      date: "Oct 2023 – Présent"
+      missions:
+        - "Intégration frontend et mise en œuvre d’interfaces utilisateur responsives."
+        - "Création et intégration d’API RESTful avec des services tiers."
+        - "Développement d'applications web full-stack avec React, Node.js et Next.js."
+        - "Création de plateformes e-commerce sur mesure avec WooCommerce."
+        - "Déploiement sur VPS, configuration de NGINX et gestion des processus avec PM2 sur Linux."
+
+    wizito:
+      position: "Développeur Full-Stack"
+      company: "#Wizito"
+      sub-detail: "Services de location de bornes photo B2B à Paris et Lyon - France"
+      date: "Sep 2021 – Sep 2023"
+      missions:
+        - "Modernisation du code existant et amélioration de la maintenabilité de ce dernier"
+        - "Migration d’une application Ruby monolithique vers des microservices en Express et Strapi."
+        - "Développement d’interfaces frontend à partir de maquettes pour le site anglophone."
+        - "Création de fonctionnalités frontend pour le back-office interne de l’équipe."
+
+    sabca:
+      position: "Technicien Aéronautique F-16"
+      company: "#Sabca"
+      sub-detail: "Site de maintenance F-16 à Gosselies – Belgique"
+      date: "Sep 2018 – Mar 2021"
+      missions:
+        - "Maintenance des F-16 pour les flottes militaires belge et néerlandaise en tant que technicien aéronautique."
+education:
+  title: "formation"
+  computer-science: 
+    title: "Licence en Informatique générale"
+    school: "Conservatoire National des Arts et Métiers • France"
+  aircraft-engineering:
+    title: "Licence en Aérotechnique"
+    school: "Haute École Condorcet • Belgique"
+contact:
+  title: "contact"
+  intro: >
+    Vous avez un projet en tête ou simplement envie d’échanger ?  
+    Je suis toujours ouvert à découvrir de nouvelles idées et opportunités.  
+    N’hésitez pas à me contacter via le formulaire ci-dessous ou par <1>e-mail</1>.  
+    Vous pouvez également consulter mon <2>GitHub</2> ou me joindre sur <3>LinkedIn</3>.
+  form:
+    title: "Me contacter"
+    subtitle: "Collaborons ensemble sur votre prochain projet."
+    name:
+      label: "Nom"
+      placeholder: "Votre nom"
+    email:
+      label: "Email"
+      placeholder: "Votre adresse email"
+    message:
+      label: "Message"
+      placeholder: "Détails du projet : comment puis-je vous aider ?"
+    button: 
+      send: "Envoyer"
+      sending: "Envoi en cours..."
+    alternative: >
+      Vous préférez planifier une visio ?<br />
+      <1>Réservez un créneau sur Google Meet</1>
+    success: "Merci ! Votre message a bien été envoyé."
+    fail: "Échec de l’envoi du message."
+    error: "Une erreur est survenue. Veuillez réessayer plus tard."

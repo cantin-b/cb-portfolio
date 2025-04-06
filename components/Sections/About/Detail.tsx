@@ -23,6 +23,8 @@ import {
 import { AiOutlineApi } from "react-icons/ai"
 import { IoMdOpen } from 'react-icons/io'
 
+import { useTranslation, Trans } from 'next-i18next'
+
 type ISkillSetModal = {
   onOpen(): void
 }
@@ -34,6 +36,10 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
   const diffInMilliseconds = currentDate.getTime() - startDate.getTime();
   const diffInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
   const professionalYears = Math.floor(diffInYears);
+
+  const { t } = useTranslation('common')
+
+  console.log(t('about.title'))
 
   return (
     <Stack
@@ -49,13 +55,15 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
           fontVariantCaps: 'small-caps',
         }}
       >
-        What i do.
+        {t('about.title')}
       </Heading>
-      <Text variant="description">
-        Over the past {professionalYears} years, I’ve been building and maintaining web applications as a <b>Full-Stack Developer</b>,
-        solving real-world problems with clean code and modern tools.
-        I work across the stack — from modernizing legacy codebases, building <b>backend</b> features and architecture, integrating <b>APIs</b>,
-        to implementing and maintaining <b>frontend</b> integration.
+      <Text variant="description" textAlign="justify">
+        <Trans 
+          i18nKey="about.description"
+          values={{ professionalYears }}
+          components={{ b: <b /> }}
+        />
+        {/* {t('about.description', { professionalYears })} */}
       </Text>
 
       <SimpleGrid columns={2} spacing={4}>
@@ -103,7 +111,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             textAlign="left"
             onClick={onOpen}
           >
-            See my full tech stack <Icon as={IoMdOpen} />
+            {t('about.tech-stack-button')} <Icon as={IoMdOpen} />
           </Text>
         </Box>
       </SimpleGrid>

@@ -8,7 +8,7 @@ import {
   Box,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { motion, useTransform } from 'framer-motion'
 import styles from './styles.module.css'
 import {
   fadeInUp,
@@ -17,6 +17,7 @@ import {
   stagger,
   scaleUp,
 } from 'config/animations'
+import { useTranslation } from 'next-i18next'
 
 const Sidebar = () => {
   const { colorMode } = useColorMode()
@@ -27,6 +28,8 @@ const Sidebar = () => {
   const MotionStack = motion(Stack)
   const MotionButton = motion(Button)
   const MotionBox = motion(Box)
+
+  const { t } = useTranslation('common')
 
   return (
     <MotionBox
@@ -59,7 +62,7 @@ const Sidebar = () => {
             variant="accent"
             fontWeight="light"
           >
-            Hey there! I am
+            {t('sidebar.greeting')}
           </MotionText>
           <MotionHeading
             as="h2"
@@ -79,21 +82,24 @@ const Sidebar = () => {
             className={styles.marginTopSmall}
             variants={fadeInUp}
           >
-            Full-Stack Developer
+            {t('sidebar.role')}
           </MotionHeading>
           <MotionText
             variant="description"
+            textAlign="justify"
             fontSize="small"
             paddingRight={{ lg: '12' }}
             variants={fadeInUp}
             maxWidth={{ base: '100%', lg: '80%' }}
           >
-            How nice of you to look at my personal website,
+            {t('sidebar.thanks')}
+            <br />
+            <br/>
+            {t('sidebar.description')} {" "}
             <Text variant="emphasis" as="span">
-              {' '}
-              Thank you!
+              {t('sidebar.idea')} {" "}
             </Text>
-            <br />I’m Cantin, a full-stack developer who thrives on creating modern web applications. I specialize in React, Node.js, and enjoy working across the entire stack, from backend APIs to clean and responsive front-end UIs.
+            {t('sidebar.support')}
           </MotionText>
           <MotionButton
             size="lg"
@@ -109,7 +115,7 @@ const Sidebar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            Get in touch!
+            {t('sidebar.button')}
           </MotionButton>
         </MotionStack>
       </Container>
