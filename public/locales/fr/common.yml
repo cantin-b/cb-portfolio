@@ -15,7 +15,7 @@ about:
   title: "ce que je fais"
   description: >
     Depuis plus de {{professionalYears}} ans, je développe et maintiens des applications web en tant
-    que <b>Développeur Full-Stack</b>, en résolvant des problématiques concrètes à l’aide d'd’outils modernes et d’un code  propre et bien structuré. J’interviens sur l’ensemble de la stack technique, de la modernisation de bases de code existantes et de l’intégration <b>frontend</b>, à l’intégration d’<b>APIs</b> et au développement de fonctionnalités <b>backend</b>.
+    que <b>Développeur Full-Stack</b>, en résolvant des problématiques concrètes à l’aide d’outils modernes et d’un code  propre et bien structuré. J’interviens sur l’ensemble de la stack technique, de la modernisation de bases de code existantes et de l’intégration <b>frontend</b>, à l’intégration d’<b>APIs</b> et au développement de fonctionnalités <b>backend</b>.
   tech-stack-button: "Voir ma stack technique"
   modal: 
     title: "Liste des compétences"
