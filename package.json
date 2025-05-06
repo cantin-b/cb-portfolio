@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start --port $PORT",
     "lint": "next lint",
     "pm2:start": "pm2 start npm --name 'cb-portfolio' -- start",
     "pm2:startup": "pm2 startup && pm2 save",
