@@ -9,6 +9,7 @@ import { RiMouseLine } from 'react-icons/ri'
 import { motion, Variants, AnimatePresence } from 'framer-motion'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 import { mobileBreakpointsMap } from 'config/theme'
+import { getEmailHref } from 'hooks/getEmailHref'
 
 const scrollMoreVariants: Variants = {
   initial: {
@@ -103,7 +104,7 @@ const ScrollMore = () => {
               as="a"
               paddingY={3}
               fontFamily="monospace"
-              href="mailto:hello@cantinbartel.dev"
+              href={getEmailHref()}
               target="_blank"
               rel="noreferrer"
               color={emailColor}

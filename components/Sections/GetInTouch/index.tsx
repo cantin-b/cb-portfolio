@@ -5,6 +5,8 @@ import { Heading, Text, Stack, Link, Icon, Box } from '@chakra-ui/react'
 import { Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
+import { getEmailHref } from 'hooks/getEmailHref'
+import { EMAIL_CONTACT } from 'lib/constants'
 
 
 type FormData = {
@@ -95,7 +97,7 @@ const GetInTouch = () => {
       {hasMounted && (
         <Text variant="description" textAlign="justify">
           <Trans i18nKey="contact.intro" components={{
-            1: <Link href="mailto:hello@cantinbartel.dev" isExternal color="teal.200" />,
+            1: <Link href={getEmailHref('hello@cantinbartel.dev', t('email-templating.subject'), t('email-templating-body'))} isExternal color="teal.200" />,
             2: <Link href="https://github.com/cantin-b/cantin-b/" isExternal color="teal.200" />,
             3: <Link href="https://www.linkedin.com/in/cantin-bartel/" isExternal color="teal.200" />,
             }} />
