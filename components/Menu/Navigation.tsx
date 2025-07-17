@@ -232,6 +232,27 @@ const Navigation = () => {
               {t('navigation.contact')}
             </Button>
           </Box>
+          <Box
+            width={{ base: '100%', lg: 'auto' }}
+            textAlign={{ base: 'center', lg: 'left' }}
+          >
+            <Button
+              fontWeight="light"
+              variant="ghost"
+              fontSize={menuButtonSize}
+              letterSpacing={2}
+              className={btnClassName}
+              padding={2}
+              marginX={2}
+              as="a"
+              href="https://blog.cantinbartel.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              // onClick={onMenuItemClick}
+            >
+              Blog
+            </Button>
+          </Box>
           {!isMobile && (
             <Box>
               <Flex align="center">
