@@ -24,7 +24,7 @@ navigation:
   contact: "Contact"
 sidebar:
   greeting: "Hi there! I'm"
-  role: "Freelance Full-Stack Developer (Node.js, React, Next.js) • SaaS • CRM • AI Engineer"
+  role: "Freelance Software Engineer"
   thanks: "Thanks for stopping by!"
   description: "I build elegant, high-performance websites and web applications with React/Next.js, and robust Node.js backends."
   idea: "Thinking about your next project?"
@@ -37,7 +37,7 @@ about:
     as a <b>Full-Stack Developer</b>, solving real-world problems using clean code and modern 
     tools. I work across the stack, from modernizing legacy codebases and implementing
     <b>frontend</b> integration, to integrating <b>APIs</b> and building <b>backend</b> features.
-    I also help clients ship <b>SaaS</b> products and custom <b>CRM / back-office</b> tools, and integrate <b>AI</b> features (LLMs, automation, RAG) when it makes sense.
+    I also help clients ship <b>SaaS</b> products and custom <b>CRM / back-office</b> tools.
   tech-stack-button: "See my full tech stack"
   modal: 
     title: "Full Skill Set List"

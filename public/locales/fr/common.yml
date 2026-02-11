@@ -25,7 +25,7 @@ navigation:
 sidebar:
   greeting: "Bonjour ! Je suis"
   name: "Cantin"
-  role: "Développeur freelance Full-Stack (Node.js, React, Next.js) • SaaS • CRM • IA"
+  role: "Développeur freelance"
   thanks: "Merci pour votre visite!"
   description: "Je conçois des sites internet et des applications web performants (React/Next.js), ainsi que des backends Node.js robustes."
   idea: "Un besoin, une idée ?" 
@@ -36,7 +36,7 @@ about:
   description: >
     Depuis plus de {{professionalYears}} ans, je développe et maintiens des applications web en tant
     que <b>Développeur Full-Stack</b>, en résolvant des problématiques concrètes à l’aide d’outils modernes et d’un code  propre et bien structuré. J’interviens sur l’ensemble de la stack technique, de la modernisation de bases de code existantes et de l’intégration <b>frontend</b>, à l’intégration d’<b>APIs</b> et au développement de fonctionnalités <b>backend</b>.
-    J’accompagne aussi mes clients sur des produits <b>SaaS</b> et des <b>CRM / back-offices</b> sur mesure, ainsi que sur des intégrations <b>IA</b> (LLM, automatisations, RAG) quand cela apporte de la valeur.
+    J’accompagne aussi mes clients sur des produits <b>SaaS</b> et des <b>CRM / back-offices</b>.
   tech-stack-button: "Voir ma stack technique"
   modal: 
     title: "Liste des compétences"
