@@ -5,11 +5,13 @@ import {
   Button,
   Flex,
   Box,
+  IconButton,
   useColorMode,
   useColorModeValue,
   useBreakpointValue,
   Text
 } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { motion, useCycle } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
@@ -19,9 +21,11 @@ import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 // ----------
 import { useRouter } from 'next/router'
 import { SITE_DOMAIN_EN, SITE_DOMAIN_FR } from 'lib/constants'
+import { useColorModePreference } from 'hooks/useColorModePreference'
 
 const Navigation = () => {
-  const { colorMode } = useColorMode()
+  const { colorMode, setColorMode } = useColorMode()
+  const { setPreference } = useColorModePreference()
   const MotionContainer = motion(Container)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
@@ -39,6 +43,13 @@ const Navigation = () => {
 
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
+  const ThemeIcon = IsDark ? SunIcon : MoonIcon
+
+  const handleThemeToggle = () => {
+    const next = IsDark ? 'light' : 'dark'
+    setPreference(next)
+    setColorMode(next)
+  }
 
   const router = useRouter()
   const currentLocale = router.locale
@@ -110,6 +121,15 @@ const Navigation = () => {
         top="3%"
       >
         <Flex align="center">
+          <IconButton
+            aria-label="Theme"
+            variant="ghost"
+            icon={<ThemeIcon />}
+            boxShadow="none"
+            onClick={handleThemeToggle}
+            padding={0}
+          />
+          <Text mx={2}>|</Text>
           {LanguageToggleButton}
         </Flex>
         <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
@@ -268,6 +288,15 @@ const Navigation = () => {
           {!isMobile && (
             <Box>
               <Flex align="center">
+                <IconButton
+                  marginX={1}
+                  aria-label="Theme"
+                  variant="ghost"
+                  icon={<ThemeIcon />}
+                  boxShadow="none"
+                  onClick={handleThemeToggle}
+                />
+                <Text mx={2}>|</Text>
                 {LanguageToggleButton}
               </Flex>
             </Box>

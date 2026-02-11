@@ -41,7 +41,7 @@ class MyDocument extends Document<MyDocumentProps> {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html:
-                "try{localStorage.removeItem('chakra-ui-color-mode')}catch(e){}",
+                "try{var p=localStorage.getItem('cb-color-mode-preference');if(p==='light'||p==='dark'){localStorage.setItem('chakra-ui-color-mode',p)}else{localStorage.removeItem('chakra-ui-color-mode')}}catch(e){}",
             }}
           />
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
