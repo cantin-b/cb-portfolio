@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { useHasMounted } from 'hooks/useHasMounted'
 import { Heading, Text, Stack, Link, Icon, Box } from '@chakra-ui/react'
 import { Variants } from 'framer-motion'
