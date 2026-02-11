@@ -13,6 +13,7 @@ const DetailSection = () => {
       spacing={{ base: 6, xl: 8 }}
     >
       <Heading
+        as="h2"
         size="2xl"
         style={{
           fontVariantCaps: 'small-caps',

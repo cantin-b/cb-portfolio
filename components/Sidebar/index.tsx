@@ -65,7 +65,7 @@ const Sidebar = () => {
             {t('sidebar.greeting')}
           </MotionText>
           <MotionHeading
-            as="h2"
+            as="h1"
             size={surNameSize}
             className={styles.marginTopForce}
             textTransform="uppercase"
@@ -73,10 +73,10 @@ const Sidebar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            Cantin
+            Cantin Bartel
           </MotionHeading>
           <MotionHeading
-            as="h3"
+            as="h2"
             size="md"
             variant="emphasis"
             className={styles.marginTopSmall}

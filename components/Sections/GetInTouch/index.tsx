@@ -85,12 +85,13 @@ const GetInTouch = () => {
       as="footer"
     >
       <Heading
+        as="h2"
         size="2xl"
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
-        contact{' '}
+        {t('contact.title')}
       </Heading>
       {hasMounted && (
         <Text variant="description" textAlign="justify">

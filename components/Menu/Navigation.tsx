@@ -20,6 +20,7 @@ import { easing, menuAnim } from 'config/animations'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 // ----------
 import { useRouter } from 'next/router'
+import { SITE_DOMAIN_EN, SITE_DOMAIN_FR } from 'lib/constants'
 
 const Navigation = () => {
   const { toggleColorMode, colorMode } = useColorMode()
@@ -54,14 +55,15 @@ const Navigation = () => {
     const currentHost = window.location.hostname
 
     if (newLocale === 'fr') {
-      return currentHost.includes('localhost') ? 'fr.localhost:3000' : 'fr.cantinbartel.dev'
+      return currentHost.includes('localhost') ? 'fr.localhost:3000' : SITE_DOMAIN_FR
     } else {
-      return currentHost.includes('localhost') ? 'localhost:3000' : 'www.cantinbartel.dev'
+      return currentHost.includes('localhost') ? 'localhost:3000' : SITE_DOMAIN_EN
     }
   }
 
   const handleLanguageSwitch = () => {
-    const target = `http://${getTargetDomain()}${currentPath}`
+    const protocol = typeof window === 'undefined' ? 'https:' : window.location.protocol
+    const target = `${protocol}//${getTargetDomain()}${currentPath}`
     window.location.href = target
   }
 
@@ -183,11 +185,32 @@ const Navigation = () => {
               padding={2}
               marginX={2}
               as="a"
-              href={isMobile ? '#aboutMe' : '#'}
+              href="#aboutMe"
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
               {t('navigation.about')}
+            </Button>
+          </Box>
+          <Box
+            width={{ base: '100%', lg: 'auto' }}
+            textAlign={{ base: 'center', lg: 'left' }}
+            marginY={{ base: 2, lg: 0 }}
+          >
+            <Button
+              fontWeight="light"
+              variant="ghost"
+              fontSize={menuButtonSize}
+              letterSpacing={2}
+              className={btnClassName}
+              padding={2}
+              marginX={2}
+              as="a"
+              href="#services"
+              rel="noreferrer"
+              onClick={onMenuItemClick}
+            >
+              {t('navigation.services')}
             </Button>
           </Box>
           <Box

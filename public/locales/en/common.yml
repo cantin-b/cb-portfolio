@@ -1,12 +1,17 @@
+seo:
+  title: "Cantin Bartel | Freelance Full-Stack Developer (Node.js, React, Next.js) • SaaS • CRM • AI Engineer"
+  description: "Freelance full-stack developer specialized in Node.js, React and Next.js. I build websites, SaaS products and custom CRM/back-office tools, and I integrate AI features (LLMs, automation, RAG)."
+  keywords: "freelance developer, freelance full stack developer, node.js freelancer, next.js freelancer, react freelancer, saas development, crm development, web app development, software development, ai engineer, api development"
 navigation:
   about: "About"
+  services: "Services"
   experience: "Experience"
   contact: "Contact"
 sidebar:
   greeting: "Hi there! I'm"
-  role: "Full-Stack Developer"
+  role: "Freelance Full-Stack Developer (Node.js, React, Next.js) • SaaS • CRM • AI Engineer"
   thanks: "Thanks for stopping by!"
-  description: "I’m passionate about building elegant, high-performance websites and web applications."
+  description: "I build elegant, high-performance websites and web applications with React/Next.js, and robust Node.js backends."
   idea: "Thinking about your next project?"
   support: I’d be happy to help you bring it to life.
   button: "Get in touch"
@@ -17,12 +22,22 @@ about:
     as a <b>Full-Stack Developer</b>, solving real-world problems using clean code and modern 
     tools. I work across the stack, from modernizing legacy codebases and implementing
     <b>frontend</b> integration, to integrating <b>APIs</b> and building <b>backend</b> features.
+    I also help clients ship <b>SaaS</b> products and custom <b>CRM / back-office</b> tools, and integrate <b>AI</b> features (LLMs, automation, RAG) when it makes sense.
   tech-stack-button: "See my full tech stack"
   modal: 
     title: "Full Skill Set List"
     languages: "Languages"
     devops: "DevOps & Deployment"
     databases: "Databases"
+services:
+  title: "services"
+  intro: "From a simple website to a full product, I help you design, build and deploy software that converts and scales."
+  items:
+    - "SEO-friendly websites and landing pages (Next.js / React)"
+    - "SaaS development (auth, dashboards, billing, multi-tenant)"
+    - "Custom CRM / back-office tools (roles, workflows, integrations)"
+    - "Node.js API development (REST, third-party integrations)"
+    - "AI features (LLM integrations, RAG, automation workflows)"
 experience:
   title: "background"
   description: >

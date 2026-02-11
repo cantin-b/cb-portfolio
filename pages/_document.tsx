@@ -1,9 +1,27 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  type DocumentContext,
+} from 'next/document'
 
-class MyDocument extends Document {
+type MyDocumentProps = {
+  locale?: string
+}
+
+class MyDocument extends Document<MyDocumentProps> {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return {
+      ...initialProps,
+      locale: ctx.locale || 'en',
+    }
+  }
+
   render() {
     return (
-      <Html lang="en">
+      <Html lang={this.props.locale || 'en'}>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

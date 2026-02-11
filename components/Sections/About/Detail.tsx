@@ -39,8 +39,6 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 
   const { t } = useTranslation('common')
 
-  console.log(t('about.title'))
-
   return (
     <Stack
       width={{ base: '100%', lg: '70%' }}
@@ -48,7 +46,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
       as="section"
     >
       <Heading
-        as="h4"
+        as="h2"
         size="2xl"
         letterSpacing={1.8}
         style={{

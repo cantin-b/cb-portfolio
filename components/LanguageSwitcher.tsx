@@ -18,7 +18,8 @@ export default function LanguageSwitcher() {
   }
 
   const handleClick = () => {
-    const target = `http://${getTargetDomain()}${currentPath}`
+    const protocol = typeof window === 'undefined' ? 'https:' : window.location.protocol
+    const target = `${protocol}//${getTargetDomain()}${currentPath}`
     window.location.href = target
   }
 
