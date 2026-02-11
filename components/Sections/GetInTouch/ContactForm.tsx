@@ -1,13 +1,5 @@
-type ContactFormProps = {
-  formData: { name: string; email: string; message: string }
-  errors: Record<string, string>
-  isSubmitting: boolean
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-}
-
 import { useTranslation, Trans } from 'next-i18next'
-import { useHasMounted } from 'hooks/useHasMounted';
+import { useHasMounted } from 'hooks/useHasMounted'
 import {
   Box,
   Button,
@@ -23,6 +15,16 @@ import {
 } from '@chakra-ui/react'
 import { GOOGLE_CALENDAR } from '../../../lib/constants'
 
+type ContactFormProps = {
+  formData: { name: string; email: string; message: string }
+  errors: Record<string, string>
+  isSubmitting: boolean
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+}
+
 const ContactForm = ({
   formData,
   errors,
@@ -32,6 +34,12 @@ const ContactForm = ({
 }: ContactFormProps) => {
   const hasMounted = useHasMounted()
   const { t } = useTranslation('common')
+
+  const formBg = useColorModeValue('white', 'gray.800')
+  const focusBorderColor = useColorModeValue('#319795', '#9DECF9')
+  const buttonBg = useColorModeValue('#319795', '#9DECF9')
+  const buttonHoverBg = useColorModeValue('#2c8583', '#8dd7e3')
+  const buttonTextColor = useColorModeValue('white', '#121212')
   return (
     <Box
       maxW="lg"
@@ -40,7 +48,7 @@ const ContactForm = ({
       p={8}
       borderRadius="lg"
       boxShadow="xl"
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={formBg}
     >
       <form onSubmit={handleSubmit}>
         <Stack spacing={6}>
@@ -59,7 +67,7 @@ const ContactForm = ({
               value={formData.name}
               onChange={handleChange}
               isInvalid={!!errors.name}
-              focusBorderColor={useColorModeValue('#319795', '#9DECF9')}
+              focusBorderColor={focusBorderColor}
             />
             {errors.name && (
               <Text color="red.500" fontSize="sm" mt={1}>
@@ -76,7 +84,7 @@ const ContactForm = ({
               value={formData.email}
               onChange={handleChange}
               isInvalid={!!errors.email}
-              focusBorderColor={useColorModeValue('#319795', '#9DECF9')}
+              focusBorderColor={focusBorderColor}
             />
             {errors.email && (
               <Text color="red.500" fontSize="sm" mt={1}>
@@ -93,7 +101,7 @@ const ContactForm = ({
               value={formData.message}
               onChange={handleChange}
               isInvalid={!!errors.message}
-              focusBorderColor={useColorModeValue('#319795', '#9DECF9')}
+              focusBorderColor={focusBorderColor}
             />
             {errors.message && (
               <Text color="red.500" fontSize="sm" mt={1}>
@@ -102,9 +110,9 @@ const ContactForm = ({
             )}
           </FormControl>
           <Button
-            bg={useColorModeValue('#319795', '#9DECF9')}
-            _hover={{ bg: useColorModeValue('#2c8583', '#8dd7e3') }}
-            color={useColorModeValue('white', '#121212')}
+            bg={buttonBg}
+            _hover={{ bg: buttonHoverBg }}
+            color={buttonTextColor}
             size="lg"
             type="submit"
             isDisabled={isSubmitting}
@@ -120,10 +128,10 @@ const ContactForm = ({
                   href={GOOGLE_CALENDAR}
                   isExternal
                   fontWeight="medium"
-                  color={useColorModeValue('#319795', '#9DECF9')}
+                  color={buttonBg}
                   _hover={{
                     textDecoration: 'underline',
-                    color: useColorModeValue('#2c8583', '#8dd7e3'),
+                    color: buttonHoverBg,
                   }} />,
               }} />
             </Text>
