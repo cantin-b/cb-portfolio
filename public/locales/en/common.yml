@@ -26,9 +26,9 @@ sidebar:
   greeting: "Hi there! I'm"
   role: "Freelance Software Engineer"
   thanks: "Thanks for stopping by!"
-  description: "I build elegant, high-performance websites and web applications with React/Next.js, and robust Node.js backends."
-  idea: "Thinking about your next project?"
-  support: I’d be happy to help you bring it to life.
+  description: "I build websites and custom web apps for small and mid-sized businesses in order to make their daily work simple."
+  idea: "Need a website or a custom internal tool?"
+  support: "I can build something that fits your workflow."
   button: "Get in touch"
 about:
   title: "what i do"

@@ -25,11 +25,11 @@ navigation:
 sidebar:
   greeting: "Bonjour ! Je suis"
   name: "Cantin"
-  role: "Développeur freelance"
+  role: "Développeur web / logiciel freelance"
   thanks: "Merci pour votre visite!"
-  description: "Je conçois des sites internet et des applications web performants (React/Next.js), ainsi que des backends Node.js robustes."
-  idea: "Un besoin, une idée ?" 
-  support: "Je serais ravi de vous accompagner."
+  description: "Je crée des sites internet et des outils web sur mesure pour les PME afin de simplifier leur quotidien."
+  idea: "Besoin d’un site ou d’un outil interne ?"
+  support: "Je peux construire une solution adaptée à votre workflow."
   button: "Me contacter"
 about:
   title: "ce que je fais"
