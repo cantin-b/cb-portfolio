@@ -5,13 +5,11 @@ import {
   Button,
   Flex,
   Box,
-  IconButton,
   useColorMode,
   useColorModeValue,
   useBreakpointValue,
   Text
 } from '@chakra-ui/react'
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { motion, useCycle } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
@@ -23,7 +21,7 @@ import { useRouter } from 'next/router'
 import { SITE_DOMAIN_EN, SITE_DOMAIN_FR } from 'lib/constants'
 
 const Navigation = () => {
-  const { toggleColorMode, colorMode } = useColorMode()
+  const { colorMode } = useColorMode()
   const MotionContainer = motion(Container)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
@@ -41,7 +39,6 @@ const Navigation = () => {
 
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
-  const Icon = IsDark ? SunIcon : MoonIcon
 
   const router = useRouter()
   const currentLocale = router.locale
@@ -113,15 +110,6 @@ const Navigation = () => {
         top="3%"
       >
         <Flex align="center">
-          <IconButton
-            aria-label="Color Mode"
-            variant="ghost"
-            icon={<Icon />}
-            boxShadow="none"
-            onClick={toggleColorMode}
-            padding={0}
-          />
-          <Text mx={2}>|</Text>
           {LanguageToggleButton}
         </Flex>
         <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
@@ -280,15 +268,6 @@ const Navigation = () => {
           {!isMobile && (
             <Box>
               <Flex align="center">
-                <IconButton
-                  marginX={1}
-                  aria-label="Color Mode"
-                  variant="ghost"
-                  icon={<Icon />}
-                  boxShadow="none"
-                  onClick={toggleColorMode}
-                />
-                <Text mx={2}>|</Text>
                 {LanguageToggleButton}
               </Flex>
             </Box>

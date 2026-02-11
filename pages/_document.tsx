@@ -5,6 +5,8 @@ import Document, {
   NextScript,
   type DocumentContext,
 } from 'next/document'
+import { ColorModeScript } from '@chakra-ui/react'
+import theme from 'config/theme'
 
 type MyDocumentProps = {
   locale?: string
@@ -35,6 +37,14 @@ class MyDocument extends Document<MyDocumentProps> {
           ></link>
         </Head>
         <body>
+          <script
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html:
+                "try{localStorage.removeItem('chakra-ui-color-mode')}catch(e){}",
+            }}
+          />
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>
