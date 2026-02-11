@@ -1,11 +1,26 @@
 seo:
-  title: "Cantin Bartel | Freelance Full-Stack Developer (Node.js, React, Next.js) • SaaS • CRM • AI Engineer"
-  description: "Freelance full-stack developer specialized in Node.js, React and Next.js. I build websites, SaaS products and custom CRM/back-office tools, and I integrate AI features (LLMs, automation, RAG)."
-  keywords: "freelance developer, freelance full stack developer, node.js freelancer, next.js freelancer, react freelancer, saas development, crm development, web app development, software development, ai engineer, api development"
+  pages:
+    home:
+      title: "Cantin Bartel | Freelance Full-Stack Developer (Node.js, React, Next.js) • SaaS • CRM • AI Engineer"
+      description: "Freelance full-stack developer specialized in Node.js, React and Next.js. I build websites, SaaS products and custom CRM/back-office tools, and I integrate AI features (LLMs, automation, RAG). Remote: Paris, Brussels, EU, US & Asia."
+      keywords: "freelance developer, freelance software engineer, freelance full stack developer, remote freelance developer, freelance developer Paris, freelance developer Brussels, node.js freelancer, next.js freelancer, react freelancer, saas development, crm development, web app development, software development, ai engineer, api development"
+    freelance:
+      title: "Freelance Developer — Remote (Paris, Brussels, EU, US, Asia) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Hire a freelance software developer for your website, SaaS or custom CRM/back-office. Full-stack Node.js + React/Next.js, API integrations, deployments, and AI features. Remote delivery across EU/US/Asia time zones."
+      keywords: "hire freelance developer, freelance software developer, remote freelance developer, freelance developer Paris remote, freelance developer Brussels remote, freelance web developer, saas developer freelancer, crm developer freelancer, node.js developer freelance, react next.js freelancer"
+    freelanceParis:
+      title: "Freelance Developer for Paris (Remote) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Remote freelance full-stack developer for Paris-based teams. I build websites, SaaS products and custom CRMs/back-offices with Node.js + React/Next.js, plus API integrations and AI features."
+      keywords: "freelance developer Paris, remote freelance developer Paris, freelance software developer Paris, node.js developer Paris, next.js developer Paris, react developer Paris, saas developer Paris, crm developer Paris"
+    freelanceBruxelles:
+      title: "Freelance Developer for Brussels/Bruxelles (Remote) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Remote freelance full-stack developer for Brussels/Bruxelles-based teams. Websites, SaaS, custom CRM/back-office, Node.js APIs, deployments, and AI integrations."
+      keywords: "freelance developer Brussels, freelance developer Bruxelles, remote freelance developer Brussels, node.js developer Brussels, next.js developer Brussels, react developer Brussels, saas developer Brussels, crm developer Brussels"
 navigation:
   about: "About"
   services: "Services"
   experience: "Experience"
+  freelance: "Freelance"
   contact: "Contact"
 sidebar:
   greeting: "Hi there! I'm"
@@ -31,13 +46,108 @@ about:
     databases: "Databases"
 services:
   title: "services"
-  intro: "From a simple website to a full product, I help you design, build and deploy software that converts and scales."
+  intro: "From a simple website to a full product, I help you design, build and deploy software that converts and scales. Remote collaboration: Paris, Brussels, EU, US & Asia."
   items:
     - "SEO-friendly websites and landing pages (Next.js / React)"
     - "SaaS development (auth, dashboards, billing, multi-tenant)"
     - "Custom CRM / back-office tools (roles, workflows, integrations)"
     - "Node.js API development (REST, third-party integrations)"
     - "AI features (LLM integrations, RAG, automation workflows)"
+
+freelance:
+  hero:
+    title: "Freelance Full-Stack Developer — Remote (Paris, Brussels, EU, US, Asia)"
+    subtitle: "I build software that ships: websites, SaaS and custom CRMs/back-offices — with Node.js, React and Next.js. Clear communication, fast iterations, production-grade delivery."
+  services:
+    title: "what i can build"
+    intro: "Typical missions I deliver for startups and small businesses:"
+  bullets:
+    - "Marketing websites & landing pages (SEO, performance, analytics)"
+    - "SaaS products (auth, roles, dashboards, billing, multi-tenant)"
+    - "Custom CRM / back-office (workflows, permissions, admin tools)"
+    - "Node.js APIs (REST, third-party integrations, webhooks)"
+    - "AI features (LLM integrations, RAG search, automations)"
+  remote:
+    title: "remote & time zones"
+    body: "I work remotely with clients in Paris, Brussels and across the EU, and I can adapt to US and Asia time zones when needed (async-friendly workflow, documented decisions, regular check-ins)."
+  process:
+    title: "how we work"
+    body: "I help you clarify scope, ship an MVP fast, and iterate safely. You get clean code, a maintainable architecture, and a deployment strategy (VPS/NGINX/PM2 or modern platforms)."
+  cta:
+    title: "let’s talk"
+    body: "Tell me what you want to build and your timeline."
+    link: "Contact me"
+  faq:
+    title: "FAQ"
+    items:
+      - q: "Do you work with clients outside Europe?"
+        a: "Yes. I work remotely and can adapt to EU, US and Asia time zones depending on the project."
+      - q: "Can you build a SaaS or a custom CRM?"
+        a: "Yes. I can deliver SaaS foundations (auth, roles, billing, dashboards) and build CRMs/back-offices tailored to your workflows."
+      - q: "Do you integrate AI features?"
+        a: "Yes. I can integrate LLMs, build RAG search, and automate workflows when it brings measurable value."
+  backHome: "Back to the homepage"
+
+freelanceCities:
+  backToFreelance: "Back to the freelance page"
+  paris:
+    hero:
+      title: "Freelance Full-Stack Developer for Paris — Remote"
+      subtitle: "Working with Paris-based teams (or clients targeting Paris). I ship fast, maintainable software: websites, SaaS and custom CRM/back-office tools — Node.js + React/Next.js."
+    why:
+      title: "why work with me"
+      body: "You get a senior full-stack partner who can scope, build and deploy. Remote-first collaboration with clear documentation, async updates, and regular check-ins—ideal for Paris time zone (CET/CEST) and beyond."
+    services:
+      title: "services for paris teams"
+      intro: "Common deliverables for companies in Paris / Île-de-France:"
+    bullets:
+      - "SEO landing pages and marketing sites (performance, analytics, tracking)"
+      - "SaaS MVPs and product iterations (auth, roles, dashboards, billing)"
+      - "Custom CRM/back-office (workflows, permissions, admin tooling)"
+      - "Node.js APIs and integrations (webhooks, third-party services)"
+      - "AI features when useful (LLM tools, RAG search, automations)"
+    cta:
+      title: "get a quote"
+      body: "Share your context (industry, goals, timeline) and I’ll propose a clear approach and next steps."
+      link: "Contact me"
+    faq:
+      title: "FAQ"
+      items:
+        - q: "Can we work fully remote from Paris?"
+          a: "Yes. I work remotely with a simple process: written scope, short iterations, demos, and transparent progress."
+        - q: "Do you build SaaS and internal tools?"
+          a: "Yes. I build SaaS foundations and internal back-office/CRM tools tailored to your team workflows."
+        - q: "Do you support deployments?"
+          a: "Yes. I can ship to VPS/NGINX/PM2 setups or modern platforms, with monitoring-friendly practices."
+  bruxelles:
+    hero:
+      title: "Freelance Full-Stack Developer for Brussels/Bruxelles — Remote"
+      subtitle: "Remote collaboration for Brussels/Bruxelles-based clients across Belgium and the EU. I build websites, SaaS products and custom CRM/back-office tools with Node.js + React/Next.js."
+    why:
+      title: "why work with me"
+      body: "I’ve worked in Belgium and I’m comfortable collaborating across French/English contexts. Remote-first delivery with clear specs, predictable iterations and production-grade engineering."
+    services:
+      title: "services for brussels teams"
+      intro: "Typical missions for companies in Brussels/Bruxelles:"
+    bullets:
+      - "High-performance websites and landing pages (SEO, tracking, conversions)"
+      - "SaaS development and MVP delivery (multi-tenant, dashboards, billing)"
+      - "Custom CRM/back-office (roles, workflows, data exports)"
+      - "Node.js APIs and third-party integrations (webhooks, payments, tools)"
+      - "AI features (LLM integrations, RAG search, automation workflows)"
+    cta:
+      title: "let’s discuss your project"
+      body: "Send your needs and constraints (deadline, budget range, stack) and I’ll suggest a pragmatic plan."
+      link: "Contact me"
+    faq:
+      title: "FAQ"
+      items:
+        - q: "Do you work with Belgian and EU clients?"
+          a: "Yes. I work remotely with clients in Belgium and across the EU, with CET/CEST-friendly communication."
+        - q: "Can you build a custom CRM/back-office?"
+          a: "Yes. I design and build internal tools around your workflows, roles, and reporting needs."
+        - q: "Can you integrate AI features?"
+          a: "Yes. When it helps (search, support, internal automation), I can integrate LLMs and RAG safely."
 experience:
   title: "background"
   description: >

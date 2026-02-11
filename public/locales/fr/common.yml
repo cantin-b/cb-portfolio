@@ -1,11 +1,26 @@
 seo:
-  title: "Cantin Bartel | Développeur freelance Full-Stack (Node.js, React, Next.js) • SaaS • CRM • IA"
-  description: "Développeur freelance full stack spécialisé en Node.js, React et Next.js. Je conçois des sites internet, des applications SaaS et des CRM/back-offices sur mesure, avec intégration de fonctionnalités IA (LLM, automatisation, RAG)."
-  keywords: "développeur freelance, développeur full stack freelance, freelance node.js, freelance next.js, freelance react, développement saas, développement crm, création site internet, développement application web, développement logiciel, ingénieur ia, développement api"
+  pages:
+    home:
+      title: "Cantin Bartel | Développeur freelance Full-Stack (Node.js, React, Next.js) • SaaS • CRM • IA"
+      description: "Développeur freelance full stack spécialisé en Node.js, React et Next.js. Je conçois des sites internet, des applications SaaS et des CRM/back-offices sur mesure, avec intégration de fonctionnalités IA (LLM, automatisation, RAG). Remote : Paris, Bruxelles, UE, US & Asie."
+      keywords: "développeur freelance, développeur logiciel freelance, développeur full stack freelance, développeur freelance remote, développeur freelance Paris remote, développeur freelance Bruxelles remote, freelance node.js, freelance next.js, freelance react, développement saas, développement crm, création site internet, développement application web, développement logiciel, ingénieur ia, développement api"
+    freelance:
+      title: "Développeur freelance — Remote (Paris, Bruxelles, UE, US, Asie) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Développeur logiciel / web freelance pour votre site internet, SaaS ou CRM/back-office sur mesure. Full-stack Node.js + React/Next.js, intégrations API, déploiement, et fonctionnalités IA. Collaboration remote sur fuseaux UE/US/Asie."
+      keywords: "développeur freelance, développeur logiciel freelance, développeur web freelance, développeur freelance Paris remote, développeur freelance Bruxelles remote, freelance full stack, développement saas, développeur saas freelance, développement crm, développeur crm freelance, node.js freelance, react next.js freelance"
+    freelanceParis:
+      title: "Développeur freelance à Paris (remote) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Développeur freelance full stack pour des équipes basées à Paris (en remote). Sites internet, SaaS, CRM/back-office sur mesure avec Node.js + React/Next.js, intégrations API et fonctionnalités IA."
+      keywords: "développeur freelance Paris, développeur freelance Paris remote, développeur logiciel freelance Paris, node.js freelance Paris, next.js freelance Paris, react freelance Paris, développeur saas Paris, développeur crm Paris"
+    freelanceBruxelles:
+      title: "Développeur freelance à Bruxelles (remote) | Node.js • React • Next.js • SaaS • CRM"
+      description: "Développeur freelance full stack pour des équipes basées à Bruxelles (en remote). Sites internet, SaaS, CRM/back-office sur mesure, APIs Node.js, déploiement et intégrations IA."
+      keywords: "développeur freelance Bruxelles, développeur freelance Bruxelles remote, développeur logiciel freelance Bruxelles, node.js freelance Bruxelles, next.js freelance Bruxelles, react freelance Bruxelles, développeur saas Bruxelles, développeur crm Bruxelles"
 navigation:
   about: "À propos"
   services: "Services"
   experience: "Expérience"
+  freelance: "Freelance"
   contact: "Contact"
 sidebar:
   greeting: "Bonjour ! Je suis"
@@ -30,13 +45,108 @@ about:
     databases: "Bases de données"
 services:
   title: "services"
-  intro: "Du site vitrine au produit complet, je vous aide à concevoir, développer et déployer un logiciel fiable, rapide et orienté conversion."
+  intro: "Du site vitrine au produit complet, je vous aide à concevoir, développer et déployer un logiciel fiable, rapide et orienté conversion. Collaboration remote : Paris, Bruxelles, UE, US & Asie."
   items:
     - "Sites internet et landing pages optimisés SEO (Next.js / React)"
     - "Développement SaaS (auth, dashboards, paiement, multi-tenant)"
     - "CRM / back-office sur mesure (rôles, workflows, intégrations)"
     - "Développement d’API Node.js (REST, intégrations tierces)"
     - "Fonctionnalités IA (intégration LLM, RAG, automatisations)"
+
+freelance:
+  hero:
+    title: "Développeur freelance Full-Stack — Remote (Paris, Bruxelles, UE, US, Asie)"
+    subtitle: "Je développe des logiciels qui sortent en production : sites internet, SaaS et CRM/back-offices sur mesure — avec Node.js, React et Next.js. Communication claire, itérations rapides, livraison fiable."
+  services:
+    title: "ce que je peux construire"
+    intro: "Exemples de missions que je réalise pour des startups et des PME :"
+  bullets:
+    - "Sites vitrine & landing pages (SEO, performance, analytics)"
+    - "Produits SaaS (auth, rôles, dashboards, paiement, multi-tenant)"
+    - "CRM / back-office sur mesure (workflows, permissions, admin)"
+    - "API Node.js (REST, intégrations tierces, webhooks)"
+    - "Fonctionnalités IA (intégration LLM, recherche RAG, automatisations)"
+  remote:
+    title: "remote & fuseaux horaires"
+    body: "Je travaille en remote avec des clients à Paris, Bruxelles et partout en Europe, et je m’adapte aux fuseaux US et Asie si besoin (workflow asynchrone, décisions documentées, points réguliers)."
+  process:
+    title: "comment on travaille"
+    body: "Je vous aide à cadrer le besoin, livrer un MVP rapidement, puis itérer en sécurité. Vous obtenez une base de code propre, une architecture maintenable et une stratégie de déploiement (VPS/NGINX/PM2 ou plateformes modernes)."
+  cta:
+    title: "parlons de votre projet"
+    body: "Expliquez-moi ce que vous voulez construire et vos contraintes de timing."
+    link: "Me contacter"
+  faq:
+    title: "FAQ"
+    items:
+      - q: "Travaillez-vous avec des clients hors Europe ?"
+        a: "Oui. Je travaille en remote et je peux m’adapter aux fuseaux UE, US et Asie selon le projet."
+      - q: "Pouvez-vous développer un SaaS ou un CRM sur mesure ?"
+        a: "Oui. Je peux mettre en place les fondations SaaS (auth, rôles, paiement, dashboard) et construire des CRM/back-offices adaptés à vos workflows."
+      - q: "Intégrez-vous des fonctionnalités IA ?"
+        a: "Oui. Je peux intégrer des LLM, mettre en place de la recherche RAG, et automatiser des workflows quand cela apporte un gain mesurable."
+  backHome: "Retour à l’accueil"
+
+freelanceCities:
+  backToFreelance: "Retour à la page freelance"
+  paris:
+    hero:
+      title: "Développeur freelance Full-Stack pour Paris — en remote"
+      subtitle: "Collaboration remote avec des équipes basées à Paris (ou visant le marché parisien). Je livre des logiciels maintenables : sites internet, SaaS et CRM/back-offices sur mesure — Node.js + React/Next.js."
+    why:
+      title: "pourquoi travailler avec moi"
+      body: "Vous avez un partenaire full-stack capable de cadrer, développer et déployer. Collaboration remote efficace (doc, suivi, démos), très adaptée au fuseau Paris (CET/CEST) et aux équipes distribuées."
+    services:
+      title: "services pour des équipes à paris"
+      intro: "Livrables fréquents pour des entreprises à Paris / Île-de-France :"
+    bullets:
+      - "Landing pages et sites marketing (SEO, performance, analytics, tracking)"
+      - "MVP SaaS et itérations produit (auth, rôles, dashboards, paiement)"
+      - "CRM/back-office sur mesure (workflows, permissions, outils admin)"
+      - "APIs Node.js et intégrations (webhooks, services tiers)"
+      - "Fonctionnalités IA si utile (LLM, recherche RAG, automatisations)"
+    cta:
+      title: "obtenir un devis"
+      body: "Partagez votre contexte (secteur, objectifs, timing) et je vous propose une approche claire et les prochaines étapes."
+      link: "Me contacter"
+    faq:
+      title: "FAQ"
+      items:
+        - q: "Peut-on travailler 100% en remote depuis Paris ?"
+          a: "Oui. Process simple : cadrage écrit, itérations courtes, démos régulières et suivi transparent."
+        - q: "Développez-vous des SaaS et des outils internes ?"
+          a: "Oui. Je mets en place les fondations SaaS et je développe des back-offices/CRM adaptés à vos workflows."
+        - q: "Gérez-vous le déploiement ?"
+          a: "Oui. VPS/NGINX/PM2 ou plateformes modernes, avec de bonnes pratiques (logs, sécurité, maintenabilité)."
+  bruxelles:
+    hero:
+      title: "Développeur freelance Full-Stack pour Bruxelles — en remote"
+      subtitle: "Collaboration remote avec des clients basés à Bruxelles, en Belgique et en Europe. Je développe des sites internet, SaaS et CRM/back-offices sur mesure avec Node.js + React/Next.js."
+    why:
+      title: "pourquoi travailler avec moi"
+      body: "Je connais bien le contexte belge et je travaille facilement en français et en anglais. Livraison remote avec cadrage, itérations prévisibles et approche orientée production."
+    services:
+      title: "services pour des équipes à bruxelles"
+      intro: "Exemples de missions pour des entreprises à Bruxelles :"
+    bullets:
+      - "Sites internet et landing pages (SEO, tracking, conversion)"
+      - "Développement SaaS et MVP (multi-tenant, dashboards, paiement)"
+      - "CRM/back-office sur mesure (rôles, workflows, exports)"
+      - "APIs Node.js et intégrations tierces (webhooks, paiement, outils)"
+      - "Fonctionnalités IA (LLM, recherche RAG, automatisations)"
+    cta:
+      title: "discutons de votre projet"
+      body: "Envoyez vos besoins et contraintes (deadline, budget, stack) et je vous propose un plan pragmatique."
+      link: "Me contacter"
+    faq:
+      title: "FAQ"
+      items:
+        - q: "Travaillez-vous avec des clients belges et européens ?"
+          a: "Oui. Je travaille en remote avec des clients en Belgique et dans l’UE, avec une communication adaptée au fuseau CET/CEST."
+        - q: "Pouvez-vous développer un CRM/back-office sur mesure ?"
+          a: "Oui. Je conçois et développe des outils internes selon vos workflows, rôles et besoins de reporting."
+        - q: "Pouvez-vous intégrer des fonctionnalités IA ?"
+          a: "Oui. Quand c’est pertinent (recherche, support, automatisations), j’intègre des LLM et de la RAG de façon fiable."
 
 experience:
   title: "parcours"

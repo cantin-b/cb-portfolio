@@ -5,7 +5,21 @@ import { getBaseUrlForLocale, getLocaleOg, stripQueryAndHash, toAbsoluteUrl } fr
 
 const DEFAULT_OG_IMAGE_PATH = '/avatars/CB_avatar.png'
 
-const OpenGraphHead = () => {
+type OpenGraphHeadProps = {
+  title?: string
+  description?: string
+  keywords?: string
+  ogImagePath?: string
+  noindex?: boolean
+}
+
+const OpenGraphHead = ({
+  title: titleOverride,
+  description: descriptionOverride,
+  keywords: keywordsOverride,
+  ogImagePath = DEFAULT_OG_IMAGE_PATH,
+  noindex = false,
+}: OpenGraphHeadProps) => {
   const router = useRouter()
   const { t } = useTranslation('common')
 
@@ -13,16 +27,24 @@ const OpenGraphHead = () => {
   const baseUrl = getBaseUrlForLocale(locale)
   const path = stripQueryAndHash(router.asPath || '/')
   const canonicalUrl = toAbsoluteUrl(baseUrl, path)
-  const ogImageUrl = toAbsoluteUrl(baseUrl, DEFAULT_OG_IMAGE_PATH)
+  const ogImageUrl = toAbsoluteUrl(baseUrl, ogImagePath)
 
-  const title = t('seo.title')
-  const description = t('seo.description')
-  const keywords = t('seo.keywords')
+  const title = titleOverride || t('seo.pages.home.title')
+  const description = descriptionOverride || t('seo.pages.home.description')
+  const keywords = keywordsOverride || t('seo.pages.home.keywords')
 
   const enBaseUrl = getBaseUrlForLocale('en')
   const frBaseUrl = getBaseUrlForLocale('fr')
   const enUrl = toAbsoluteUrl(enBaseUrl, path)
   const frUrl = toAbsoluteUrl(frBaseUrl, path)
+
+  const areaServed = [
+    { '@type': 'City', name: 'Paris' },
+    { '@type': 'City', name: 'Brussels' },
+    { '@type': 'AdministrativeArea', name: 'European Union' },
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'Place', name: 'Asia' },
+  ]
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -61,6 +83,25 @@ const OpenGraphHead = () => {
           'AI Engineering',
         ],
       },
+      {
+        '@type': 'ProfessionalService',
+        name: 'Cantin Bartel — Freelance Software Developer',
+        url: canonicalUrl,
+        areaServed,
+        availableLanguage: ['en', 'fr'],
+        serviceType: [
+          'Website development',
+          'SaaS development',
+          'CRM / back-office development',
+          'API development',
+          'AI integrations',
+        ],
+        provider: {
+          '@type': 'Person',
+          name: 'Cantin Bartel',
+          url: baseUrl,
+        },
+      },
     ],
   }
 
@@ -70,7 +111,12 @@ const OpenGraphHead = () => {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content="Cantin Bartel" />
-      <meta name="robots" content="index,follow,max-image-preview:large" />
+      <meta
+        name="robots"
+        content={
+          noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'
+        }
+      />
 
       <link rel="canonical" href={canonicalUrl} />
       <link rel="alternate" hrefLang="en" href={enUrl} />
