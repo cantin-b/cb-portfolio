@@ -22,7 +22,7 @@ about:
   description: >
     I help small and mid-sized businesses build tools that make their day easier: a website that brings in requests, or a custom web app that fits how you actually work.
     From a simple <b>brochure website</b> to <b>tailor-made software</b>, I design, build and deploy solutions with <b>React/Next.js</b> and <b>Node.js</b>.
-    Typical projects include quote/request forms, booking flows, dashboards, <b>CRM / back-office</b> tools, and integrations that keep your workflow smooth and predictable.
+    This can include request forms, booking flows, dashboards, CRM / back-office tools, API integrations, or small automations that remove manual work.
   tech-stack-button: "See my full tech stack"
   modal: 
     title: "Full Skill Set List"
@@ -31,13 +31,13 @@ about:
     databases: "Databases"
 services:
   title: "services"
-  intro: "From a simple website to a full product, I help you design, build and deploy software that converts and scales. Remote collaboration: Paris, Brussels, EU, US & Asia."
+  intro: "From a simple website to a custom internal tool, I help design, build and maintain software that fits the way your business works."
   items:
-    - "SEO-friendly websites and landing pages (Next.js / React)"
-    - "SaaS development (auth, dashboards, billing, multi-tenant)"
-    - "Custom CRM / back-office tools (roles, workflows, integrations)"
-    - "Node.js API development (REST, third-party integrations)"
-    - "AI features (LLM integrations, RAG, automation workflows)"
+    - "SEO-friendly websites and landing pages built with React or Next.js"
+    - "Internal tools and back-office features for daily business operations"
+    - "CRM-style workflows to manage clients, requests, bookings or business data"
+    - "API integrations with third-party services, forms, dashboards or admin tools"
+    - "Deployment and maintenance on Linux servers with NGINX, PM2 or Docker"
 
 experience:
   title: "background"
@@ -48,14 +48,14 @@ experience:
     freelance:
       position: "Full-Stack Developer"
       company: "Freelance"
-      sub-detail: "Remote full-stack development services for global clients"
-      date: "Oct 2023 - Present"
+      sub-detail: "Web applications, internal tools and custom websites"
+      date: "Jun 2025 - Present"
       missions:
-        - "Work on frontend integration and responsive UI implementation."
-        - "Create and integrate RESTful APIs with third-party services."
-        - "Build full-stack web applications using modern technologies like React, Node.js, and Next.js."
-        - "Develop custom e-commerce plateforms using WooCommerce."
-        - "Handle VPS-based deployment, NGINX reverse proxy, and process management with PM2 in a Linux environment."
+        - "Built an internal tool for a car rental business to track vehicle fleet, bookings and administrative deadlines."
+        - "Developed a custom CRM for an insurance broker to centralize prospects, clients and sales follow-up."
+        - "Built and maintained websites for small businesses."
+        - "Integrated APIs and third-party services into business workflows."
+        - "Handled deployment and maintenance on Linux servers with NGINX, PM2 and Docker."
 
     wizito:
       position: "Développeur Full-Stack"

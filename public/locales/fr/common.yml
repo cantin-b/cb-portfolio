@@ -2,8 +2,8 @@ seo:
   pages:
     home:
       title: "Cantin Bartel | Développeur freelance Full-Stack (Node.js, React, Next.js) • SaaS • CRM • IA"
-      description: "Développeur freelance full stack spécialisé en Node.js, React et Next.js. Je conçois des sites internet, des applications SaaS et des CRM/back-offices sur mesure, avec intégration de fonctionnalités IA (LLM, automatisation, RAG). Remote : Paris, Bruxelles, UE, US & Asie."
-      keywords: "développeur freelance, développeur logiciel freelance, développeur full stack freelance, développeur freelance remote, développeur freelance Paris remote, développeur freelance Bruxelles remote, freelance node.js, freelance next.js, freelance react, développement saas, développement crm, création site internet, développement application web, développement logiciel, ingénieur ia, développement api"
+      description: "Développeur freelance full-stack spécialisé en Node.js, React et Next.js. Je conçois des sites internet, des applications web, des outils internes et des CRM/back-offices sur mesure. Collaboration à distance avec des clients en France, Belgique, Suisse romande et ailleurs."
+      keywords: "développeur freelance, développeur full-stack freelance, développeur logiciel freelance, développeur web freelance, développeur freelance Suisse romande, développeur freelance Paris, développeur freelance Bruxelles, freelance node.js, freelance next.js, freelance react, développement application web, outil interne, CRM sur mesure, back-office, intégration API"
 navigation:
   about: "À propos"
   services: "Services"
@@ -14,7 +14,7 @@ sidebar:
   name: "Cantin"
   role: "Développeur web / logiciel freelance"
   thanks: "Merci pour votre visite!"
-  description: "Je crée des sites internet et des outils web sur mesure pour les PME afin de simplifier leur quotidien."
+  description: "Je crée des sites internet et des applications web sur mesure pour les PME afin de simplifier leur quotidien."
   idea: "Besoin d’un site ou d’un outil interne ?"
   support: "Je peux construire une solution adaptée à votre workflow."
   button: "Me contacter"
@@ -23,7 +23,7 @@ about:
   description: >
     J’aide les petites et moyennes entreprises à créer des outils concrets qui facilitent le quotidien : un site internet qui génère des demandes, ou une application sur mesure qui colle à votre façon de travailler.
     Du <b>site vitrine</b> au <b>logiciel personnalisé</b>, je conçois, développe et déploie des solutions en <b>React/Next.js</b> et <b>Node.js</b>.
-    Exemples : formulaires de demande/devis, prise de rendez‑vous, tableaux de bord, <b>CRM / back-office</b> et intégrations pour fluidifier votre workflow au quotidien.
+    Cela peut inclure des formulaires de demande ou de devis, des parcours de réservation, des tableaux de bord, des <b>CRM / back-offices</b>, des intégrations API ou de petites automatisations qui réduisent le travail manuel.
   tech-stack-button: "Voir ma stack technique"
   modal: 
     title: "Liste des compétences"
@@ -32,13 +32,13 @@ about:
     databases: "Bases de données"
 services:
   title: "services"
-  intro: "Du site vitrine au produit complet, je vous aide à concevoir, développer et déployer un logiciel fiable, rapide et orienté conversion. Collaboration remote : Paris, Bruxelles, UE, US & Asie."
+  intro: "Du simple site internet à l’outil interne sur mesure, je vous aide à concevoir, développer et maintenir un logiciel adapté à votre façon de travailler."
   items:
-    - "Sites internet et landing pages optimisés SEO (Next.js / React)"
-    - "Développement SaaS (auth, dashboards, paiement, multi-tenant)"
-    - "CRM / back-office sur mesure (rôles, workflows, intégrations)"
-    - "Développement d’API Node.js (REST, intégrations tierces)"
-    - "Fonctionnalités IA (intégration LLM, RAG, automatisations)"
+    - "Sites internet et landing pages optimisés SEO, développés avec React ou Next.js"
+    - "Outils internes et fonctionnalités back-office pour les opérations quotidiennes"
+    - "Workflows de type CRM pour gérer clients, demandes, réservations ou données métier"
+    - "Intégrations API avec services tiers, formulaires, tableaux de bord ou outils d’administration"
+    - "Déploiement et maintenance sur serveurs Linux avec NGINX, PM2 ou Docker"
 
 experience:
   title: "parcours"
@@ -49,14 +49,14 @@ experience:
     freelance:
       position: "Développeur Full-Stack"
       company: "#Freelance"
-      sub-detail: "Services de développement full-stack"
-      date: "Oct 2023 – Présent"
+      sub-detail: "Applications web, outils internes et sites internet sur mesure"
+      date: "Juin 2025 – Présent"
       missions:
-        - "Intégration frontend et mise en œuvre d’interfaces utilisateur responsives."
-        - "Création et intégration d’API RESTful avec des services tiers."
-        - "Développement d'applications web full-stack avec React, Node.js et Next.js."
-        - "Création de plateformes e-commerce sur mesure avec WooCommerce."
-        - "Déploiement sur VPS, configuration de NGINX et gestion des processus avec PM2 sur Linux."
+        - "Création d’un outil interne pour une société de location de voitures, afin de suivre la flotte, les réservations et les échéances administratives."
+        - "Développement d’un CRM sur mesure pour un courtier en assurance, afin de centraliser les prospects, les clients et le suivi commercial."
+        - "Création et maintenance de sites internet pour des petites entreprises."
+        - "Intégration d’API et de services tiers dans des workflows métier."
+        - "Déploiement et maintenance sur serveurs Linux avec NGINX, PM2 et Docker."
 
     wizito:
       position: "Développeur Full-Stack"
@@ -87,13 +87,11 @@ education:
 contact:
   title: "contact"
   intro: >
-    Vous avez un projet en tête ou simplement envie d’échanger ?  
-    Je suis toujours ouvert à découvrir de nouvelles idées et opportunités.  
-    N’hésitez pas à me contacter via le formulaire ci-dessous ou par <1>e-mail</1>.  
-    Vous pouvez également consulter mon <2>GitHub</2> ou me joindre sur <3>LinkedIn</3>.
+    Vous avez besoin d’un site, d’un outil interne, d’un renfort full-stack ou d’un projet freelance bien cadré ?
+    Vous pouvez me contacter via le formulaire ci-dessous, m’envoyer un <1>e-mail</1>, consulter mon <2>GitHub</2> ou me joindre sur <3>LinkedIn</3>.
   form:
     title: "Me contacter"
-    subtitle: "Collaborons ensemble sur votre prochain projet."
+    subtitle: "Expliquez-moi votre besoin, le contexte et le délai."
     name:
       label: "Nom"
       placeholder: "Votre nom"
@@ -102,7 +100,7 @@ contact:
       placeholder: "Votre adresse email"
     message:
       label: "Message"
-      placeholder: "Détails du projet : comment puis-je vous aider ?"
+      placeholder: "Détails du poste, contrat ou projet"
     button: 
       send: "Envoyer"
       sending: "Envoi en cours..."

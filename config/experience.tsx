@@ -23,7 +23,7 @@ export const Experiences: {
     subDetail: 'experience.jobs.freelance.sub-detail',
     url: '/#',
     position: 'experience.jobs.freelance.position',
-    duration: 'Oct 2023 - Present',
+    duration: 'experience.jobs.freelance.date',
     logo: {
       light: '/logos/CB_logo.png',
       dark: '/logos/CB_logo_dark.png',
@@ -42,7 +42,7 @@ export const Experiences: {
     subDetail: 'experience.jobs.wizito.sub-detail',
     url: 'https://www.wizito.com/en',
     position: 'experience.jobs.wizito.position',
-    duration: 'Sep 2021 - Sep 2023',
+    duration: 'experience.jobs.wizito.date',
     logo: {
       light: '/logos/wizito_logo_black.png',
       dark: '/logos/wizito_logo_white.png',
@@ -60,7 +60,7 @@ export const Experiences: {
     subDetail: 'experience.jobs.sabca.sub-detail',
     url: 'https://www.sabena-engineering.com/defence/',
     position: 'experience.jobs.sabca.position',
-    duration: 'Sep 2018 - Mar 2021',
+    duration: 'experience.jobs.sabca.date',
     logo: {
       light: '/logos/sabca_logo.png',
       dark: '/logos/sabca_logo_dark.png',

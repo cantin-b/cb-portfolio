@@ -121,7 +121,7 @@ const ExperienceTab = () => {
                     {company.subDetail && t(company.subDetail)}
                   </Text>
                 </Text>
-                <Text fontSize="smaller">{company.duration}</Text>
+                <Text fontSize="smaller">{t(company.duration)}</Text>
               </Stack>
               <List spacing={3} pt={5}>
                 {company.roles?.map((roleDesc, idx) => (
