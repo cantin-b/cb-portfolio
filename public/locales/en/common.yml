@@ -29,6 +29,7 @@ about:
     languages: "Languages"
     devops: "DevOps & Deployment"
     databases: "Databases"
+    ai-tools: "AI Tools"
 services:
   title: "services"
   intro: "From a simple website to a custom internal tool, I help design, build and maintain software that fits the way your business works."

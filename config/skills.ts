@@ -6,19 +6,18 @@ import {
   SiNextdotjs,
   SiReact,
   SiPm2,
-  SiWordpress, 
   SiStrapi,
   SiTailwindcss,
   SiPostgresql,
   SiDocker,
   SiNginx,
   SiLinux,
-  SiWoocommerce,
   SiMysql,
   SiMongodb,
-  SiElectron,
   SiGnubash,
-  SiExpress 
+  SiExpress,
+  SiClaude,
+  SiOpenai,
 } from 'react-icons/si'
 import { AiOutlineApi } from "react-icons/ai"
 
@@ -27,7 +26,7 @@ export type SkillCategory =
   | 'frontend'
   | 'devops'
   | 'database'
-  | 'CMS'
+  | 'aiTools'
   | 'languages'
 
 export type Skill = {
@@ -117,14 +116,14 @@ export const Skills: {
       icon: SiGnubash,
     },
   ],
-  CMS: [
+  aiTools: [
     {
-      name: 'Wordpress',
-      icon: SiWordpress,
+      name: 'Claude Code',
+      icon: SiClaude,
     },
     {
-      name: 'WooCommerce',
-      icon: SiWoocommerce,
+      name: 'Codex',
+      icon: SiOpenai,
     },
   ]
 }

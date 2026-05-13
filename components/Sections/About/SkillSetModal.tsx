@@ -74,7 +74,7 @@ const SkillList = ({
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
   const backendCols = splitSkills(Skills.backend)
   const devopsCols = splitSkills(Skills.devops)
-  const cmsCols = splitSkills(Skills.CMS)
+  const aiToolCols = splitSkills(Skills.aiTools)
   const languages = splitSkills(Skills.languages)
   const frontendCols: Skill[][] = [
     Skills.frontend.slice(0, 2),
@@ -104,7 +104,7 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
           <SkillList title="Frontend" columns={frontendCols} />
           <SkillList title={t('about.modal.devops')} columns={devopsCols} />
           <SkillList title={t('about.modal.databases')} columns={dataBaseCols} />
-          <SkillList title="CMS & eCommerce" columns={cmsCols} />
+          <SkillList title={t('about.modal.ai-tools')} columns={aiToolCols} />
         </ModalBody>
       </ModalContent>
     </Modal>

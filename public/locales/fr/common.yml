@@ -30,6 +30,7 @@ about:
     languages: "Langages"
     devops: "DevOps & Déploiement"
     databases: "Bases de données"
+    ai-tools: "Outils IA"
 services:
   title: "services"
   intro: "Du simple site internet à l’outil interne sur mesure, je vous aide à concevoir, développer et maintenir un logiciel adapté à votre façon de travailler."
