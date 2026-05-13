@@ -1,12 +1,7 @@
 import type { GetServerSideProps } from 'next'
 import { getBaseUrlForLocale, toAbsoluteUrl } from 'lib/seo'
 
-const SITE_PATHS = [
-  '/' as const,
-  '/freelance' as const,
-  '/freelance/paris' as const,
-  '/freelance/bruxelles' as const,
-]
+const SITE_PATHS = ['/' as const]
 
 function buildSitemapXml() {
   const enBaseUrl = getBaseUrlForLocale('en')

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Grid,
   GridItem,
@@ -20,7 +19,7 @@ import ScrollMore from 'components/Misc/ScrollMore'
 import { Article } from 'types/article'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import type { UserConfig } from 'next-i18next'
-import i18nConfig from '../next-i18next.config' 
+import i18nConfig from '../next-i18next.config'
 
 // These are on bottom sections so no need to render it instantly
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))

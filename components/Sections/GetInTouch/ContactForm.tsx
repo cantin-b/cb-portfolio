@@ -16,7 +16,7 @@ import {
 import { GOOGLE_CALENDAR } from '../../../lib/constants'
 
 type ContactFormProps = {
-  formData: { name: string; email: string; message: string }
+  formData: { name: string; email: string; message: string; website: string }
   errors: Record<string, string>
   isSubmitting: boolean
   handleChange: (
@@ -109,6 +109,15 @@ const ContactForm = ({
               </Text>
             )}
           </FormControl>
+          <Input
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+            display="none"
+          />
           <Button
             bg={buttonBg}
             _hover={{ bg: buttonHoverBg }}

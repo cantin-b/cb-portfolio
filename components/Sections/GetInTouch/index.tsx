@@ -11,10 +11,16 @@ type FormData = {
   name: string
   email: string
   message: string
+  website: string
 }
 
 const GetInTouch = () => {
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' })
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: '',
+    website: '',
+  })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -65,7 +71,7 @@ const GetInTouch = () => {
 
       if (res.ok) {
         alert(t('contact.form.success'))
-        setFormData({ name: '', email: '', message: '' })
+        setFormData({ name: '', email: '', message: '', website: '' })
         // Redirect to homepage after successful submit
         window.location.href = '/#'
       } else {
@@ -110,7 +116,6 @@ const GetInTouch = () => {
         handleSubmit={handleSubmit}
       />
       <Box
-        spacing={0.5}
         textAlign="center"
         fontFamily="monospace"
         paddingTop={{ base: 10, lg: 20, xl: 20 }}

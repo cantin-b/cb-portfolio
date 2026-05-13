@@ -257,27 +257,6 @@ const Navigation = () => {
               padding={2}
               marginX={2}
               as="a"
-              href="/freelance"
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.freelance')}
-            </Button>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
               href={`${homePrefix}#contact`}
               rel="noreferrer"
               onClick={onMenuItemClick}

@@ -1,15 +1,17 @@
 import i18nextConfig from './next-i18next.config.js'
 
 const isProd = process.env.NODE_ENV === 'production'
+const siteDomainEn = process.env.NEXT_PUBLIC_SITE_DOMAIN_EN || 'www.cantinbartel.dev'
+const siteDomainFr = process.env.NEXT_PUBLIC_SITE_DOMAIN_FR || 'fr.cantinbartel.dev'
 
 const domains = isProd
   ? [
       {
-        domain: process.env.NEXT_PUBLIC_SITE_DOMAIN_EN,
+        domain: siteDomainEn,
         defaultLocale: 'en'
       },
       {
-        domain: process.env.NEXT_PUBLIC_SITE_DOMAIN_FR,
+        domain: siteDomainFr,
         defaultLocale: 'fr'
       }
     ]
@@ -29,12 +31,6 @@ const domains = isProd
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   i18n: {
     ...i18nextConfig.i18n,
     domains

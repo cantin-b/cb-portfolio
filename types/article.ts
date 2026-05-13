@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export interface Article {
   id: string
   type_of: string

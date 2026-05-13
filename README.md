@@ -34,7 +34,9 @@ GMAIL_USER=your@gmail.com
 GMAIL_PASS=your-email-app-password
 HOSTINGER_USER=contact@yourdomain.com
 HOSTINGER_PASS=your-hosting-password
-GOOGLE_CALENDAR="https://calendar.google.com/..."
+NEXT_PUBLIC_GOOGLE_CALENDAR="https://calendar.google.com/..."
+NEXT_PUBLIC_SITE_DOMAIN_EN=www.cantinbartel.dev
+NEXT_PUBLIC_SITE_DOMAIN_FR=fr.cantinbartel.dev
 ```
 
 3. Start the dev server:

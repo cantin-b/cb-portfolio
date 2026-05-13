@@ -1,8 +1,6 @@
-/* eslint-disable react/no-multi-comp */
 import * as React from 'react'
 import { motion } from 'framer-motion'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Path = (props: any) => (
   <motion.path
     fill="transparent"
