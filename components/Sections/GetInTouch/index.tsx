@@ -6,6 +6,7 @@ import { Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
 
+const WHATSAPP_BUSINESS_URL = 'https://wa.me/33756977524'
 
 type FormData = {
   name: string
@@ -103,7 +104,7 @@ const GetInTouch = () => {
         <Text variant="description" textAlign="justify">
           <Trans i18nKey="contact.intro" components={{
             1: <Link href="mailto:hello@cantinbartel.dev" isExternal color="teal.200" />,
-            2: <Link href="https://github.com/cantin-b/cantin-b/" isExternal color="teal.200" />,
+            2: <Link href={WHATSAPP_BUSINESS_URL} isExternal color="teal.200" />,
             3: <Link href="https://www.linkedin.com/in/cantin-bartel/" isExternal color="teal.200" />,
             }} />
         </Text>
@@ -125,7 +126,7 @@ const GetInTouch = () => {
           variant="description"
           textDecoration="none"
           rel="noreferrer"
-          href="https://github.com/cantin-b"
+          href={WHATSAPP_BUSINESS_URL}
           target="_blank"
           _focus={{ boxShadow: 'none' }}
         >
