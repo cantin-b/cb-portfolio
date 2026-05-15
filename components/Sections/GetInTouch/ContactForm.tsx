@@ -36,9 +36,9 @@ const ContactForm = ({
   const { t } = useTranslation('common')
 
   const formBg = useColorModeValue('white', '#111827')
-  const focusBorderColor = useColorModeValue('#319795', '#8FD8E8')
-  const buttonBg = useColorModeValue('#319795', '#8FD8E8')
-  const buttonHoverBg = useColorModeValue('#2c8583', '#B7ECF5')
+  const focusBorderColor = useColorModeValue('#263579', '#8FD8E8')
+  const buttonBg = useColorModeValue('#263579', '#8FD8E8')
+  const buttonHoverBg = useColorModeValue('#C1272D', '#B7ECF5')
   const buttonTextColor = useColorModeValue('white', '#0B1118')
   return (
     <Box

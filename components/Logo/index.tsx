@@ -13,18 +13,26 @@ const Logo = () => {
   const { colorMode } = useColorMode()
   const [isLogoLoaded, setLogoLoaded] = useState(false)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
+  const isDark = colorMode === ThemeMode.Dark
 
-  const logoSrc = colorMode === ThemeMode.Dark ? '/logos/CB_logo_dark.png' : '/logos/CB_logo.png'
+  const logoSrc = isDark
+    ? '/logos/CB_logo_dark.png'
+    : '/logos/cb-web-artisan-logo-no-subtitle.png'
+  const logoWidth = isMobile ? 60 : 100
+  const logoHeight = isMobile ? (isDark ? 60 : 27) : (isDark ? 100 : 45)
 
   return (
     <AnimatePresence>
-      <Link href="/" passHref>
+      <Link
+        href="/"
+        passHref
+        className={!isMobile ? styles.logo : styles.mobileLogo}
+      >
         <MotionImage
-          className={!isMobile ? styles.logo : ''}
           src={logoSrc}
           alt="Cantin Bartel Logo"
-          width={isMobile ? 60 : 100}
-          height={isMobile ? 60 : 100}
+          width={logoWidth}
+          height={logoHeight}
           onLoad={() => setLogoLoaded(true)}
           variants={simpleOpacity}
           initial="initial"

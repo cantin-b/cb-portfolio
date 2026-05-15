@@ -25,7 +25,7 @@
   }
 }
 .dark{
-  border: 3px solid black;
+  border: 3px solid rgba(38, 53, 121, 0.82);
   border-left-color: transparent;
   border-top-color: transparent;
   border-bottom-color: transparent;

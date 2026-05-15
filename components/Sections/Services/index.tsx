@@ -14,7 +14,7 @@ import { CheckCircleIcon } from '@chakra-ui/icons'
 const ServicesSection = () => {
   const { t } = useTranslation('common')
   const services = t('services.items', { returnObjects: true }) as string[]
-  const iconColor = useColorModeValue('teal.400', '#8FD8E8')
+  const iconColor = useColorModeValue('#263579', '#8FD8E8')
 
   return (
     <Stack

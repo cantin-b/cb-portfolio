@@ -2,8 +2,20 @@
   position: fixed;
   top: 3%;
   left: 3.5%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   cursor: pointer;
   z-index: 100;
+}
+.mobileLogo{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 .sidebar{
   border: 3px solid #8FD8E8;

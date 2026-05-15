@@ -30,7 +30,7 @@ type ISkillSetModal = {
 }
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
-  const emphasis = useColorModeValue('teal.500', '#8FD8E8')
+  const emphasis = useColorModeValue('#263579', '#8FD8E8')
   const currentDate = new Date();
   const startDate = new Date(2021, 8); // September is month 8 (zero-based index)
   const diffInMilliseconds = currentDate.getTime() - startDate.getTime();

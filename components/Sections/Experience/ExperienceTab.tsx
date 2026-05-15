@@ -25,11 +25,11 @@ import { useTranslation } from 'next-i18next'
 
 const ExperienceTab = () => {
   const { colorMode } = useColorMode()
-  const emphasis = useColorModeValue('teal.500', '#8FD8E8')
-  const borderColor = useColorModeValue('gray.300', '#263241')
-  const activeBordercolor = useColorModeValue('teal.500', '#8FD8E8')
+  const emphasis = useColorModeValue('#263579', '#8FD8E8')
+  const borderColor = useColorModeValue('#C9D3E1', '#263241')
+  const activeBordercolor = useColorModeValue('#263579', '#8FD8E8')
   const activeTabBg = useColorModeValue(
-    'rgba(49, 151, 149, 0.08)',
+    'rgba(38, 53, 121, 0.07)',
     'rgba(143, 216, 232, 0.08)'
   )
   const isMobile = useBreakpointValue(mobileBreakpointsMap)

@@ -41,6 +41,17 @@ const midnight = {
   border: '#263241',
 }
 
+const daylight = {
+  bg: '#F4F7FB',
+  surface: '#FFFFFF',
+  text: '#172033',
+  description: '#334155',
+  accent: '#263579',
+  accentHover: '#C1272D',
+  muted: '#64748B',
+  border: '#C9D3E1',
+}
+
 const colors = {
   black: midnight.bg,
 }
@@ -48,24 +59,24 @@ const colors = {
 const styles = {
   global: (props: any) => ({
     body: {
-      color: mode('gray.800', midnight.text)(props),
-      bg: mode('gray.100', midnight.bg)(props),
+      color: mode(daylight.text, midnight.text)(props),
+      bg: mode(daylight.bg, midnight.bg)(props),
     },
   }),
 }
 
 const textVariants = {
   emphasis: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('teal.500', midnight.accent)(props),
+    color: mode(daylight.accent, midnight.accent)(props),
   }),
   description: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('gray.800', midnight.description)(props),
+    color: mode(daylight.description, midnight.description)(props),
   }),
   accent: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('gray.800', midnight.accent)(props),
+    color: mode(daylight.accent, midnight.accent)(props),
   }),
   accentAlternative: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('#595959', '#C1C9D4')(props),
+    color: mode(daylight.muted, '#C1C9D4')(props),
   }),
 }
 
@@ -79,18 +90,18 @@ const theme = extendTheme({
   components: {
     Link: {
       baseStyle: (props: ThemeComponentProps<ChakraTheme>) => ({
-        color: mode('teal.500', midnight.accent)(props),
+        color: mode(daylight.accent, midnight.accent)(props),
         _hover: {
-          color: mode('teal.600', midnight.accentHover)(props),
+          color: mode(daylight.accentHover, midnight.accentHover)(props),
           textDecoration: 'none',
         },
       }),
       variants: {
         ...textVariants,
         description: (props: ThemeComponentProps<ChakraTheme>) => ({
-          color: mode('gray.800', midnight.description)(props),
+          color: mode(daylight.description, midnight.description)(props),
           _hover: {
-            color: mode('teal.500', midnight.accent)(props),
+            color: mode(daylight.accent, midnight.accent)(props),
             textDecoration: 'none',
           },
         }),
@@ -105,11 +116,11 @@ const theme = extendTheme({
     Button: {
       variants: {
         outline: (props: ThemeComponentProps<ChakraTheme>) => ({
-          borderColor: mode('gray.800', midnight.accent)(props),
-          color: mode('gray.800', midnight.text)(props),
+          borderColor: mode(daylight.accent, midnight.accent)(props),
+          color: mode(daylight.text, midnight.text)(props),
           _hover: {
             backgroundColor: mode(
-              'rgba(49, 151, 149, 0.06)',
+              'rgba(38, 53, 121, 0.07)',
               'rgba(143, 216, 232, 0.08)'
             )(props),
           },
@@ -117,10 +128,10 @@ const theme = extendTheme({
         outlineAlternative: (props: ThemeComponentProps<ChakraTheme>) => ({
           borderWidth: '1px',
           borderRadius: 0,
-          borderColor: mode('#595959', midnight.border)(props),
+          borderColor: mode(daylight.border, midnight.border)(props),
           _hover: {
             backgroundColor: mode(
-              'rgba(49, 151, 149, 0.06)',
+              'rgba(193, 39, 45, 0.07)',
               'rgba(143, 216, 232, 0.08)'
             )(props),
           },
@@ -130,14 +141,14 @@ const theme = extendTheme({
     Icon: {
       variants: {
         accent: (props: ThemeComponentProps<ChakraTheme>) => ({
-          borderColor: mode('gray.800', midnight.border)(props),
+          borderColor: mode(daylight.border, midnight.border)(props),
         }),
       },
     },
     Divider: {
       variants: {
         solid: (props: ThemeComponentProps<ChakraTheme>) => ({
-          borderColor: mode('gray.800', midnight.border)(props),
+          borderColor: mode(daylight.border, midnight.border)(props),
           marginLeft: 'auto',
           marginRight: 'auto',
         }),
@@ -146,8 +157,8 @@ const theme = extendTheme({
     Modal: {
       baseStyle: (props: ThemeComponentProps<ChakraTheme>) => ({
         dialog: {
-          bg: mode('white', midnight.surface)(props),
-          color: mode('gray.800', midnight.text)(props),
+          bg: mode(daylight.surface, midnight.surface)(props),
+          color: mode(daylight.text, midnight.text)(props),
           boxShadow: mode('xl', '0 24px 60px rgba(0, 0, 0, 0.38)')(props),
         },
       }),

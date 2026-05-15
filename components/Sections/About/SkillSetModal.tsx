@@ -31,7 +31,7 @@ const SkillList = ({
   title: string
   columns: Skill[][]
 }) => {
-  const emphasis = useColorModeValue('teal.500', '#8FD8E8')
+  const emphasis = useColorModeValue('#263579', '#8FD8E8')
   const [colOne, colTwo = []] = columns
 
   return (
