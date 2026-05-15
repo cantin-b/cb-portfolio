@@ -17,9 +17,9 @@ const Logo = () => {
 
   const logoSrc = isDark
     ? '/logos/CB_logo_dark.png'
-    : '/logos/cb-web-artisan-logo-no-subtitle.png'
+    : '/logos/CB_logo.png'
   const logoWidth = isMobile ? 60 : 100
-  const logoHeight = isMobile ? (isDark ? 60 : 27) : (isDark ? 100 : 45)
+  const logoHeight = isMobile ? 60 : 100
 
   return (
     <AnimatePresence>
@@ -37,6 +37,7 @@ const Logo = () => {
           variants={simpleOpacity}
           initial="initial"
           animate={isLogoLoaded ? 'animate' : 'initial'}
+          unoptimized
           priority
         />
       </Link>
