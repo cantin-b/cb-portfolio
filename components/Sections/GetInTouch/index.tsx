@@ -1,7 +1,14 @@
 import { memo, useState } from 'react'
 import { useTranslation, Trans } from 'next-i18next'
 import { useHasMounted } from 'hooks/useHasMounted'
-import { Heading, Text, Stack, Link, Icon, Box } from '@chakra-ui/react'
+import {
+  Heading,
+  Text,
+  Stack,
+  Link,
+  Box,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
@@ -27,6 +34,8 @@ const GetInTouch = () => {
 
   const hasMounted = useHasMounted()
   const { t } = useTranslation('common')
+  const contactLinkColor = useColorModeValue('teal.600', 'cyan.200')
+  const contactLinkHoverColor = useColorModeValue('teal.700', 'cyan.100')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -103,9 +112,24 @@ const GetInTouch = () => {
       {hasMounted && (
         <Text variant="description" textAlign="justify">
           <Trans i18nKey="contact.intro" components={{
-            1: <Link href="mailto:hello@cantinbartel.dev" isExternal color="teal.200" />,
-            2: <Link href={WHATSAPP_BUSINESS_URL} isExternal color="teal.200" />,
-            3: <Link href="https://www.linkedin.com/in/cantin-bartel/" isExternal color="teal.200" />,
+            1: <Link
+              href="mailto:hello@cantinbartel.dev"
+              isExternal
+              color={contactLinkColor}
+              _hover={{ color: contactLinkHoverColor }}
+            />,
+            2: <Link
+              href={WHATSAPP_BUSINESS_URL}
+              isExternal
+              color={contactLinkColor}
+              _hover={{ color: contactLinkHoverColor }}
+            />,
+            3: <Link
+              href="https://www.linkedin.com/in/cantin-bartel/"
+              isExternal
+              color={contactLinkColor}
+              _hover={{ color: contactLinkHoverColor }}
+            />,
             }} />
         </Text>
       )}
