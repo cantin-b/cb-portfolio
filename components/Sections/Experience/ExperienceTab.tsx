@@ -25,9 +25,13 @@ import { useTranslation } from 'next-i18next'
 
 const ExperienceTab = () => {
   const { colorMode } = useColorMode()
-  const emphasis = useColorModeValue('teal.500', 'cyan.200')
-  const borderColor = useColorModeValue('gray.300', 'gray.600')
-  const activeBordercolor = useColorModeValue('teal.500', '#97DFFC')
+  const emphasis = useColorModeValue('teal.500', '#8FD8E8')
+  const borderColor = useColorModeValue('gray.300', '#263241')
+  const activeBordercolor = useColorModeValue('teal.500', '#8FD8E8')
+  const activeTabBg = useColorModeValue(
+    'rgba(49, 151, 149, 0.08)',
+    'rgba(143, 216, 232, 0.08)'
+  )
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
 
   const tabOrientation =
@@ -72,7 +76,7 @@ const ExperienceTab = () => {
               boxShadow: 'none',
               borderLeftWidth: tabOrientation === 'vertical' ? '4px' : '0',
               borderBottomWidth: tabOrientation === 'horizontal' ? '4px' : '0',
-              background: 'whiteAlpha.100',
+              background: activeTabBg,
             }}
             borderBottomWidth={tabOrientation === 'horizontal' ? '4px' : '0'}
           >

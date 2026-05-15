@@ -1,11 +1,20 @@
 import { memo } from 'react'
 import { useTranslation } from 'next-i18next'
-import { Heading, Text, Stack, List, ListItem, ListIcon } from '@chakra-ui/react'
+import {
+  Heading,
+  Text,
+  Stack,
+  List,
+  ListItem,
+  ListIcon,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { CheckCircleIcon } from '@chakra-ui/icons'
 
 const ServicesSection = () => {
   const { t } = useTranslation('common')
   const services = t('services.items', { returnObjects: true }) as string[]
+  const iconColor = useColorModeValue('teal.400', '#8FD8E8')
 
   return (
     <Stack
@@ -29,7 +38,7 @@ const ServicesSection = () => {
       <List spacing={3}>
         {services.map((item) => (
           <ListItem key={item} fontSize="small" display="flex" alignItems="flex-start">
-            <ListIcon as={CheckCircleIcon} color="teal.400" mt={0.5} />
+            <ListIcon as={CheckCircleIcon} color={iconColor} mt={0.5} />
             <Text as="span">{item}</Text>
           </ListItem>
         ))}
@@ -39,4 +48,3 @@ const ServicesSection = () => {
 }
 
 export default memo(ServicesSection)
-

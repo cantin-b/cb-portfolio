@@ -35,11 +35,11 @@ const ContactForm = ({
   const hasMounted = useHasMounted()
   const { t } = useTranslation('common')
 
-  const formBg = useColorModeValue('white', 'gray.800')
-  const focusBorderColor = useColorModeValue('#319795', '#9DECF9')
-  const buttonBg = useColorModeValue('#319795', '#9DECF9')
-  const buttonHoverBg = useColorModeValue('#2c8583', '#8dd7e3')
-  const buttonTextColor = useColorModeValue('white', '#121212')
+  const formBg = useColorModeValue('white', '#111827')
+  const focusBorderColor = useColorModeValue('#319795', '#8FD8E8')
+  const buttonBg = useColorModeValue('#319795', '#8FD8E8')
+  const buttonHoverBg = useColorModeValue('#2c8583', '#B7ECF5')
+  const buttonTextColor = useColorModeValue('white', '#0B1118')
   return (
     <Box
       maxW="lg"
