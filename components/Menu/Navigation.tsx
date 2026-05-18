@@ -25,7 +25,7 @@ import { useColorModePreference } from 'hooks/useColorModePreference'
 
 const Navigation = () => {
   const { colorMode, setColorMode } = useColorMode()
-  const { setPreference } = useColorModePreference()
+  const { preference, setPreference } = useColorModePreference()
   const MotionContainer = motion(Container)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
@@ -72,8 +72,13 @@ const Navigation = () => {
 
   const handleLanguageSwitch = () => {
     const protocol = typeof window === 'undefined' ? 'https:' : window.location.protocol
-    const target = `${protocol}//${getTargetDomain()}${currentPath}`
-    window.location.href = target
+    const target = new URL(`${protocol}//${getTargetDomain()}${currentPath}`)
+
+    if (preference === 'light' || preference === 'dark') {
+      target.searchParams.set('theme', preference)
+    }
+
+    window.location.href = target.toString()
   }
 
   const onMenuItemClick = useCallback(

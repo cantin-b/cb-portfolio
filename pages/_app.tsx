@@ -18,6 +18,17 @@ function ColorModeSync() {
   const { setColorMode } = useColorMode()
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const themeParam = params.get('theme')
+    if (themeParam !== 'light' && themeParam !== 'dark') return
+
+    params.delete('theme')
+    const search = params.toString()
+    const nextUrl = `${window.location.pathname}${search ? `?${search}` : ''}${window.location.hash}`
+    window.history.replaceState(window.history.state, '', nextUrl)
+  }, [])
+
+  useEffect(() => {
     if (preference === 'light' || preference === 'dark') {
       setColorMode(preference)
       return

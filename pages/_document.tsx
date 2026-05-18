@@ -40,7 +40,7 @@ class MyDocument extends Document<MyDocumentProps> {
           <script
             dangerouslySetInnerHTML={{
               __html:
-                "try{var p=localStorage.getItem('cb-color-mode-preference');if(p==='light'||p==='dark'){localStorage.setItem('chakra-ui-color-mode',p)}else{localStorage.removeItem('chakra-ui-color-mode')}}catch(e){}",
+                "try{var q=new URLSearchParams(window.location.search);var p=q.get('theme');if(p==='light'||p==='dark'){localStorage.setItem('cb-color-mode-preference',p);q.delete('theme');var s=q.toString();window.history.replaceState(window.history.state,'',window.location.pathname+(s?'?'+s:'')+window.location.hash)}else{p=localStorage.getItem('cb-color-mode-preference')}if(p==='light'||p==='dark'){localStorage.setItem('chakra-ui-color-mode',p)}else{localStorage.removeItem('chakra-ui-color-mode')}}catch(e){}",
             }}
           />
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
