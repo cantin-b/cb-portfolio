@@ -6,6 +6,7 @@ const DURATIONS = {
   VerySlow: 1.8,
 }
 const easing = [0.6, -0.05, 0.01, 0.99]
+const premiumEasing = [0.22, 1, 0.36, 1]
 
 const fadeInUp = {
   initial: {
@@ -47,6 +48,31 @@ const letterSpace = {
     transition: {
       duration: DURATIONS.Slow,
       ease: easing,
+    },
+  },
+}
+
+const nameReveal = {
+  initial: {},
+  animate: {
+    transition: {
+      delayChildren: 0.05,
+      staggerChildren: 0.14,
+    },
+  },
+}
+
+const nameLineReveal = {
+  initial: {
+    y: '110%',
+    opacity: 1,
+  },
+  animate: {
+    y: '0%',
+    opacity: 1,
+    transition: {
+      duration: DURATIONS.Normal,
+      ease: premiumEasing,
     },
   },
 }
@@ -145,6 +171,8 @@ export {
   fadeInUp,
   fadeInUpSlower,
   letterSpace,
+  nameReveal,
+  nameLineReveal,
   stagger,
   galleryStagger,
   simpleOpacity,

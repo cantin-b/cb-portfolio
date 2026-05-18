@@ -12,7 +12,8 @@ import { motion, useTransform } from 'framer-motion'
 import styles from './styles.module.css'
 import {
   fadeInUp,
-  letterSpace,
+  nameReveal,
+  nameLineReveal,
   simpleOpacity,
   stagger,
   scaleUp,
@@ -69,11 +70,32 @@ const Sidebar = () => {
             size={surNameSize}
             className={styles.marginTopForce}
             textTransform="uppercase"
-            variants={letterSpace}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            variants={nameReveal}
+            lineHeight={0.95}
+            letterSpacing={0}
+            whileHover={{ scale: 1.015 }}
+            whileTap={{ scale: 0.985 }}
           >
-            Cantin Bartel
+            <MotionBox as="span" display="block" overflow="hidden">
+              <MotionBox
+                as="span"
+                display="block"
+                variants={nameLineReveal}
+                style={{ willChange: 'transform' }}
+              >
+                Cantin
+              </MotionBox>
+            </MotionBox>
+            <MotionBox as="span" display="block" overflow="hidden">
+              <MotionBox
+                as="span"
+                display="block"
+                variants={nameLineReveal}
+                style={{ willChange: 'transform' }}
+              >
+                Bartel
+              </MotionBox>
+            </MotionBox>
           </MotionHeading>
           <MotionHeading
             as="h2"
