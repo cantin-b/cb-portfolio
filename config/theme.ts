@@ -30,15 +30,15 @@ const config = {
 }
 
 const midnight = {
-  bg: '#0B1118',
-  surface: '#111827',
-  surfaceElevated: '#162033',
-  text: '#F3F4F6',
-  description: '#A7B0C0',
-  accent: '#8FD8E8',
-  accentHover: '#B7ECF5',
-  accentDeep: '#5AA6A6',
-  border: '#263241',
+  bg: '#101216',
+  surface: '#171A21',
+  surfaceElevated: '#20242D',
+  text: '#F2F0EA',
+  description: '#B8BEC9',
+  accent: '#AEB9D6',
+  accentHover: '#C7D0E6',
+  red: '#C1272D',
+  border: '#323846',
 }
 
 const daylight = {
@@ -92,7 +92,7 @@ const theme = extendTheme({
       baseStyle: (props: ThemeComponentProps<ChakraTheme>) => ({
         color: mode(daylight.accent, midnight.accent)(props),
         _hover: {
-          color: mode(daylight.accentHover, midnight.accentHover)(props),
+          color: mode(daylight.accentHover, midnight.red)(props),
           textDecoration: 'none',
         },
       }),
@@ -121,7 +121,7 @@ const theme = extendTheme({
           _hover: {
             backgroundColor: mode(
               'rgba(38, 53, 121, 0.07)',
-              'rgba(143, 216, 232, 0.08)'
+              'rgba(174, 185, 214, 0.1)'
             )(props),
           },
         }),
@@ -132,7 +132,7 @@ const theme = extendTheme({
           _hover: {
             backgroundColor: mode(
               'rgba(193, 39, 45, 0.07)',
-              'rgba(143, 216, 232, 0.08)'
+              'rgba(193, 39, 45, 0.08)'
             )(props),
           },
         }),

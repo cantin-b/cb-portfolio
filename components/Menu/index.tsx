@@ -31,7 +31,7 @@ const mobileMenuVariants: Variants = {
 }
 
 const Menu = () => {
-  const bg = useColorModeValue('#F4F7FB', '#0B1118')
+  const bg = useColorModeValue('#F4F7FB', '#101216')
   const controls = useAnimation()
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const scrollDirection = useScrollDirection(true, isMobile)

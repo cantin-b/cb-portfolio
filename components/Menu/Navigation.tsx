@@ -36,10 +36,10 @@ const Navigation = () => {
 
   const bg = useColorModeValue(
     'rgba(244, 247, 251, 0.95)',
-    'rgba(11, 17, 24, 0.92)'
+    'rgba(16, 18, 22, 0.94)'
   )
 
-  const borderColor = useColorModeValue('#263579', '#8FD8E8')
+  const borderColor = useColorModeValue('#263579', '#AEB9D6')
 
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
@@ -101,7 +101,7 @@ const Navigation = () => {
         as="span"
         fontWeight="bold"
         textDecoration="underline"
-        color={IsDark ? '#8FD8E8' : "#263579"}
+        color={IsDark ? '#AEB9D6' : "#263579"}
       >
         {currentLocale?.toUpperCase()}
       </Text>

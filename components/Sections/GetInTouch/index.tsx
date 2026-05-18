@@ -34,8 +34,8 @@ const GetInTouch = () => {
 
   const hasMounted = useHasMounted()
   const { t } = useTranslation('common')
-  const contactLinkColor = useColorModeValue('#263579', '#8FD8E8')
-  const contactLinkHoverColor = useColorModeValue('#C1272D', '#B7ECF5')
+  const contactLinkColor = useColorModeValue('#263579', '#AEB9D6')
+  const contactLinkHoverColor = useColorModeValue('#C1272D', '#C1272D')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

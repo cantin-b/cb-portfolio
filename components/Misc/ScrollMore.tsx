@@ -55,8 +55,8 @@ const emailVariants: Variants = {
 const ScrollMore = () => {
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const scrollDirection = useScrollDirection(false, isMobile)
-  const emailColor = useColorModeValue('#172033', '#A7B0C0')
-  const emailLine = useColorModeValue('#263579', '#8FD8E8')
+  const emailColor = useColorModeValue('#172033', '#B8BEC9')
+  const emailLine = useColorModeValue('#263579', '#AEB9D6')
 
   return (
     <Box
