@@ -104,14 +104,23 @@ const Navigation = () => {
     >
       <Text
         as="span"
-        fontWeight="bold"
-        textDecoration="underline"
-        color={IsDark ? '#AEB9D6' : "#263579"}
+        fontWeight={currentLocale === 'en' ? 'bold' : 'normal'}
+        textDecoration={currentLocale === 'en' ? 'underline' : 'none'}
+        color={currentLocale === 'en' ? (IsDark ? '#AEB9D6' : '#263579') : 'inherit'}
+        opacity={currentLocale === 'en' ? 1 : 0.6}
       >
-        {currentLocale?.toUpperCase()}
+        EN
       </Text>
       <Text as="span" mx={1} opacity={0.5}>/</Text>
-      <Text as="span" opacity={0.6}>{newLocale.toUpperCase()}</Text>
+      <Text
+        as="span"
+        fontWeight={currentLocale === 'fr' ? 'bold' : 'normal'}
+        textDecoration={currentLocale === 'fr' ? 'underline' : 'none'}
+        color={currentLocale === 'fr' ? (IsDark ? '#AEB9D6' : '#263579') : 'inherit'}
+        opacity={currentLocale === 'fr' ? 1 : 0.6}
+      >
+        FR
+      </Text>
     </Button>
   )
 
