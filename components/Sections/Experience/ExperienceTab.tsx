@@ -12,7 +12,6 @@ import {
   ListIcon,
   ListItem,
   SlideFade,
-  Skeleton,
   useColorModeValue,
   useBreakpointValue,
   useColorMode,
@@ -86,7 +85,6 @@ const ExperienceTab = () => {
               }
               alt={company.longName}
               maxWidth="88px"
-              fallback={<Skeleton height="100%" width="100%" />}
             ></Image>
           </Tab>
         ))}
