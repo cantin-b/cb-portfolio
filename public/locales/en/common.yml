@@ -7,22 +7,23 @@ seo:
 navigation:
   about: "About"
   services: "Services"
+  work: "Work"
   experience: "Experience"
   contact: "Contact"
 sidebar:
   greeting: "Hi there! I'm"
   role: "Freelance Software Engineer"
   thanks: "Thanks for stopping by!"
-  description: "I build websites and custom web apps for small and mid-sized businesses in order to make their daily work simple."
-  idea: "Need a website or a custom internal tool?"
-  support: "I can build something that fits your workflow."
+  description: "I build modern websites for small and mid-sized businesses, with the option to add custom tools when their daily work needs more than a standard site."
+  idea: "Need a clear website for your business?"
+  support: "I can also build the internal features around it when your workflow grows."
   button: "Get in touch"
 about:
   title: "what i do"
   description: >
-    I help small and mid-sized businesses build tools that make their day easier: a website that brings in requests, or a custom web app that fits how you actually work.
-    From a simple <b>brochure website</b> to <b>tailor-made software</b>, I design, build and deploy solutions with <b>React/Next.js</b> and <b>Node.js</b>.
-    This can include request forms, booking flows, dashboards, CRM / back-office tools, API integrations, or small automations that remove manual work.
+    I help small and mid-sized businesses create websites that present their services clearly, bring in requests and feel easy to use on every device.
+    When a business needs more than a standard site, I can extend it with <b>tailor-made software</b> built with <b>React/Next.js</b> and <b>Node.js</b>.
+    This can include request forms, booking flows, dashboards, CRM / back-office tools, API integrations or small automations that remove manual work.
   tech-stack-button: "See my full tech stack"
   modal: 
     title: "Full Skill Set List"
@@ -32,13 +33,70 @@ about:
     ai-tools: "AI Tools"
 services:
   title: "services"
-  intro: "From a simple website to a custom internal tool, I help design, build and maintain software that fits the way your business works."
+  intro: "I mainly help small businesses get a clear, modern web presence, then add custom software features when the workflow calls for it."
   items:
     - "SEO-friendly websites and landing pages built with React or Next.js"
-    - "Internal tools and back-office features for daily business operations"
+    - "Service pages, contact flows and quote request forms that make it easy for visitors to reach out"
+    - "Booking, dashboard or back-office features when a website needs to support daily operations"
     - "CRM-style workflows to manage clients, requests, bookings or business data"
     - "API integrations with third-party services, forms, dashboards or admin tools"
     - "Deployment and maintenance on Linux servers with NGINX, PM2 or Docker"
+
+selectedWork:
+  title: "Selected Work"
+  intro: "Selected examples of websites and tools I can build for small businesses — from simple local business websites to more advanced internal workflows."
+  actions:
+    viewProject: "View project"
+    viewDetails: "View details"
+    viewPublicWebsite: "View Public Website"
+    viewBackOffice: "View Back-Office"
+    viewScreenshots: "View screenshots"
+  caseStudy:
+    eyebrow: "Case study"
+    summary: "Scooter Rental brings together two connected experiences: a polished public website that helps customers browse models and request bookings, and a practical back-office that keeps daily operations organized."
+    sections:
+      publicSite:
+        title: "Customer website"
+        description: "A mobile-friendly rental website with a strong landing page, bike catalogue, filters, model pages, date selection, availability cues, pricing estimates and WhatsApp-based booking requests."
+        imageAlt: "Scooter Rental customer website interface"
+      backOffice:
+        title: "Back-office"
+        description: "An operations dashboard for fleet planning, booking timelines, vehicle inventory, maintenance deadlines, insurance and tax tracking, users and permission controls."
+        imageAlt: "Scooter Rental back-office dashboard interface"
+  projects:
+    scooter:
+      title: "Scooter Rental"
+      type: "Full-stack platform"
+      description: "A full-stack rental platform for a scooter business, pairing a conversion-focused customer website with an internal dashboard for bookings, fleet availability, maintenance tracking, and staff permissions."
+      tags:
+        - "Website"
+        - "Booking Flow"
+        - "Fleet Calendar"
+        - "Internal Tool"
+    painter:
+      title: "Painter Website"
+      type: "Website demo"
+      description: "A clean responsive website concept for a local painting company, focused on presenting services, building trust and making it easy for visitors to request a quote."
+      tags:
+        - "Website"
+        - "Local business"
+        - "Responsive"
+    restaurant:
+      title: "Restaurant / Café Website"
+      type: "Concept"
+      description: "A simple modern website concept for a restaurant or café, with menu presentation, opening hours, location, contact information and mobile-friendly layout."
+      tags:
+        - "Website"
+        - "Restaurant"
+        - "Mobile-first"
+    crm:
+      title: "Custom CRM Workflow"
+      type: "Internal tool screenshots"
+      description: "Screenshots of a custom CRM workflow built to manage prospects, calls, follow-ups, documents and business stages."
+      tags:
+        - "CRM"
+        - "Internal tool"
+        - "Workflow"
 
 experience:
   title: "background"

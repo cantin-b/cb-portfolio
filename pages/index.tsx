@@ -15,6 +15,7 @@ import Avatar from 'components/Avatar'
 import About from 'components/Sections/About'
 import Experience from 'components/Sections/Experience'
 import Services from 'components/Sections/Services'
+import SelectedWork from 'components/Sections/SelectedWork'
 import ScrollMore from 'components/Misc/ScrollMore'
 import { Article } from 'types/article'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -111,6 +112,18 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
                 flexDirection={'row'}
               >
                 <Services />
+              </Box>
+            </FadeInLayout>
+            <FadeInLayout>
+              <Box
+                id="work"
+                className="contentRow"
+                paddingTop={{ base: 0, lg: 20, xl: 0 }}
+                paddingBottom={{ base: 12, lg: 10 }}
+                paddingX={0}
+                flexDirection={'row'}
+              >
+                <SelectedWork />
               </Box>
             </FadeInLayout>
             <FadeInLayout>

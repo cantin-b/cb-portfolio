@@ -7,6 +7,7 @@ seo:
 navigation:
   about: "À propos"
   services: "Services"
+  work: "Work"
   experience: "Expérience"
   contact: "Contact"
 sidebar:
@@ -14,15 +15,15 @@ sidebar:
   name: "Cantin"
   role: "Développeur web / logiciel freelance"
   thanks: "Merci pour votre visite!"
-  description: "Je crée des sites internet et des applications web sur mesure pour les PME afin de simplifier leur quotidien."
-  idea: "Besoin d’un site ou d’un outil interne ?"
-  support: "Je peux construire une solution adaptée à votre workflow."
+  description: "Je crée des sites internet modernes pour les PME, avec la possibilité d’ajouter des outils sur mesure quand leur quotidien demande plus qu’un site classique."
+  idea: "Besoin d’un site clair pour votre activité ?"
+  support: "Je peux aussi construire les fonctionnalités internes qui l’accompagnent quand votre workflow grandit."
   button: "Me contacter"
 about:
   title: "ce que je fais"
   description: >
-    J’aide les petites et moyennes entreprises à créer des outils concrets qui facilitent le quotidien : un site internet qui génère des demandes, ou une application sur mesure qui colle à votre façon de travailler.
-    Du <b>site vitrine</b> au <b>logiciel personnalisé</b>, je conçois, développe et déploie des solutions en <b>React/Next.js</b> et <b>Node.js</b>.
+    J’aide les petites et moyennes entreprises à créer des sites internet qui présentent clairement leurs services, génèrent des demandes et restent simples à utiliser sur tous les appareils.
+    Quand un besoin dépasse le site classique, je peux l’étendre avec un <b>logiciel sur mesure</b> développé en <b>React/Next.js</b> et <b>Node.js</b>.
     Cela peut inclure des formulaires de demande ou de devis, des parcours de réservation, des tableaux de bord, des <b>CRM / back-offices</b>, des intégrations API ou de petites automatisations qui réduisent le travail manuel.
   tech-stack-button: "Voir ma stack technique"
   modal: 
@@ -33,13 +34,70 @@ about:
     ai-tools: "Outils IA"
 services:
   title: "services"
-  intro: "Du simple site internet à l’outil interne sur mesure, je vous aide à concevoir, développer et maintenir un logiciel adapté à votre façon de travailler."
+  intro: "J’aide d’abord les petites entreprises à construire une présence web claire et moderne, puis à ajouter des fonctionnalités sur mesure quand leur workflow le demande."
   items:
     - "Sites internet et landing pages optimisés SEO, développés avec React ou Next.js"
-    - "Outils internes et fonctionnalités back-office pour les opérations quotidiennes"
+    - "Pages de services, formulaires de contact et demandes de devis faciles à utiliser"
+    - "Fonctionnalités de réservation, tableaux de bord ou back-office quand le site doit soutenir les opérations quotidiennes"
     - "Workflows de type CRM pour gérer clients, demandes, réservations ou données métier"
     - "Intégrations API avec services tiers, formulaires, tableaux de bord ou outils d’administration"
     - "Déploiement et maintenance sur serveurs Linux avec NGINX, PM2 ou Docker"
+
+selectedWork:
+  title: "Selected Work"
+  intro: "Quelques exemples de sites et d’outils que je peux construire pour des petites entreprises — du site local simple aux workflows internes plus avancés."
+  actions:
+    viewProject: "Voir le projet"
+    viewDetails: "Voir les détails"
+    viewPublicWebsite: "Voir le site public"
+    viewBackOffice: "Voir le back-office"
+    viewScreenshots: "Voir les captures"
+  caseStudy:
+    eyebrow: "Étude de cas"
+    summary: "Scooter Rental réunit deux expériences connectées : un site public soigné pour aider les clients à parcourir les modèles et envoyer une demande de réservation, et un back-office pratique pour organiser les opérations quotidiennes."
+    sections:
+      publicSite:
+        title: "Site client"
+        description: "Un site de location mobile-friendly avec landing page, catalogue de deux-roues, filtres, pages modèle, sélection de dates, indicateurs de disponibilité, estimations de prix et demandes de réservation via WhatsApp."
+        imageAlt: "Interface du site client Scooter Rental"
+      backOffice:
+        title: "Back-office"
+        description: "Un dashboard opérationnel pour le planning de flotte, les réservations, l'inventaire des véhicules, les échéances de maintenance, le suivi assurance/taxe, les utilisateurs et les permissions."
+        imageAlt: "Interface du back-office Scooter Rental"
+  projects:
+    scooter:
+      title: "Scooter Rental"
+      type: "Plateforme full-stack"
+      description: "Une plateforme de location full-stack pour une entreprise de scooters, associant un site client orienté conversion à un dashboard interne pour les réservations, les disponibilités de flotte, la maintenance et les permissions d'équipe."
+      tags:
+        - "Site web"
+        - "Parcours de réservation"
+        - "Calendrier de flotte"
+        - "Outil interne"
+    painter:
+      title: "Painter Website"
+      type: "Démo site web"
+      description: "Un concept de site responsive pour une entreprise locale de peinture, pensé pour présenter les services, inspirer confiance et faciliter les demandes de devis."
+      tags:
+        - "Site web"
+        - "Entreprise locale"
+        - "Responsive"
+    restaurant:
+      title: "Restaurant / Café Website"
+      type: "Concept"
+      description: "Un concept de site moderne pour un restaurant ou café, avec présentation du menu, horaires, localisation, informations de contact et mise en page mobile."
+      tags:
+        - "Site web"
+        - "Restaurant"
+        - "Mobile-first"
+    crm:
+      title: "Custom CRM Workflow"
+      type: "Captures outil interne"
+      description: "Des captures d’un workflow CRM sur mesure conçu pour gérer prospects, appels, relances, documents et étapes commerciales."
+      tags:
+        - "CRM"
+        - "Outil interne"
+        - "Workflow"
 
 experience:
   title: "parcours"
