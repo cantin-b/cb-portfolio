@@ -1,4 +1,4 @@
-import { memo, type KeyboardEvent } from 'react'
+import { memo, useState, type KeyboardEvent } from 'react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Badge,
@@ -17,58 +17,94 @@ import {
   Stack,
   Text,
   useColorModeValue,
-  useDisclosure,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 
-type SelectedWorkProject = {
-  id: string
-  image: string
-  featured?: boolean
-  url?: string
-  backOfficeUrl?: string
-  ctaKey: string
+type ProjectLink = {
+  href: string
+  labelKey: string
 }
 
 type CaseStudySection = {
-  id: 'publicSite' | 'backOffice'
+  id: 'publicSite' | 'backOffice' | 'crmWorkflow'
   image: string
+}
+
+type SelectedWorkProject = {
+  id: 'scooter' | 'siamEstate' | 'prospectingCrm'
+  image: string
+  detailSections: CaseStudySection[]
+  links: ProjectLink[]
+  ctaKey: string
 }
 
 const projects: SelectedWorkProject[] = [
   {
     id: 'scooter',
-    image: '/projects/selected-work/scooter-rental/00-marketing.png',
-    featured: true,
-    url: 'https://scooter-rental.cantinbartel.dev',
-    backOfficeUrl: 'https://scooter-rental.cantinbartel.dev/app',
+    image: '/projects/selected-work/scooter-rental/scooter-rental.png',
+    detailSections: [
+      {
+        id: 'publicSite',
+        image: '/projects/selected-work/scooter-rental/scooter-rental.png',
+      },
+      {
+        id: 'backOffice',
+        image: '/projects/selected-work/scooter-rental/scooter-rental-backoffice.png',
+      },
+    ],
+    links: [
+      {
+        href: 'https://scooter-rental.cantinbartel.dev',
+        labelKey: 'selectedWork.actions.viewPublicWebsite',
+      },
+      {
+        href: 'https://scooter-rental.cantinbartel.dev/app',
+        labelKey: 'selectedWork.actions.viewBackOffice',
+      },
+    ],
     ctaKey: 'selectedWork.actions.viewDetails',
   },
   {
-    id: 'painter',
-    image: '/projects/selected-work/painter-website.svg',
-    ctaKey: 'selectedWork.actions.viewProject',
+    id: 'siamEstate',
+    image: '/projects/selected-work/siam-estate/real-estate.png',
+    detailSections: [
+      {
+        id: 'publicSite',
+        image: '/projects/selected-work/siam-estate/real-estate.png',
+      },
+      {
+        id: 'backOffice',
+        image: '/projects/selected-work/siam-estate/real-estate-backoffice.png',
+      },
+    ],
+    links: [
+      {
+        href: 'https://siam-estate.cantinbartel.dev/',
+        labelKey: 'selectedWork.actions.viewPublicWebsite',
+      },
+      {
+        href: 'https://siam-estate.cantinbartel.dev/admin',
+        labelKey: 'selectedWork.actions.viewBackOffice',
+      },
+    ],
+    ctaKey: 'selectedWork.actions.viewDetails',
   },
   {
-    id: 'restaurant',
-    image: '/projects/selected-work/restaurant-cafe.svg',
-    ctaKey: 'selectedWork.actions.viewProject',
-  },
-  {
-    id: 'crm',
-    image: '/projects/selected-work/crm-workflow.svg',
-    ctaKey: 'selectedWork.actions.viewScreenshots',
-  },
-]
-
-const scooterCaseStudySections: CaseStudySection[] = [
-  {
-    id: 'publicSite',
-    image: '/projects/selected-work/scooter-rental/02-public-site-marketing.png',
-  },
-  {
-    id: 'backOffice',
-    image: '/projects/selected-work/scooter-rental/01-backoffice-marketing.png',
+    id: 'prospectingCrm',
+    image: '/projects/selected-work/crm-demo/crm-demo.png',
+    detailSections: [
+      {
+        id: 'crmWorkflow',
+        image: '/projects/selected-work/crm-demo/crm-demo.png',
+      },
+    ],
+    links: [
+      {
+        href: 'https://crm-demo.cantinbartel.dev/',
+        labelKey: 'selectedWork.actions.openCrmDemo',
+      },
+    ],
+    ctaKey: 'selectedWork.actions.viewDetails',
   },
 ]
 
@@ -99,12 +135,10 @@ const ProjectTags = ({ tags }: { tags: string[] }) => {
 
 const ProjectCard = ({
   project,
-  isFeatured = false,
   onOpenDetails,
 }: {
   project: SelectedWorkProject
-  isFeatured?: boolean
-  onOpenDetails?: () => void
+  onOpenDetails: (project: SelectedWorkProject) => void
 }) => {
   const { t } = useTranslation('common')
   const surface = useColorModeValue('white', '#171A21')
@@ -116,78 +150,62 @@ const ProjectCard = ({
   const tags = t(`selectedWork.projects.${project.id}.tags`, {
     returnObjects: true,
   }) as string[]
-  const isInteractive = isFeatured && Boolean(onOpenDetails)
+
+  const openProject = () => onOpenDetails(project)
 
   const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (!isInteractive) return
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
-      onOpenDetails?.()
+      openProject()
     }
   }
 
   return (
     <Box
       as="article"
-      role={isInteractive ? 'button' : undefined}
-      tabIndex={isInteractive ? 0 : undefined}
-      aria-label={isInteractive ? t(project.ctaKey) : undefined}
-      onClick={isInteractive ? onOpenDetails : undefined}
+      role="button"
+      tabIndex={0}
+      aria-label={`${t(project.ctaKey)}: ${title}`}
+      onClick={openProject}
       onKeyDown={handleCardKeyDown}
       bg={surface}
       border="1px solid"
       borderColor={borderColor}
       borderRadius="md"
-      cursor={isInteractive ? 'pointer' : undefined}
+      cursor="pointer"
       overflow="hidden"
       height="100%"
-      display={isFeatured ? { base: 'block', md: 'grid' } : 'block'}
-      gridTemplateColumns={
-        isFeatured ? { md: 'minmax(0, 3fr) minmax(260px, 2fr)' } : undefined
-      }
+      display={{ base: 'block', md: 'grid' }}
+      gridTemplateColumns={{ md: 'minmax(280px, 5fr) minmax(260px, 3fr)' }}
       transition="border-color 160ms ease, transform 160ms ease"
-      _hover={
-        isInteractive
-          ? {
-              borderColor: hoverBorderColor,
-              transform: 'translateY(-2px)',
-            }
-          : undefined
-      }
-      _focusVisible={
-        isInteractive
-          ? {
-              borderColor: hoverBorderColor,
-              boxShadow: `0 0 0 1px ${hoverBorderColor}`,
-              outline: 'none',
-            }
-          : undefined
-      }
+      _hover={{
+        borderColor: hoverBorderColor,
+        transform: 'translateY(-2px)',
+      }}
+      _focusVisible={{
+        borderColor: hoverBorderColor,
+        boxShadow: `0 0 0 1px ${hoverBorderColor}`,
+        outline: 'none',
+      }}
     >
       <Box
-        aspectRatio={isFeatured ? 3 / 4 : 16 / 10}
+        aspectRatio={4 / 3}
         bg={imageBg}
         display="flex"
         alignItems="center"
         justifyContent="center"
-        alignSelf={isFeatured ? 'start' : undefined}
         minW={0}
         overflow="hidden"
       >
         <Image
           src={project.image}
           alt={title}
-          objectFit="contain"
+          objectFit="cover"
           width="100%"
           height="100%"
         />
       </Box>
-      <Stack
-        spacing={4}
-        p={isFeatured ? { base: 5, md: 6 } : 5}
-        justify="space-between"
-        minW={0}
-      >
+      <Stack spacing={4} p={{ base: 5, md: 6 }} justify="space-between" minW={0}>
         <Stack spacing={3}>
           <Text
             fontSize="xs"
@@ -197,38 +215,23 @@ const ProjectCard = ({
           >
             {t(`selectedWork.projects.${project.id}.type`)}
           </Text>
-          <Heading as="h3" size={isFeatured ? 'md' : 'sm'}>
+          <Heading as="h3" size="md">
             {title}
           </Heading>
-          <Text variant="description" fontSize="sm">
+          <Text variant="description" fontSize="sm" noOfLines={6}>
             {t(`selectedWork.projects.${project.id}.description`)}
           </Text>
           <ProjectTags tags={tags} />
         </Stack>
-        {isInteractive ? (
-          <Button
-            as="span"
-            size="sm"
-            variant="outlineAlternative"
-            alignSelf="flex-start"
-            pointerEvents="none"
-          >
-            {t(project.ctaKey)}
-          </Button>
-        ) : project.url ? (
-          <Button
-            as="a"
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            size="sm"
-            variant="outlineAlternative"
-            alignSelf="flex-start"
-            rightIcon={<ExternalLinkIcon />}
-          >
-            {t(project.ctaKey)}
-          </Button>
-        ) : null}
+        <Button
+          as="span"
+          size="sm"
+          variant="outlineAlternative"
+          alignSelf="flex-start"
+          pointerEvents="none"
+        >
+          {t(project.ctaKey)}
+        </Button>
       </Stack>
     </Box>
   )
@@ -239,7 +242,7 @@ const ProjectCaseStudyModal = ({
   isOpen,
   onClose,
 }: {
-  project: SelectedWorkProject
+  project?: SelectedWorkProject
   isOpen: boolean
   onClose: () => void
 }) => {
@@ -252,10 +255,14 @@ const ProjectCaseStudyModal = ({
     '0 -18px 28px -28px rgba(23, 32, 51, 0.55)',
     '0 -18px 28px -28px rgba(0, 0, 0, 0.85)'
   )
+
+  if (!project) return null
+
   const title = t(`selectedWork.projects.${project.id}.title`)
   const tags = t(`selectedWork.projects.${project.id}.tags`, {
     returnObjects: true,
   }) as string[]
+  const sectionColumns = project.detailSections.length > 1 ? { base: 1, lg: 2 } : 1
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="5xl" scrollBehavior="inside" isCentered>
@@ -283,15 +290,15 @@ const ProjectCaseStudyModal = ({
               {title}
             </Heading>
             <Text variant="description" fontSize="sm">
-              {t('selectedWork.caseStudy.summary')}
+              {t(`selectedWork.projects.${project.id}.caseStudy.summary`)}
             </Text>
             <ProjectTags tags={tags} />
           </Stack>
         </ModalHeader>
 
         <ModalBody px={{ base: 5, md: 8 }} py={2} pb={{ base: 5, md: 6 }}>
-          <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={4}>
-            {scooterCaseStudySections.map((section) => (
+          <SimpleGrid columns={sectionColumns} spacing={4}>
+            {project.detailSections.map((section) => (
               <Box
                 key={section.id}
                 border="1px solid"
@@ -302,7 +309,7 @@ const ProjectCaseStudyModal = ({
               >
                 <Box
                   bg={imageBg}
-                  aspectRatio={16 / 9}
+                  aspectRatio={4 / 3}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
@@ -310,18 +317,22 @@ const ProjectCaseStudyModal = ({
                 >
                   <Image
                     src={section.image}
-                    alt={t(`selectedWork.caseStudy.sections.${section.id}.imageAlt`)}
-                    objectFit="contain"
+                    alt={t(
+                      `selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.imageAlt`
+                    )}
+                    objectFit="cover"
                     width="100%"
                     height="100%"
                   />
                 </Box>
                 <Stack spacing={2} p={{ base: 4, md: 5 }}>
                   <Heading as="h4" size="sm">
-                    {t(`selectedWork.caseStudy.sections.${section.id}.title`)}
+                    {t(`selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.title`)}
                   </Heading>
                   <Text variant="description" fontSize="sm">
-                    {t(`selectedWork.caseStudy.sections.${section.id}.description`)}
+                    {t(
+                      `selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.description`
+                    )}
                   </Text>
                 </Stack>
               </Box>
@@ -343,26 +354,19 @@ const ProjectCaseStudyModal = ({
             justify="flex-end"
             align={{ base: 'stretch', sm: 'center' }}
           >
-            <Button
-              as="a"
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              variant="outlineAlternative"
-              rightIcon={<ExternalLinkIcon />}
-            >
-              {t('selectedWork.actions.viewPublicWebsite')}
-            </Button>
-            <Button
-              as="a"
-              href={project.backOfficeUrl}
-              target="_blank"
-              rel="noreferrer"
-              variant="outlineAlternative"
-              rightIcon={<ExternalLinkIcon />}
-            >
-              {t('selectedWork.actions.viewBackOffice')}
-            </Button>
+            {project.links.map((link) => (
+              <Button
+                key={link.href}
+                as="a"
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                variant="outlineAlternative"
+                rightIcon={<ExternalLinkIcon />}
+              >
+                {t(link.labelKey)}
+              </Button>
+            ))}
           </Stack>
         </ModalFooter>
       </ModalContent>
@@ -372,9 +376,9 @@ const ProjectCaseStudyModal = ({
 
 const SelectedWorkSection = () => {
   const { t } = useTranslation('common')
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const featuredProject = projects.find((project) => project.featured)
-  const compactProjects = projects.filter((project) => !project.featured)
+  const [activeProject, setActiveProject] = useState<SelectedWorkProject>()
+
+  const handleClose = () => setActiveProject(undefined)
 
   return (
     <Stack
@@ -398,22 +402,21 @@ const SelectedWorkSection = () => {
         </Text>
       </Stack>
 
-      {featuredProject && (
-        <>
-          <ProjectCard project={featuredProject} isFeatured onOpenDetails={onOpen} />
-          <ProjectCaseStudyModal
-            project={featuredProject}
-            isOpen={isOpen}
-            onClose={onClose}
+      <Stack spacing={5}>
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            onOpenDetails={setActiveProject}
           />
-        </>
-      )}
-
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-        {compactProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
         ))}
-      </SimpleGrid>
+      </Stack>
+
+      <ProjectCaseStudyModal
+        project={activeProject}
+        isOpen={Boolean(activeProject)}
+        onClose={handleClose}
+      />
     </Stack>
   )
 }

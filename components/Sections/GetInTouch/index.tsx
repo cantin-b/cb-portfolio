@@ -116,18 +116,21 @@ const GetInTouch = () => {
               href="mailto:hello@cantinbartel.dev"
               isExternal
               color={contactLinkColor}
+              fontWeight="bold"
               _hover={{ color: contactLinkHoverColor }}
             />,
             2: <Link
               href={WHATSAPP_BUSINESS_URL}
               isExternal
               color={contactLinkColor}
+              fontWeight="bold"
               _hover={{ color: contactLinkHoverColor }}
             />,
             3: <Link
               href="https://www.linkedin.com/in/cantin-bartel/"
               isExternal
               color={contactLinkColor}
+              fontWeight="bold"
               _hover={{ color: contactLinkHoverColor }}
             />,
             }} />

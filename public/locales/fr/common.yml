@@ -47,23 +47,12 @@ selectedWork:
   title: "Selected Work"
   intro: "Quelques exemples de sites et d’outils que je peux construire pour des petites entreprises — du site local simple aux workflows internes plus avancés."
   actions:
-    viewProject: "Voir le projet"
     viewDetails: "Voir les détails"
-    viewPublicWebsite: "Voir le site public"
+    viewPublicWebsite: "Voir le site"
     viewBackOffice: "Voir le back-office"
-    viewScreenshots: "Voir les captures"
+    openCrmDemo: "Ouvrir le CRM Demo"
   caseStudy:
     eyebrow: "Étude de cas"
-    summary: "Scooter Rental réunit deux expériences connectées : un site public soigné pour aider les clients à parcourir les modèles et envoyer une demande de réservation, et un back-office pratique pour organiser les opérations quotidiennes."
-    sections:
-      publicSite:
-        title: "Site client"
-        description: "Un site de location mobile-friendly avec landing page, catalogue de deux-roues, filtres, pages modèle, sélection de dates, indicateurs de disponibilité, estimations de prix et demandes de réservation via WhatsApp."
-        imageAlt: "Interface du site client Scooter Rental"
-      backOffice:
-        title: "Back-office"
-        description: "Un dashboard opérationnel pour le planning de flotte, les réservations, l'inventaire des véhicules, les échéances de maintenance, le suivi assurance/taxe, les utilisateurs et les permissions."
-        imageAlt: "Interface du back-office Scooter Rental"
   projects:
     scooter:
       title: "Scooter Rental"
@@ -74,30 +63,53 @@ selectedWork:
         - "Parcours de réservation"
         - "Calendrier de flotte"
         - "Outil interne"
-    painter:
-      title: "Painter Website"
-      type: "Démo site web"
-      description: "Un concept de site responsive pour une entreprise locale de peinture, pensé pour présenter les services, inspirer confiance et faciliter les demandes de devis."
+      caseStudy:
+        summary: "Scooter Rental réunit deux expériences connectées : un site public soigné pour aider les clients à parcourir les modèles et envoyer une demande de réservation, et un back-office pratique pour organiser les opérations quotidiennes."
+        sections:
+          publicSite:
+            title: "Site client"
+            description: "Un site de location mobile-friendly avec landing page, catalogue de deux-roues, filtres, pages modèle, sélection de dates, indicateurs de disponibilité, estimations de prix et demandes de réservation via WhatsApp."
+            imageAlt: "Interface du site client Scooter Rental"
+          backOffice:
+            title: "Back-office"
+            description: "Un dashboard opérationnel pour le planning de flotte, les réservations, l'inventaire des véhicules, les échéances de maintenance, le suivi assurance/taxe, les utilisateurs et les permissions."
+            imageAlt: "Interface du back-office Scooter Rental"
+    siamEstate:
+      title: "Siam Estate"
+      type: "Plateforme immobilière"
+      description: "Une plateforme immobilière pour des biens en Thaïlande, associant un site client soigné pour explorer les logements, les lieux et les articles à un back-office pour gérer les annonces, demandes, photos et contenus."
       tags:
-        - "Site web"
-        - "Entreprise locale"
-        - "Responsive"
-    restaurant:
-      title: "Restaurant / Café Website"
-      type: "Concept"
-      description: "Un concept de site moderne pour un restaurant ou café, avec présentation du menu, horaires, localisation, informations de contact et mise en page mobile."
+        - "Immobilier"
+        - "Recherche de biens"
+        - "CMS d'annonces"
+        - "Back-office"
+      caseStudy:
+        summary: "Siam Estate connecte un site immobilier premium à un back-office opérationnel, afin de gérer les biens, résidences, propriétaires, demandes et contenus éditoriaux depuis un seul espace."
+        sections:
+          publicSite:
+            title: "Site client"
+            description: "Un site public pour parcourir des biens en Thaïlande par lieu et type, lire des articles de marché, consulter les détails d'une annonce et envoyer une demande depuis une expérience mobile-friendly."
+            imageAlt: "Interface du site client Siam Estate"
+          backOffice:
+            title: "Back-office"
+            description: "Un espace d'administration pour les annonces, résidences, propriétaires, lieux, articles, demandes et photos, avec des dashboards pour garder le portefeuille simple à maintenir."
+            imageAlt: "Interface du back-office Siam Estate"
+    prospectingCrm:
+      title: "Prospecting CRM"
+      type: "Outil commercial interne"
+      description: "Un CRM de prospection conçu pour importer des listes de prospects en CSV, organiser les contacts, planifier rappels et rendez-vous, suivre le pipeline et préparer l'outreach avec des modèles d'e-mails."
       tags:
-        - "Site web"
-        - "Restaurant"
-        - "Mobile-first"
-    crm:
-      title: "Custom CRM Workflow"
-      type: "Captures outil interne"
-      description: "Des captures d’un workflow CRM sur mesure conçu pour gérer prospects, appels, relances, documents et étapes commerciales."
-      tags:
+        - "Import CSV"
         - "CRM"
-        - "Outil interne"
-        - "Workflow"
+        - "Calendrier"
+        - "Modèles e-mail"
+      caseStudy:
+        summary: "Prospecting CRM est construit autour du quotidien de la prospection freelance : importer des prospects, qualifier les leads, planifier les relances et garder l'activité commerciale visible."
+        sections:
+          crmWorkflow:
+            title: "Workflow de prospection"
+            description: "Un espace CRM ciblé avec tableaux de prospects, filtres, statuts, rendez-vous, rappels, vues calendrier, fiches clients, modèles d'e-mails réutilisables et accès rapide aux détails des leads."
+            imageAlt: "Dashboard Prospecting CRM et calendrier mobile"
 
 experience:
   title: "parcours"
