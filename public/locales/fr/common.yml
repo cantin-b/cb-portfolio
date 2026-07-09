@@ -15,15 +15,15 @@ sidebar:
   name: "Cantin"
   role: "Développeur web / logiciel freelance"
   thanks: "Merci pour votre visite!"
-  description: "Je crée des sites internet modernes pour les PME, avec la possibilité d’ajouter des outils sur mesure quand leur quotidien demande plus qu’un site classique."
-  idea: "Besoin d’un site clair pour votre activité ?"
-  support: "Je peux aussi construire les fonctionnalités internes qui l’accompagnent quand votre workflow grandit."
+  description: "Je crée des sites internet et des applications web sur mesure pour les PME afin de simplifier leur quotidien."
+  idea: "Besoin d’un site ou d’un outil interne ?"
+  support: "Je peux construire une solution adaptée à votre workflow."
   button: "Me contacter"
 about:
   title: "ce que je fais"
   description: >
-    J’aide les petites et moyennes entreprises à créer des sites internet qui présentent clairement leurs services, génèrent des demandes et restent simples à utiliser sur tous les appareils.
-    Quand un besoin dépasse le site classique, je peux l’étendre avec un <b>logiciel sur mesure</b> développé en <b>React/Next.js</b> et <b>Node.js</b>.
+    J’aide les petites et moyennes entreprises à créer des outils concrets qui facilitent le quotidien : un site internet qui génère des demandes, ou une application sur mesure qui colle à votre façon de travailler.
+    Du <b>site vitrine</b> au <b>logiciel personnalisé</b>, je conçois, développe et déploie des solutions en <b>React/Next.js</b> et <b>Node.js</b>.
     Cela peut inclure des formulaires de demande ou de devis, des parcours de réservation, des tableaux de bord, des <b>CRM / back-offices</b>, des intégrations API ou de petites automatisations qui réduisent le travail manuel.
   tech-stack-button: "Voir ma stack technique"
   modal: 
@@ -34,11 +34,10 @@ about:
     ai-tools: "Outils IA"
 services:
   title: "services"
-  intro: "J’aide d’abord les petites entreprises à construire une présence web claire et moderne, puis à ajouter des fonctionnalités sur mesure quand leur workflow le demande."
+  intro: "Du simple site internet à l’outil interne sur mesure, je vous aide à concevoir, développer et maintenir un logiciel adapté à votre façon de travailler."
   items:
     - "Sites internet et landing pages optimisés SEO, développés avec React ou Next.js"
-    - "Pages de services, formulaires de contact et demandes de devis faciles à utiliser"
-    - "Fonctionnalités de réservation, tableaux de bord ou back-office quand le site doit soutenir les opérations quotidiennes"
+    - "Outils internes et fonctionnalités back-office pour les opérations quotidiennes"
     - "Workflows de type CRM pour gérer clients, demandes, réservations ou données métier"
     - "Intégrations API avec services tiers, formulaires, tableaux de bord ou outils d’administration"
     - "Déploiement et maintenance sur serveurs Linux avec NGINX, PM2 ou Docker"

@@ -14,16 +14,16 @@ sidebar:
   greeting: "Hi there! I'm"
   role: "Freelance Software Engineer"
   thanks: "Thanks for stopping by!"
-  description: "I build modern websites for small and mid-sized businesses, with the option to add custom tools when their daily work needs more than a standard site."
-  idea: "Need a clear website for your business?"
-  support: "I can also build the internal features around it when your workflow grows."
+  description: "I build websites and custom web apps for small and mid-sized businesses in order to make their daily work simple."
+  idea: "Need a website or a custom internal tool?"
+  support: "I can build something that fits your workflow."
   button: "Get in touch"
 about:
   title: "what i do"
   description: >
-    I help small and mid-sized businesses create websites that present their services clearly, bring in requests and feel easy to use on every device.
-    When a business needs more than a standard site, I can extend it with <b>tailor-made software</b> built with <b>React/Next.js</b> and <b>Node.js</b>.
-    This can include request forms, booking flows, dashboards, CRM / back-office tools, API integrations or small automations that remove manual work.
+    I help small and mid-sized businesses build tools that make their day easier: a website that brings in requests, or a custom web app that fits how you actually work.
+    From a simple <b>brochure website</b> to <b>tailor-made software</b>, I design, build and deploy solutions with <b>React/Next.js</b> and <b>Node.js</b>.
+    This can include request forms, booking flows, dashboards, CRM / back-office tools, API integrations, or small automations that remove manual work.
   tech-stack-button: "See my full tech stack"
   modal: 
     title: "Full Skill Set List"
@@ -33,11 +33,10 @@ about:
     ai-tools: "AI Tools"
 services:
   title: "services"
-  intro: "I mainly help small businesses get a clear, modern web presence, then add custom software features when the workflow calls for it."
+  intro: "From a simple website to a custom internal tool, I help design, build and maintain software that fits the way your business works."
   items:
     - "SEO-friendly websites and landing pages built with React or Next.js"
-    - "Service pages, contact flows and quote request forms that make it easy for visitors to reach out"
-    - "Booking, dashboard or back-office features when a website needs to support daily operations"
+    - "Internal tools and back-office features for daily business operations"
     - "CRM-style workflows to manage clients, requests, bookings or business data"
     - "API integrations with third-party services, forms, dashboards or admin tools"
     - "Deployment and maintenance on Linux servers with NGINX, PM2 or Docker"
