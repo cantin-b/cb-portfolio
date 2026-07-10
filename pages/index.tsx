@@ -58,7 +58,11 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
         templateColumns={{
           base: 'repeat(1, 1fr)',
           lg: 'repeat(3, 1fr)',
-          xl: 'repeat(5, 1fr)',
+          // At xl the columns sit side-by-side. A 35/65 split pulls the content
+          // column left (~35% start instead of ~40%) so the vertical rail has
+          // roughly symmetric gutters. The fixed sidebar text only reaches ~27%,
+          // so the earlier content start does not collide with it.
+          xl: '35fr 65fr',
         }}
         templateRows={{
           sm: 'repeat(1, 0)',
@@ -70,7 +74,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
           padding={sideBarPadding}
           marginTop={paddTop}
           rowSpan={2}
-          colSpan={{ base: 1, sm: 1, md: 1, lg: 1, xl: 2 }}
+          colSpan={{ base: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
           display="flex"
           alignContent="center"
           as="div"
@@ -82,8 +86,14 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
           as="main"
           padding={mainContent}
           rowSpan={2}
-          colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
+          colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 1 }}
           overflow="hidden"
+          // Paint the content above the fixed sidebar's (mostly empty) container
+          // box so its left edge stays clickable where the two now nearly meet at
+          // xl — while staying below the Menu (z-index 1). No effect on the
+          // sidebar's own interactive region, which the content never covers.
+          position="relative"
+          zIndex={0}
         >
           {/* Single source of truth for inter-section vertical rhythm.
               ~5rem (base) → ~9rem (xl) between sections. Per-section paddings
