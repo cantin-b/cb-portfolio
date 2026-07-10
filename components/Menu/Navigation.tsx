@@ -99,7 +99,9 @@ const Navigation = () => {
       fontSize="sm"
       fontWeight="normal"
       opacity={0.8}
+      transition="opacity 200ms cubic-bezier(0.22, 1, 0.36, 1)"
       _hover={{ opacity: 1 }}
+      _focusVisible={{ opacity: 1 }}
       marginLeft={-0.5}
     >
       <Text

@@ -107,8 +107,17 @@ const ScrollMore = () => {
               target="_blank"
               rel="noreferrer"
               color={emailColor}
+              transition="color 200ms cubic-bezier(0.22, 1, 0.36, 1)"
               _hover={{
                 color: emailLine,
+                _after: {
+                  backgroundColor: emailLine,
+                  opacity: 1,
+                },
+              }}
+              _focusVisible={{
+                color: emailLine,
+                outline: 'none',
                 _after: {
                   backgroundColor: emailLine,
                   opacity: 1,
@@ -128,6 +137,8 @@ const ScrollMore = () => {
                 height: { base: '5em', xl: '8em' },
                 margin: 'auto',
                 marginTop: '10px',
+                transition:
+                  'background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms cubic-bezier(0.22, 1, 0.36, 1)',
               }}
             >
               hello@cantinbartel.dev{' '}

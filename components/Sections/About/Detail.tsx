@@ -23,7 +23,13 @@ import {
 import { AiOutlineApi } from "react-icons/ai"
 import { IoMdOpen } from 'react-icons/io'
 
+import { motion } from 'framer-motion'
+import { stagger, revealItem } from 'config/animations'
+
 import { useTranslation, Trans } from 'next-i18next'
+
+const MotionStack = motion(Stack)
+const MotionHeading = motion(Heading)
 
 type ISkillSetModal = {
   onOpen(): void
@@ -31,6 +37,7 @@ type ISkillSetModal = {
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
   const emphasis = useColorModeValue('#263579', '#AEB9D6')
+  const emphasisHover = useColorModeValue('#C1272D', '#C7D0E6')
   const currentDate = new Date();
   const startDate = new Date(2021, 8); // September is month 8 (zero-based index)
   const diffInMilliseconds = currentDate.getTime() - startDate.getTime();
@@ -40,12 +47,14 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
   const { t } = useTranslation('common')
 
   return (
-    <Stack
+    <MotionStack
+      variants={stagger}
       width={{ base: '100%', lg: '70%' }}
       spacing={{ base: 6, xl: 8 }}
       as="section"
     >
-      <Heading
+      <MotionHeading
+        variants={revealItem}
         as="h2"
         size="2xl"
         letterSpacing={1.8}
@@ -54,17 +63,18 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
         }}
       >
         {t('about.title')}
-      </Heading>
-      <Text variant="description" textAlign="justify">
-        <Trans 
-          i18nKey="about.description"
-          values={{ professionalYears }}
-          components={{ b: <b /> }}
-        />
-        {/* {t('about.description', { professionalYears })} */}
-      </Text>
+      </MotionHeading>
+      <MotionStack variants={revealItem} spacing={{ base: 6, xl: 8 }}>
+        <Text variant="description" textAlign="justify">
+          <Trans
+            i18nKey="about.description"
+            values={{ professionalYears }}
+            components={{ b: <b /> }}
+          />
+          {/* {t('about.description', { professionalYears })} */}
+        </Text>
 
-      <SimpleGrid columns={2} spacing={4}>
+        <SimpleGrid columns={2} spacing={4}>
         <List spacing={3}>
           <ListItem fontSize="small" display="flex" alignItems="center">
             <ListIcon as={SiJavascript} color={emphasis} fontSize="2em" />
@@ -108,12 +118,16 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             fontSize="smaller"
             textAlign="left"
             onClick={onOpen}
+            transition="color 200ms cubic-bezier(0.22, 1, 0.36, 1)"
+            _hover={{ color: emphasisHover }}
+            _focusVisible={{ color: emphasisHover, outline: 'none' }}
           >
             {t('about.tech-stack-button')} <Icon as={IoMdOpen} />
           </Text>
         </Box>
-      </SimpleGrid>
-    </Stack>
+        </SimpleGrid>
+      </MotionStack>
+    </MotionStack>
   )
 }
 

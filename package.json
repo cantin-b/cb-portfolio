@@ -32,7 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@playwright/mcp": "^0.0.75",
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.61.1",
     "@types/node": "^20.11.0",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.46",

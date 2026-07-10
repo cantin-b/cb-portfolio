@@ -34,6 +34,9 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
     xl: 0,
   })
   const paddTop = useBreakpointValue({ base: '20', sm: 20, md: 20 })
+  // Anchor-scroll offset so the fixed Menu doesn't overlap section tops on nav
+  // navigation (≈ menu height + a little air).
+  const sectionScrollOffset = { base: 24, lg: 28 }
   return (
     <>
       <Script
@@ -82,7 +85,11 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
           colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
           overflow="hidden"
         >
-          <Stack w="100" spacing={24}>
+          {/* Single source of truth for inter-section vertical rhythm.
+              ~5rem (base) → ~9rem (xl) between sections. Per-section paddings
+              were removed so the gap stays constant; the only exceptions are the
+              About full-height hero and Contact's bottom breathing room below. */}
+          <Stack w="100%" spacing={{ base: 20, lg: 28, xl: 36 }}>
             <FadeInLayout>
               <Box
                 id="aboutMe"
@@ -90,8 +97,6 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
                 minH={{ lg: '100vh' }}
                 display="flex"
                 alignItems="center"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 0 }}
                 flexDirection={{
                   base: 'column-reverse',
                   lg: 'row',
@@ -106,9 +111,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
               <Box
                 id="services"
                 className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
+                scrollMarginTop={sectionScrollOffset}
                 flexDirection={'row'}
               >
                 <Services />
@@ -118,9 +121,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
               <Box
                 id="work"
                 className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
+                scrollMarginTop={sectionScrollOffset}
                 flexDirection={'row'}
               >
                 <SelectedWork />
@@ -130,9 +131,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
               <Box
                 id="jobs"
                 className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
+                scrollMarginTop={sectionScrollOffset}
                 flexDirection={'row'}
               >
                 <Experience />
@@ -142,8 +141,8 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
               <Box
                 id="contact"
                 className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 20 }}
-                paddingX={0}
+                scrollMarginTop={sectionScrollOffset}
+                paddingBottom={{ base: 16, xl: 24 }}
                 flexDirection={'row'}
               >
                 <GetInTouch />

@@ -17,6 +17,22 @@
   align-items: center;
   justify-content: flex-start;
 }
+
+/* Discreet, restrained interactive affordance — same easing/timing as the rest. */
+.logo img,
+.mobileLogo img {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo:hover img,
+.logo:focus-visible img,
+.mobileLogo:hover img,
+.mobileLogo:focus-visible img {
+  transform: scale(1.05);
+}
+.logo:focus-visible,
+.mobileLogo:focus-visible {
+  outline: none;
+}
 .sidebar{
   border: 3px solid #AEB9D6;
   border-radius: 100%;

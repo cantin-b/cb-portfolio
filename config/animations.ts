@@ -150,6 +150,36 @@ const avatarAnimation = {
   },
 }
 
+const lineDraw = {
+  initial: {
+    scaleX: 0,
+  },
+  animate: {
+    scaleX: 1,
+    transition: {
+      duration: DURATIONS.Normal,
+      ease: premiumEasing,
+    },
+  },
+}
+
+// Gentle section-reveal rise (opacity + small y). Deliberately softer than
+// fadeInUp/fadeInUpSlower so the whole-page cascade stays restrained.
+const revealItem = {
+  initial: {
+    y: 24,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: DURATIONS.Fast,
+      ease: premiumEasing,
+    },
+  },
+}
+
 const stagger = {
   animate: {
     transition: {
@@ -168,9 +198,12 @@ const galleryStagger = {
 export {
   DURATIONS,
   easing,
+  premiumEasing,
   fadeInUp,
   fadeInUpSlower,
   letterSpace,
+  lineDraw,
+  revealItem,
   nameReveal,
   nameLineReveal,
   stagger,

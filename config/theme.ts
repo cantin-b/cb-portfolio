@@ -6,6 +6,10 @@ import {
 } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 
+// Shared restrained hover/focus timing (mirrors premiumEasing in config/animations.ts).
+const HOVER_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
+const HOVER_DURATION = '200ms'
+
 interface IThemeMode {
   Light: ColorMode
   Dark: ColorMode
@@ -90,8 +94,13 @@ const theme = extendTheme({
   components: {
     Link: {
       baseStyle: (props: ThemeComponentProps<ChakraTheme>) => ({
+        transition: `color ${HOVER_DURATION} ${HOVER_EASE}`,
         color: mode(daylight.accent, midnight.accent)(props),
         _hover: {
+          color: mode(daylight.accentHover, midnight.red)(props),
+          textDecoration: 'none',
+        },
+        _focusVisible: {
           color: mode(daylight.accentHover, midnight.red)(props),
           textDecoration: 'none',
         },
@@ -99,8 +108,13 @@ const theme = extendTheme({
       variants: {
         ...textVariants,
         description: (props: ThemeComponentProps<ChakraTheme>) => ({
+          transition: `color ${HOVER_DURATION} ${HOVER_EASE}`,
           color: mode(daylight.description, midnight.description)(props),
           _hover: {
+            color: mode(daylight.accent, midnight.accent)(props),
+            textDecoration: 'none',
+          },
+          _focusVisible: {
             color: mode(daylight.accent, midnight.accent)(props),
             textDecoration: 'none',
           },
@@ -116,6 +130,7 @@ const theme = extendTheme({
     Button: {
       variants: {
         outline: (props: ThemeComponentProps<ChakraTheme>) => ({
+          transition: `background-color ${HOVER_DURATION} ${HOVER_EASE}, border-color ${HOVER_DURATION} ${HOVER_EASE}`,
           borderColor: mode(daylight.accent, midnight.accent)(props),
           color: mode(daylight.text, midnight.text)(props),
           _hover: {
@@ -124,12 +139,25 @@ const theme = extendTheme({
               'rgba(174, 185, 214, 0.1)'
             )(props),
           },
+          _focusVisible: {
+            backgroundColor: mode(
+              'rgba(38, 53, 121, 0.07)',
+              'rgba(174, 185, 214, 0.1)'
+            )(props),
+          },
         }),
         outlineAlternative: (props: ThemeComponentProps<ChakraTheme>) => ({
+          transition: `background-color ${HOVER_DURATION} ${HOVER_EASE}, border-color ${HOVER_DURATION} ${HOVER_EASE}`,
           borderWidth: '1px',
           borderRadius: 0,
           borderColor: mode(daylight.border, midnight.border)(props),
           _hover: {
+            backgroundColor: mode(
+              'rgba(193, 39, 45, 0.07)',
+              'rgba(193, 39, 45, 0.08)'
+            )(props),
+          },
+          _focusVisible: {
             backgroundColor: mode(
               'rgba(193, 39, 45, 0.07)',
               'rgba(193, 39, 45, 0.08)'

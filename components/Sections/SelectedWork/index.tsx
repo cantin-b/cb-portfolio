@@ -1,5 +1,5 @@
-import { memo, useState, type KeyboardEvent } from 'react'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { memo, useEffect, useState, type KeyboardEvent } from 'react'
+import { ArrowForwardIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Badge,
   Box,
@@ -19,6 +19,16 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import { motion } from 'framer-motion'
+import { premiumEasing, stagger, revealItem } from 'config/animations'
+
+const MotionStack = motion(Stack)
+
+// Mirrors premiumEasing from config/animations.ts for CSS-driven hover/focus transitions.
+const PREMIUM_CUBIC = `cubic-bezier(${premiumEasing.join(', ')})`
+
+// Derive the dark-mode sibling asset (e.g. foo.png -> foo-dark.png).
+const toDarkSrc = (src: string) => src.replace(/\.png$/, '-dark.png')
 
 type ProjectLink = {
   href: string
@@ -133,6 +143,42 @@ const ProjectTags = ({ tags }: { tags: string[] }) => {
   )
 }
 
+// Fills its (relatively-positioned) parent cell and swaps to the *-dark.png
+// sibling in dark mode, falling back to the light asset if the dark one is missing.
+const ProjectImage = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string
+  alt: string
+  className?: string
+}) => {
+  const preferredSrc = useColorModeValue(src, toDarkSrc(src))
+  const [resolvedSrc, setResolvedSrc] = useState(preferredSrc)
+
+  useEffect(() => {
+    setResolvedSrc(preferredSrc)
+  }, [preferredSrc])
+
+  return (
+    <Image
+      className={className}
+      src={resolvedSrc}
+      alt={alt}
+      onError={() => {
+        if (resolvedSrc !== src) setResolvedSrc(src)
+      }}
+      position="absolute"
+      inset={0}
+      width="100%"
+      height="100%"
+      objectFit="cover"
+      objectPosition="top"
+    />
+  )
+}
+
 const ProjectCard = ({
   project,
   onOpenDetails,
@@ -146,6 +192,11 @@ const ProjectCard = ({
   const borderColor = useColorModeValue('#C9D3E1', '#323846')
   const hoverBorderColor = useColorModeValue('#263579', '#AEB9D6')
   const labelColor = useColorModeValue('#C1272D', '#C7D0E6')
+  // Faint accent glow on hover/focus — derived alpha of the palette accent color.
+  const hoverGlow = useColorModeValue(
+    '0 18px 40px -24px rgba(38, 53, 121, 0.35)',
+    '0 18px 40px -24px rgba(174, 185, 214, 0.28)'
+  )
   const title = t(`selectedWork.projects.${project.id}.title`)
   const tags = t(`selectedWork.projects.${project.id}.tags`, {
     returnObjects: true,
@@ -177,33 +228,43 @@ const ProjectCard = ({
       height="100%"
       display={{ base: 'block', md: 'grid' }}
       gridTemplateColumns={{ md: 'minmax(280px, 5fr) minmax(260px, 3fr)' }}
-      transition="border-color 160ms ease, transform 160ms ease"
+      transition={`border-color 160ms ease, transform 160ms ease, box-shadow 300ms ${PREMIUM_CUBIC}`}
       _hover={{
         borderColor: hoverBorderColor,
         transform: 'translateY(-2px)',
+        boxShadow: hoverGlow,
       }}
       _focusVisible={{
         borderColor: hoverBorderColor,
-        boxShadow: `0 0 0 1px ${hoverBorderColor}`,
+        transform: 'translateY(-2px)',
+        boxShadow: `0 0 0 1px ${hoverBorderColor}, ${hoverGlow}`,
         outline: 'none',
       }}
+      sx={{
+        '.project-image': {
+          transformOrigin: 'center',
+          transition: `transform 350ms ${PREMIUM_CUBIC}`,
+        },
+        '.cta-arrow': {
+          opacity: 0,
+          transform: 'translateX(-4px)',
+          transition: `opacity 300ms ${PREMIUM_CUBIC}, transform 300ms ${PREMIUM_CUBIC}`,
+        },
+        '&:hover .project-image, &:focus-visible .project-image': {
+          transform: 'scale(1.04)',
+        },
+        '&:hover .cta-arrow, &:focus-visible .cta-arrow': {
+          opacity: 1,
+          transform: 'translateX(0)',
+        },
+      }}
     >
-      <Box
-        aspectRatio={4 / 3}
-        bg={imageBg}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        minW={0}
-        overflow="hidden"
-      >
-        <Image
-          src={project.image}
-          alt={title}
-          objectFit="cover"
-          width="100%"
-          height="100%"
-        />
+      <Box position="relative" bg={imageBg} minW={0} overflow="hidden">
+        {/* Spacer: sets a 4:3 minimum height on wide screens while letting the
+            cell stretch to match a taller text column on narrow (MacBook) widths,
+            so the card surface never shows below the image. */}
+        <Box aspectRatio={4 / 3} width="100%" aria-hidden />
+        <ProjectImage src={project.image} alt={title} className="project-image" />
       </Box>
       <Stack spacing={4} p={{ base: 5, md: 6 }} justify="space-between" minW={0}>
         <Stack spacing={3}>
@@ -231,6 +292,7 @@ const ProjectCard = ({
           pointerEvents="none"
         >
           {t(project.ctaKey)}
+          <ArrowForwardIcon className="cta-arrow" aria-hidden ml={2} boxSize={3.5} />
         </Button>
       </Stack>
     </Box>
@@ -310,19 +372,14 @@ const ProjectCaseStudyModal = ({
                 <Box
                   bg={imageBg}
                   aspectRatio={4 / 3}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
+                  position="relative"
                   overflow="hidden"
                 >
-                  <Image
+                  <ProjectImage
                     src={section.image}
                     alt={t(
                       `selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.imageAlt`
                     )}
-                    objectFit="cover"
-                    width="100%"
-                    height="100%"
                   />
                 </Box>
                 <Stack spacing={2} p={{ base: 4, md: 5 }}>
@@ -381,13 +438,14 @@ const SelectedWorkSection = () => {
   const handleClose = () => setActiveProject(undefined)
 
   return (
-    <Stack
+    <MotionStack
+      variants={stagger}
       width={{ base: '99%', lg: '60%', xl: '75%' }}
       height="100%"
       spacing={{ base: 6, xl: 8 }}
       as="section"
     >
-      <Stack spacing={{ base: 4, xl: 6 }}>
+      <MotionStack variants={revealItem} spacing={{ base: 4, xl: 6 }}>
         <Heading
           as="h2"
           size="2xl"
@@ -400,9 +458,9 @@ const SelectedWorkSection = () => {
         <Text variant="description" textAlign="justify">
           {t('selectedWork.intro')}
         </Text>
-      </Stack>
+      </MotionStack>
 
-      <Stack spacing={5}>
+      <MotionStack variants={revealItem} spacing={5}>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
@@ -410,14 +468,14 @@ const SelectedWorkSection = () => {
             onOpenDetails={setActiveProject}
           />
         ))}
-      </Stack>
+      </MotionStack>
 
       <ProjectCaseStudyModal
         project={activeProject}
         isOpen={Boolean(activeProject)}
         onClose={handleClose}
       />
-    </Stack>
+    </MotionStack>
   )
 }
 

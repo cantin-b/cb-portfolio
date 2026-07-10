@@ -9,9 +9,12 @@ import {
   Box,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Variants } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
+import { stagger, revealItem } from 'config/animations'
 import ContactForm from './ContactForm'
+
+const MotionStack = motion(Stack)
+const MotionHeading = motion(Heading)
 
 const WHATSAPP_BUSINESS_URL = 'https://wa.me/33756977524'
 
@@ -94,13 +97,15 @@ const GetInTouch = () => {
     }
   }
   return (
-    <Stack
+    <MotionStack
+      variants={stagger}
       width={{ base: '99%', lg: '60%', xl: '75%' }}
       height="100%"
       spacing={{ base: 6, xl: 8 }}
       as="footer"
     >
-      <Heading
+      <MotionHeading
+        variants={revealItem}
         as="h2"
         size="2xl"
         style={{
@@ -108,8 +113,9 @@ const GetInTouch = () => {
         }}
       >
         {t('contact.title')}
-      </Heading>
-      {hasMounted && (
+      </MotionHeading>
+      <MotionStack variants={revealItem} spacing={{ base: 6, xl: 8 }}>
+        {hasMounted && (
         <Text variant="description" textAlign="justify">
           <Trans i18nKey="contact.intro" components={{
             1: <Link
@@ -135,34 +141,35 @@ const GetInTouch = () => {
             />,
             }} />
         </Text>
-      )}
-      <ContactForm
-        formData={formData}
-        errors={errors}
-        isSubmitting={isSubmitting}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-      <Box
-        textAlign="center"
-        fontFamily="monospace"
-        paddingTop={{ base: 10, lg: 20, xl: 20 }}
-        paddingBottom={{ base: 5, lg: 18 }}
-      >
-        <Link
-          variant="description"
-          textDecoration="none"
-          rel="noreferrer"
-          href={WHATSAPP_BUSINESS_URL}
-          target="_blank"
-          _focus={{ boxShadow: 'none' }}
+        )}
+        <ContactForm
+          formData={formData}
+          errors={errors}
+          isSubmitting={isSubmitting}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <Box
+          textAlign="center"
+          fontFamily="monospace"
+          paddingTop={{ base: 10, lg: 20, xl: 20 }}
+          paddingBottom={{ base: 5, lg: 18 }}
         >
-          <Text as="span">
-            Cantin Bartel © {new Date().getFullYear()}
-          </Text>
-        </Link>
-      </Box>
-    </Stack>
+          <Link
+            variant="description"
+            textDecoration="none"
+            rel="noreferrer"
+            href={WHATSAPP_BUSINESS_URL}
+            target="_blank"
+            _focus={{ boxShadow: 'none' }}
+          >
+            <Text as="span">
+              Cantin Bartel © {new Date().getFullYear()}
+            </Text>
+          </Link>
+        </Box>
+      </MotionStack>
+    </MotionStack>
   )
 }
 
