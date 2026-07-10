@@ -10,7 +10,7 @@ import {
   Flex,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { FiCheck } from 'react-icons/fi'
 import { motion, useAnimation, useReducedMotion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { stagger, fadeInUp, simpleOpacity, lineDraw, revealItem } from 'config/animations'
@@ -29,8 +29,8 @@ const ServicesSection = () => {
   const { t } = useTranslation('common')
   const services = t('services.items', { returnObjects: true }) as string[]
 
-  const indexColor = useColorModeValue('#263579', '#AEB9D6')
-  const indexHoverColor = useColorModeValue('#C1272D', '#C7D0E6')
+  const checkColor = useColorModeValue('#263579', '#AEB9D6')
+  const checkHoverColor = useColorModeValue('#C1272D', '#C7D0E6')
   const dividerColor = useColorModeValue('#C9D3E1', '#323846')
   const dividerHoverColor = useColorModeValue('#263579', '#AEB9D6')
 
@@ -77,44 +77,38 @@ const ServicesSection = () => {
           styleType="none"
           spacing={0}
         >
-          {services.map((item, index) => (
+          {services.map((item) => (
           <MotionListItem key={item} variants={rowVariant} role="group">
             <Flex
               align="flex-start"
-              gap={{ base: 4, md: 6 }}
+              gap={{ base: 3, md: 4 }}
               py={{ base: 4, md: 5 }}
               transition={`transform ${HOVER_TRANSITION}`}
               _groupHover={
                 prefersReducedMotion ? undefined : { transform: 'translateX(6px)' }
               }
             >
-              <Text
+              <Box
+                as={FiCheck}
                 aria-hidden="true"
-                fontSize={{ base: 'xl', md: '2xl' }}
-                fontWeight="light"
-                lineHeight="1"
+                boxSize={5}
+                mt="2px"
                 flexShrink={0}
-                fontVariantNumeric="tabular-nums"
-                color={indexColor}
-                transition={`color ${HOVER_TRANSITION}`}
-                _groupHover={{ color: indexHoverColor }}
-              >
-                {String(index + 1).padStart(2, '0')}
-              </Text>
+                color={checkColor}
+                transition={`color ${HOVER_TRANSITION}, transform ${HOVER_TRANSITION}, filter ${HOVER_TRANSITION}`}
+                _groupHover={
+                  prefersReducedMotion
+                    ? { color: checkHoverColor }
+                    : {
+                        color: checkHoverColor,
+                        transform: 'scale(1.08)',
+                        filter: `drop-shadow(0 0 5px ${checkHoverColor})`,
+                      }
+                }
+              />
               <Text as="span" fontSize="small" flex="1">
                 {item}
               </Text>
-              <ArrowForwardIcon
-                aria-hidden="true"
-                boxSize={4}
-                mt={1}
-                flexShrink={0}
-                color={indexHoverColor}
-                opacity={0}
-                transform="translateX(-6px)"
-                transition={`opacity ${HOVER_TRANSITION}, transform ${HOVER_TRANSITION}`}
-                _groupHover={{ opacity: 1, transform: 'translateX(0)' }}
-              />
             </Flex>
             <MotionBox
               variants={lineVariant}
