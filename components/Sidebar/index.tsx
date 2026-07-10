@@ -16,7 +16,7 @@ import {
   simpleOpacity,
   stagger,
 } from 'config/animations'
-import ScrollProgressLine from './ScrollProgressLine'
+import ScrollProgressArc from './ScrollProgressArc'
 import { useTranslation } from 'next-i18next'
 
 const Sidebar = () => {
@@ -31,7 +31,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <ScrollProgressLine />
+      <ScrollProgressArc />
       <MotionBox
         initial="initial"
         animate="animate"
