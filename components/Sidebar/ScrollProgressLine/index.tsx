@@ -49,7 +49,7 @@ const ScrollProgressLine = () => {
     display: { base: 'none', xl: 'block' },
     position: 'fixed' as const,
     top: 0,
-    left: { xl: '39%' },
+    left: { xl: '30%' },
     height: '100vh',
     width: '2px',
     zIndex: 1,
