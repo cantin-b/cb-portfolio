@@ -61,9 +61,6 @@ body::-webkit-scrollbar-thumb{
   main{
     overflow-y: unset  !important;
   }
-  #sidebarCircle{
-    display: none !important;
-  }
   .contentRow{
     min-height: auto !important;
     padding: var(--chakra-space-14);

@@ -3,12 +3,11 @@ import {
   Heading,
   Text,
   Button,
-  useColorMode,
   Container,
   Box,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { motion, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import styles from './styles.module.css'
 import {
   fadeInUp,
@@ -16,13 +15,11 @@ import {
   nameLineReveal,
   simpleOpacity,
   stagger,
-  scaleUp,
 } from 'config/animations'
+import ScrollProgressLine from './ScrollProgressLine'
 import { useTranslation } from 'next-i18next'
 
 const Sidebar = () => {
-  const { colorMode } = useColorMode()
-  const display = useBreakpointValue({ base: 'none', lg: 'block' })
   const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
   const MotionHeading = motion(Heading)
   const MotionText = motion(Text)
@@ -33,22 +30,15 @@ const Sidebar = () => {
   const { t } = useTranslation('common')
 
   return (
-    <MotionBox
-      initial="initial"
-      animate="animate"
-      position={{ xl: 'fixed' }}
-      maxWidth={{ xl: '34%' }}
-      top={{ lg: 0 }}
-    >
-      <motion.div
-        id="sidebarCircle"
-        className={`${styles.sidebar} ${
-          colorMode === 'light' ? styles.dark : ''
-        }`}
-        variants={scaleUp}
-        style={{ display: display }}
-        animate={colorMode === 'dark' ? 'animate' : 'lightMode'}
-      ></motion.div>
+    <>
+      <ScrollProgressLine />
+      <MotionBox
+        initial="initial"
+        animate="animate"
+        position={{ xl: 'fixed' }}
+        maxWidth={{ xl: '34%' }}
+        top={{ lg: 0 }}
+      >
       <Container
         padding={0}
         margin={0}
@@ -141,7 +131,8 @@ const Sidebar = () => {
           </MotionButton>
         </MotionStack>
       </Container>
-    </MotionBox>
+      </MotionBox>
+    </>
   )
 }
 

@@ -163,6 +163,22 @@ const lineDraw = {
   },
 }
 
+// Gentle top-anchored draw-in for a vertical line (e.g. the scroll-progress track).
+const lineDrawVertical = {
+  initial: {
+    scaleY: 0,
+    opacity: 0,
+  },
+  animate: {
+    scaleY: 1,
+    opacity: 1,
+    transition: {
+      duration: DURATIONS.Slow,
+      ease: premiumEasing,
+    },
+  },
+}
+
 // Gentle section-reveal rise (opacity + small y). Deliberately softer than
 // fadeInUp/fadeInUpSlower so the whole-page cascade stays restrained.
 const revealItem = {
@@ -203,6 +219,7 @@ export {
   fadeInUpSlower,
   letterSpace,
   lineDraw,
+  lineDrawVertical,
   revealItem,
   nameReveal,
   nameLineReveal,
