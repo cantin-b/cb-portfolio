@@ -18,10 +18,21 @@ import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
 import { easing, menuAnim } from 'config/animations'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
+import useActiveSection from 'hooks/useActiveSection'
 // ----------
 import { useRouter } from 'next/router'
 import { SITE_DOMAIN_EN, SITE_DOMAIN_FR } from 'lib/constants'
 import { useColorModePreference } from 'hooks/useColorModePreference'
+
+// Nav items in document order. `hash` matches the section ids in pages/index.tsx
+// (and the ids observed by useActiveSection) so scroll-spy can light the match.
+const NAV_ITEMS = [
+  { hash: 'aboutMe', labelKey: 'navigation.about' },
+  { hash: 'services', labelKey: 'navigation.services' },
+  { hash: 'work', labelKey: 'navigation.work' },
+  { hash: 'jobs', labelKey: 'navigation.experience' },
+  { hash: 'contact', labelKey: 'navigation.contact' },
+]
 
 const Navigation = () => {
   const { colorMode, setColorMode } = useColorMode()
@@ -40,6 +51,9 @@ const Navigation = () => {
   )
 
   const borderColor = useColorModeValue('#263579', '#AEB9D6')
+  // Accent applied to the active (scroll-spied) nav item.
+  const activeColor = useColorModeValue('#263579', '#AEB9D6')
+  const activeSection = useActiveSection()
 
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
@@ -197,110 +211,42 @@ const Navigation = () => {
           paddingBottom={isMobile ? 10 : '0'}
           onClick={() => isMobile && toggleOpen()}
         >
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
-              href={`${homePrefix}#aboutMe`}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.about')}
-            </Button>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
-              href={`${homePrefix}#services`}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.services')}
-            </Button>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
-              href={`${homePrefix}#work`}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.work')}
-            </Button>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
-              href={`${homePrefix}#jobs`}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.experience')}
-            </Button>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <Button
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              as="a"
-              href={`${homePrefix}#contact`}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              {t('navigation.contact')}
-            </Button>
-          </Box>
+          {NAV_ITEMS.map((item, index) => {
+            const isActive = activeSection === item.hash
+            return (
+              <Box
+                key={item.hash}
+                width={{ base: '100%', lg: 'auto' }}
+                textAlign={{ base: 'center', lg: 'left' }}
+                {...(index !== 0 && { marginY: { base: 2, lg: 0 } })}
+              >
+                <Button
+                  fontWeight="light"
+                  variant="ghost"
+                  fontSize={menuButtonSize}
+                  letterSpacing={2}
+                  className={btnClassName}
+                  padding={2}
+                  marginX={2}
+                  as="a"
+                  href={`${homePrefix}#${item.hash}`}
+                  rel="noreferrer"
+                  onClick={onMenuItemClick}
+                  aria-current={isActive ? 'true' : undefined}
+                  // Persistent accent + underline for the active section. The
+                  // underline animates in via .blogBtn's 200ms text-decoration
+                  // transition; inline styles win over the class.
+                  style={
+                    isActive
+                      ? { color: activeColor, textDecorationColor: activeColor }
+                      : undefined
+                  }
+                >
+                  {t(item.labelKey)}
+                </Button>
+              </Box>
+            )
+          })}
           {!isMobile && (
             <Box>
               <Flex align="center">
