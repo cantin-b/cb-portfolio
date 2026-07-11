@@ -1,10 +1,10 @@
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import {
   motion,
   useScroll,
   useSpring,
-  useMotionValue,
+  useTransform,
   useReducedMotion,
 } from 'framer-motion'
 import { simpleOpacity } from 'config/animations'
@@ -15,10 +15,13 @@ const MotionBox = motion(Box)
 const BAND_LEFT = 0.28
 const BAND_WIDTH = 0.06
 
+// Length of the gliding segment as a fraction of the arc (tunable 0.14–0.20).
+const SEGMENT_LENGTH = 0.16
+
 // A fixed, full-height SVG arc in the sidebar/content gutter that doubles as a page
-// scroll-progress indicator: a faint track arc + an accent arc that draws itself from
-// top to the reader's scroll position, with a small accent point riding its head.
-// Echoes the site's old signature curve, far subtler. xl only.
+// scroll-progress indicator: a faint track arc with a single soft glowing segment
+// that glides along the curve to the reader's scroll position — no fill, no hard
+// point. Echoes the site's old signature curve, far subtler. xl only.
 const ScrollProgressArc = () => {
   const trackColor = useColorModeValue('#C9D3E1', '#323846')
   const accentColor = useColorModeValue('#263579', '#AEB9D6')
@@ -30,9 +33,20 @@ const ScrollProgressArc = () => {
     damping: 24,
     restDelta: 0.001,
   })
+  // The arc is normalized to a path length of 1 (pathLength="1"), so a dash of
+  // SEGMENT_LENGTH followed by a large gap yields a single traveling dash. A
+  // negative stroke-dashoffset glides that dash forward along the path: 0 keeps it
+  // at the top, -(1 - SEGMENT_LENGTH) puts it at the bottom. Clamped so spring
+  // overshoot never runs it off the ends.
+  const dashOffset = useTransform(
+    smoothProgress,
+    [0, 1],
+    [0, -(1 - SEGMENT_LENGTH)],
+    { clamp: true }
+  )
 
-  // Measure the viewport so the SVG uses a 1:1 pixel viewBox (no stroke/point
-  // distortion). Rendered only after mount, so SSR/first client render match.
+  // Measure the viewport so the SVG uses a 1:1 pixel viewBox (no stroke distortion).
+  // Rendered only after mount, so SSR/first client render match.
   const [dims, setDims] = useState<{ w: number; h: number } | null>(null)
   useEffect(() => {
     const update = () => setDims({ w: window.innerWidth, h: window.innerHeight })
@@ -40,25 +54,6 @@ const ScrollProgressArc = () => {
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [])
-
-  // The traveling point rides the head of the drawn arc.
-  const pathRef = useRef<SVGPathElement>(null)
-  const cx = useMotionValue(0)
-  const cy = useMotionValue(0)
-  useEffect(() => {
-    const path = pathRef.current
-    if (!path) return
-    const len = path.getTotalLength()
-    const setPoint = (v: number) => {
-      const clamped = Math.min(Math.max(v, 0), 1)
-      const pt = path.getPointAtLength(clamped * len)
-      cx.set(pt.x)
-      cy.set(pt.y)
-    }
-    setPoint(smoothProgress.get())
-    const unsubscribe = smoothProgress.on('change', setPoint)
-    return unsubscribe
-  }, [dims, smoothProgress, cx, cy])
 
   if (!dims) return null
 
@@ -100,9 +95,17 @@ const ScrollProgressArc = () => {
             <stop offset="0.92" stopColor={trackColor} stopOpacity="0.75" />
             <stop offset="1" stopColor={trackColor} stopOpacity="0" />
           </linearGradient>
+          {/* Feather the segment: a wide soft glow + a lightly-blurred core, so
+              the dash has no hard edges. */}
+          <filter id="arcSegmentGlow" x="-60%" y="-10%" width="220%" height="120%">
+            <feGaussianBlur stdDeviation="2.5" />
+          </filter>
+          <filter id="arcSegmentCore" x="-60%" y="-10%" width="220%" height="120%">
+            <feGaussianBlur stdDeviation="0.8" />
+          </filter>
         </defs>
+        {/* Faint full track — never drawn in accent. */}
         <path
-          ref={pathRef}
           d={d}
           stroke="url(#arcTrackFade)"
           strokeWidth={1.6}
@@ -114,17 +117,25 @@ const ScrollProgressArc = () => {
             <motion.path
               d={d}
               stroke={accentColor}
+              strokeWidth={3.2}
+              strokeOpacity={0.4}
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              filter="url(#arcSegmentGlow)"
+              pathLength={1}
+              strokeDasharray={`${SEGMENT_LENGTH} 1`}
+              style={{ strokeDashoffset: dashOffset }}
+            />
+            <motion.path
+              d={d}
+              stroke={accentColor}
               strokeWidth={1.8}
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
-              style={{ pathLength: smoothProgress }}
-            />
-            <motion.circle
-              cx={cx}
-              cy={cy}
-              r={4}
-              fill={accentColor}
-              style={{ filter: `drop-shadow(0 0 4px ${accentColor})` }}
+              filter="url(#arcSegmentCore)"
+              pathLength={1}
+              strokeDasharray={`${SEGMENT_LENGTH} 1`}
+              style={{ strokeDashoffset: dashOffset }}
             />
           </>
         )}
