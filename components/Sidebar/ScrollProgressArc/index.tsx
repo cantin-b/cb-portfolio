@@ -7,7 +7,7 @@ import {
   useMotionValue,
   useReducedMotion,
 } from 'framer-motion'
-import { simpleOpacity } from 'config/animations'
+import { simpleOpacity, premiumEasing } from 'config/animations'
 
 const MotionBox = motion(Box)
 
@@ -100,6 +100,17 @@ const ScrollProgressArc = () => {
             <stop offset="0.92" stopColor={trackColor} stopOpacity="0.75" />
             <stop offset="1" stopColor={trackColor} stopOpacity="0" />
           </linearGradient>
+          {/* Soft radial blur for the glow node's halo. Generous region so the
+              blur is never clipped by the small circle's bounding box. */}
+          <filter
+            id="arcNodeHalo"
+            x="-150%"
+            y="-150%"
+            width="400%"
+            height="400%"
+          >
+            <feGaussianBlur stdDeviation="3" />
+          </filter>
         </defs>
         <path
           ref={pathRef}
@@ -119,12 +130,23 @@ const ScrollProgressArc = () => {
               vectorEffect="non-scaling-stroke"
               style={{ pathLength: smoothProgress }}
             />
+            {/* Glow node riding the fill head: a soft blurred halo under a crisp
+                core. Halo carries a barely-perceptible pulse (r + opacity). */}
             <motion.circle
               cx={cx}
               cy={cy}
-              r={4}
+              r={8}
               fill={accentColor}
-              style={{ filter: `drop-shadow(0 0 4px ${accentColor})` }}
+              filter="url(#arcNodeHalo)"
+              animate={{ r: [8, 9, 8], opacity: [0.26, 0.34, 0.26] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: premiumEasing }}
+            />
+            <motion.circle
+              cx={cx}
+              cy={cy}
+              r={3}
+              fill={accentColor}
+              style={{ filter: `drop-shadow(0 0 2px ${accentColor})` }}
             />
           </>
         )}
