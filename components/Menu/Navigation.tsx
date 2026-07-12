@@ -12,7 +12,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { motion, useCycle, useReducedMotion } from 'framer-motion'
+import { motion, useCycle, useReducedMotion, LayoutGroup } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
@@ -42,6 +42,7 @@ const Navigation = () => {
   const { preference, setPreference } = useColorModePreference()
   const MotionContainer = motion(Container)
   const MotionFlex = motion(Flex)
+  const MotionBox = motion(Box)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const menuButtonSize = useBreakpointValue({
@@ -253,6 +254,7 @@ const Navigation = () => {
           animate={{ opacity: dipOpacity }}
           transition={{ duration: 0.2, ease: premiumEasing }}
         >
+          <LayoutGroup>
           {NAV_ITEMS.map((item, index) => {
             const isActive = activeSection === item.hash
             return (
@@ -275,20 +277,41 @@ const Navigation = () => {
                   rel="noreferrer"
                   onClick={onMenuItemClick}
                   aria-current={isActive ? 'true' : undefined}
-                  // Persistent accent + underline for the active section. The
-                  // underline animates in via .blogBtn's 200ms text-decoration
-                  // transition; inline styles win over the class.
-                  style={
-                    isActive
-                      ? { color: activeColor, textDecorationColor: activeColor }
-                      : undefined
-                  }
+                  // Active section keeps the accent text color. The underline is a
+                  // SINGLE shared element (layoutId) that TRAVELS between items as
+                  // the active section changes — echoing the scroll arc's gliding
+                  // node — instead of popping on/off per item.
+                  style={isActive ? { color: activeColor } : undefined}
                 >
-                  {t(item.labelKey)}
+                  <Box
+                    as="span"
+                    className={styles.blogBtnLabel}
+                    data-active={isActive ? '' : undefined}
+                  >
+                    {t(item.labelKey)}
+                    {isActive && (
+                      <MotionBox
+                        layoutId="navActiveUnderline"
+                        aria-hidden
+                        position="absolute"
+                        left={0}
+                        right={0}
+                        bottom="-0.12em"
+                        height="0.1em"
+                        borderRadius="full"
+                        backgroundColor={activeColor}
+                        transition={{
+                          duration: prefersReducedMotion ? 0 : 0.42,
+                          ease: premiumEasing,
+                        }}
+                      />
+                    )}
+                  </Box>
                 </Button>
               </Box>
             )
           })}
+          </LayoutGroup>
           {!isMobile && (
             <Box>
               <Flex align="center">
