@@ -203,6 +203,32 @@ const stagger = {
     },
   },
 }
+
+// Hero page-load orchestration. Two phased stagger containers coordinate the
+// hero's three independent subtrees (left column, avatar, right panel) into one
+// cascade so it "writes itself" as a single sequence instead of separate pops.
+// Item variants (revealItem, nameReveal, nameLineReveal) are reused unchanged.
+const heroStaggerLead = {
+  initial: {},
+  animate: {
+    transition: {
+      delayChildren: 0.1,
+      staggerChildren: 0.12,
+    },
+  },
+}
+
+// The right "WHAT I DO" panel follows the left column: it starts its own inner
+// cascade a beat later so the eye reads the left column first, then the right.
+const heroStaggerFollow = {
+  initial: {},
+  animate: {
+    transition: {
+      delayChildren: 0.45,
+      staggerChildren: 0.1,
+    },
+  },
+}
 const galleryStagger = {
   animate: {
     transition: {
@@ -224,6 +250,8 @@ export {
   nameReveal,
   nameLineReveal,
   stagger,
+  heroStaggerLead,
+  heroStaggerFollow,
   galleryStagger,
   simpleOpacity,
   menuAnim,

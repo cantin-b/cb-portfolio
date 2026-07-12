@@ -24,7 +24,7 @@ import { AiOutlineApi } from "react-icons/ai"
 import { IoMdOpen } from 'react-icons/io'
 
 import { motion } from 'framer-motion'
-import { stagger, revealItem } from 'config/animations'
+import { heroStaggerFollow, revealItem } from 'config/animations'
 
 import { useTranslation, Trans } from 'next-i18next'
 
@@ -48,7 +48,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 
   return (
     <MotionStack
-      variants={stagger}
+      variants={heroStaggerFollow}
       width={{ base: '100%', lg: '70%' }}
       spacing={{ base: 6, xl: 8 }}
       as="section"

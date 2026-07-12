@@ -4,7 +4,7 @@ import {
   SkeletonCircle,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
 import { avatarAnimation } from 'config/animations'
 
@@ -13,6 +13,10 @@ const AvatarImages = {
   LightMode: '/avatars/CB_avatar_light.png',
 }
 
+// Module scope: defining motion(...) inside the component recreates the type on
+// every render and remounts the subtree (replaying the entrance). Keep it stable.
+const MotionBox = motion(Box)
+
 declare global {
   interface Window {
     preloadedPictures?: HTMLImageElement[]
@@ -20,7 +24,7 @@ declare global {
 }
 
 const Avatar = () => {
-  const MotionBox = motion(Box)
+  const prefersReducedMotion = useReducedMotion()
   const imgAvatar = useColorModeValue(
     AvatarImages.LightMode,
     AvatarImages.DarkMode
@@ -42,9 +46,13 @@ const Avatar = () => {
         boxSize={{ base: 64, lg: 'sm' }}
         padding={{ base: 8 }}
         marginBottom={{ base: 10, md: 0, lg: 0 }}
-        initial="initial"
+        initial={prefersReducedMotion ? 'animate' : 'initial'}
         animate={'animate'}
         variants={avatarAnimation}
+        // Phased into the hero load cascade: the avatar lands alongside the
+        // left column's role/description. delay merges with the variant's own
+        // transition (which sets duration/ease but no delay).
+        transition={{ delay: prefersReducedMotion ? 0 : 0.4 }}
         exit={{ opacity: 0 }}
       >
         <ChkImage

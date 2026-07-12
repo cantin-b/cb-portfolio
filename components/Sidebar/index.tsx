@@ -7,25 +7,29 @@ import {
   Box,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import styles from './styles.module.css'
 import {
-  fadeInUp,
+  revealItem,
   nameReveal,
   nameLineReveal,
-  simpleOpacity,
-  stagger,
+  heroStaggerLead,
 } from 'config/animations'
 import ScrollProgressArc from './ScrollProgressArc'
 import { useTranslation } from 'next-i18next'
 
+// Module scope: motion(...) defined inside the component recreates the type on
+// every render (e.g. a resize changing surNameSize, or a theme toggle) and
+// remounts the subtree, replaying the entrance. Stable identities keep it mounted.
+const MotionHeading = motion(Heading)
+const MotionText = motion(Text)
+const MotionStack = motion(Stack)
+const MotionButton = motion(Button)
+const MotionBox = motion(Box)
+
 const Sidebar = () => {
   const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
-  const MotionHeading = motion(Heading)
-  const MotionText = motion(Text)
-  const MotionStack = motion(Stack)
-  const MotionButton = motion(Button)
-  const MotionBox = motion(Box)
+  const prefersReducedMotion = useReducedMotion()
 
   const { t } = useTranslation('common')
 
@@ -33,7 +37,7 @@ const Sidebar = () => {
     <>
       <ScrollProgressArc />
       <MotionBox
-        initial="initial"
+        initial={prefersReducedMotion ? 'animate' : 'initial'}
         animate="animate"
         position={{ xl: 'fixed' }}
         maxWidth={{ xl: '34%' }}
@@ -46,10 +50,9 @@ const Sidebar = () => {
         display={{ xl: 'flex' }}
         alignItems={{ xl: 'center' }}
       >
-        <MotionStack variants={stagger} spacing={6} w="100">
+        <MotionStack variants={heroStaggerLead} spacing={6} w="100">
           <MotionText
-            variants={fadeInUp}
-            delay={1}
+            variants={revealItem}
             variant="accent"
             fontWeight="light"
           >
@@ -92,7 +95,7 @@ const Sidebar = () => {
             size="md"
             variant="emphasis"
             className={styles.marginTopSmall}
-            variants={fadeInUp}
+            variants={revealItem}
           >
             {t('sidebar.role')}
           </MotionHeading>
@@ -101,7 +104,7 @@ const Sidebar = () => {
             textAlign="justify"
             fontSize="small"
             paddingRight={{ lg: '12' }}
-            variants={fadeInUp}
+            variants={revealItem}
             maxWidth={{ base: '100%', lg: '80%' }}
           >
             {t('sidebar.thanks')}
@@ -121,7 +124,7 @@ const Sidebar = () => {
             fontWeight="normal"
             fontSize="sm"
             width="120px"
-            variants={simpleOpacity}
+            variants={revealItem}
             as={'a'}
             href="/#contact"
             whileHover={{ scale: 1.1 }}
