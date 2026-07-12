@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import {
   Container,
@@ -12,17 +12,20 @@ import {
   Text
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { motion, useCycle } from 'framer-motion'
+import { motion, useCycle, useReducedMotion } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
-import { easing, menuAnim } from 'config/animations'
-import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
+import { easing, menuAnim, premiumEasing } from 'config/animations'
+import useScrolledPastAbout from 'hooks/useScrolledPastAbout'
 import useActiveSection from 'hooks/useActiveSection'
 // ----------
 import { useRouter } from 'next/router'
 import { SITE_DOMAIN_EN, SITE_DOMAIN_FR } from 'lib/constants'
 import { useColorModePreference } from 'hooks/useColorModePreference'
+
+// Mirrors premiumEasing from config/animations.ts for CSS transitions.
+const PREMIUM_CUBIC = `cubic-bezier(${premiumEasing.join(', ')})`
 
 // Nav items in document order. `hash` matches the section ids in pages/index.tsx
 // (and the ids observed by useActiveSection) so scroll-spy can light the match.
@@ -38,6 +41,7 @@ const Navigation = () => {
   const { colorMode, setColorMode } = useColorMode()
   const { preference, setPreference } = useColorModePreference()
   const MotionContainer = motion(Container)
+  const MotionFlex = motion(Flex)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const menuButtonSize = useBreakpointValue({
@@ -104,7 +108,39 @@ const Navigation = () => {
     },
     [isMobile, toggleOpen]
   )
-  const scrollDirection = useScrollDirection()
+
+  // Desktop nav placement is driven by POSITION (have we left About?), not scroll
+  // direction — so it flips exactly once at the boundary and stays put.
+  const isPastAbout = useScrolledPastAbout()
+  const prefersReducedMotion = useReducedMotion()
+  // `displayedPastAbout` lags `isPastAbout`: it flips at the low point of the
+  // opacity dip, so the row↔column / width reflow is hidden behind the cross-fade.
+  const [displayedPastAbout, setDisplayedPastAbout] = useState(false)
+  // Container opacity, driven declaratively so the show/hide reveal keeps working;
+  // dips briefly during a header↔side switch to mask the layout reflow.
+  const [dipOpacity, setDipOpacity] = useState(1)
+
+  // Smooth single header↔side switch: dip opacity, swap the layout while it's
+  // nearly invisible, then fade back. Instant (no dip) under reduced motion or on
+  // mobile (where the desktop layout doesn't apply).
+  useEffect(() => {
+    // Settled (or already in sync): make sure the nav is fully visible. This also
+    // recovers opacity if a fast boundary crossing cancelled a dip mid-way.
+    if (isPastAbout === displayedPastAbout) {
+      setDipOpacity(1)
+      return
+    }
+    if (prefersReducedMotion || isMobile) {
+      setDisplayedPastAbout(isPastAbout)
+      return
+    }
+    setDipOpacity(0.08)
+    const id = setTimeout(() => {
+      setDisplayedPastAbout(isPastAbout)
+      setDipOpacity(1)
+    }, 170)
+    return () => clearTimeout(id)
+  }, [isPastAbout, displayedPastAbout, prefersReducedMotion, isMobile])
 
   const LanguageToggleButton = (
     <Button
@@ -170,18 +206,21 @@ const Navigation = () => {
         maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
         className={styles.menu}
         right={{
-          lg:
-            !isMobile && scrollDirection === ScrollDirection.Down
-              ? '2%'
-              : '3.5%',
+          lg: !isMobile && displayedPastAbout ? '2%' : '3.5%',
         }}
         initial="hide"
         animate={(!isMobile || isOpen) && 'show'}
+        // Morph the header↔side width/right smoothly (the item reflow is masked by
+        // the inner cross-fade). Instant under reduced motion.
+        sx={
+          prefersReducedMotion
+            ? undefined
+            : {
+                transition: `width 340ms ${PREMIUM_CUBIC}, right 340ms ${PREMIUM_CUBIC}`,
+              }
+        }
         style={{
-          width:
-            !isMobile && scrollDirection === ScrollDirection.Down
-              ? '12%'
-              : '100%',
+          width: !isMobile && displayedPastAbout ? '12%' : '100%',
           top: !isOpen && isMobile && '-100vh',
           opacity: !isOpen && isMobile && '0',
           left: isOpen && isMobile && 0,
@@ -195,21 +234,24 @@ const Navigation = () => {
         paddingTop={1}
         as="nav"
       >
-        <Flex
+        <MotionFlex
           justifyContent={{ base: 'center', lg: 'flex-end' }}
           direction={{
             base: 'column',
-            lg: scrollDirection === ScrollDirection.Down ? 'column' : 'row',
+            lg: displayedPastAbout ? 'column' : 'row',
           }}
           paddingX={{ base: '', sm: '10', lg: '0' }}
           paddingY={{
             base: '10',
-            lg: scrollDirection === ScrollDirection.Down ? '10' : '3',
+            lg: displayedPastAbout ? '10' : '3',
           }}
           height={{ base: '100vh', lg: 'auto' }}
           paddingRight="0"
           paddingBottom={isMobile ? 10 : '0'}
           onClick={() => isMobile && toggleOpen()}
+          // Cross-fade the nav items so the row↔column reflow is hidden.
+          animate={{ opacity: dipOpacity }}
+          transition={{ duration: 0.2, ease: premiumEasing }}
         >
           {NAV_ITEMS.map((item, index) => {
             const isActive = activeSection === item.hash
@@ -263,7 +305,7 @@ const Navigation = () => {
               </Flex>
             </Box>
           )}
-        </Flex>
+        </MotionFlex>
       </MotionContainer>
     </>
   )
