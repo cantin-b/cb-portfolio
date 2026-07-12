@@ -37,12 +37,18 @@ const NAV_ITEMS = [
   { hash: 'contact', labelKey: 'navigation.contact' },
 ]
 
+// Motion components MUST live at module scope. Defining `motion(...)` inside the
+// component recreates a new component type on every render, so any re-render
+// (e.g. the active section changing on scroll) unmounts and remounts the whole
+// nav — replaying its entrance animation as a brutal "pop". Stable identities
+// here keep the nav mounted; it updates in place, smoothly.
+const MotionContainer = motion(Container)
+const MotionFlex = motion(Flex)
+const MotionBox = motion(Box)
+
 const Navigation = () => {
   const { colorMode, setColorMode } = useColorMode()
   const { preference, setPreference } = useColorModePreference()
-  const MotionContainer = motion(Container)
-  const MotionFlex = motion(Flex)
-  const MotionBox = motion(Box)
   const [isOpen, toggleOpen] = useCycle(false, true)
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const menuButtonSize = useBreakpointValue({
