@@ -1,10 +1,12 @@
-import { memo, useEffect, useState, type KeyboardEvent } from 'react'
+import { memo, useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { ArrowForwardIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Badge,
   Box,
   Button,
+  CloseButton,
   Heading,
+  Icon,
   Image,
   Modal,
   ModalBody,
@@ -13,16 +15,20 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Portal,
   SimpleGrid,
   Stack,
   Text,
+  useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { FiMaximize2 } from 'react-icons/fi'
 import { premiumEasing, stagger, revealItem } from 'config/animations'
 
 const MotionStack = motion(Stack)
+const MotionBox = motion(Box)
 
 // Mirrors premiumEasing from config/animations.ts for CSS-driven hover/focus transitions.
 const PREMIUM_CUBIC = `cubic-bezier(${premiumEasing.join(', ')})`
@@ -179,6 +185,123 @@ const ProjectImage = ({
   )
 }
 
+// Tap/click-to-expand view for a single case-study screenshot. Renders through a
+// Portal so it escapes the case-study Modal's scroll/overflow context and covers
+// the full viewport above it. Native pinch-zoom handles fine zoom once enlarged.
+const ImageLightbox = ({
+  src,
+  alt,
+  isOpen,
+  onClose,
+}: {
+  src: string
+  alt: string
+  isOpen: boolean
+  onClose: () => void
+}) => {
+  const { t } = useTranslation('common')
+  const prefersReducedMotion = useReducedMotion()
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  // Mirror ProjectImage: prefer the *-dark.png sibling in dark mode so the enlarged
+  // view matches the screenshot shown in the card, falling back on load error.
+  const preferredSrc = useColorModeValue(src, toDarkSrc(src))
+  const [resolvedSrc, setResolvedSrc] = useState(preferredSrc)
+
+  useEffect(() => {
+    setResolvedSrc(preferredSrc)
+  }, [preferredSrc])
+
+  // Escape closes only the lightbox. Listen in the *capture* phase so this runs
+  // before the parent case-study Modal's own key handler (which stopPropagation()s
+  // Escape on bubble) — otherwise it'd only reach us when focus happened to sit
+  // outside the Modal. stopPropagation then keeps the Modal from acting on it too.
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.stopPropagation()
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown, true)
+    return () => document.removeEventListener('keydown', handleKeyDown, true)
+  }, [isOpen, onClose])
+
+  // Nudge focus onto the close control when opening. The parent Modal keeps its
+  // focus trap, so focus settles on a Modal-owned element rather than <body>.
+  useEffect(() => {
+    if (isOpen) closeRef.current?.focus()
+  }, [isOpen])
+
+  const transition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.3, ease: premiumEasing }
+
+  return (
+    <Portal>
+      <AnimatePresence>
+        {isOpen && (
+          <MotionBox
+            key="case-study-lightbox"
+            position="fixed"
+            inset={0}
+            // Must sit above the parent case-study Modal (Chakra `modal` token = 1400).
+            zIndex={1500}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            p={{ base: 4, md: 8 }}
+            bg="blackAlpha.600"
+            backdropFilter="blur(3px)"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={transition}
+          >
+            <CloseButton
+              ref={closeRef}
+              aria-label={t('selectedWork.caseStudy.zoomImage')}
+              onClick={onClose}
+              position="absolute"
+              top={4}
+              right={4}
+              size="lg"
+              color="white"
+              bg="blackAlpha.500"
+              borderRadius="md"
+              _hover={{ bg: 'blackAlpha.700' }}
+            />
+            <MotionBox
+              position="relative"
+              maxW="92vw"
+              maxH="92vh"
+              onClick={(event) => event.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={transition}
+            >
+              <Image
+                src={resolvedSrc}
+                alt={alt}
+                onError={() => {
+                  if (resolvedSrc !== src) setResolvedSrc(src)
+                }}
+                maxW="92vw"
+                maxH="92vh"
+                objectFit="contain"
+                borderRadius="md"
+              />
+            </MotionBox>
+          </MotionBox>
+        )}
+      </AnimatePresence>
+    </Portal>
+  )
+}
+
 const ProjectCard = ({
   project,
   onOpenDetails,
@@ -312,11 +435,48 @@ const ProjectCaseStudyModal = ({
   const surface = useColorModeValue('white', '#171A21')
   const imageBg = useColorModeValue('#F4F7FB', '#101216')
   const borderColor = useColorModeValue('#C9D3E1', '#323846')
+  const accentColor = useColorModeValue('#263579', '#AEB9D6')
   const labelColor = useColorModeValue('#C1272D', '#C7D0E6')
   const footerShadow = useColorModeValue(
     '0 -18px 28px -28px rgba(23, 32, 51, 0.55)',
     '0 -18px 28px -28px rgba(0, 0, 0, 0.85)'
   )
+
+  // Lightbox state lives here so Escape/focus can be coordinated with this Modal.
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+  // The image trigger that opened the lightbox, so focus can return to it on close.
+  const lightboxTriggerRef = useRef<HTMLDivElement | null>(null)
+
+  const openLightbox = (
+    event: { currentTarget: HTMLDivElement },
+    image: { src: string; alt: string }
+  ) => {
+    lightboxTriggerRef.current = event.currentTarget
+    setLightboxImage(image)
+  }
+
+  const closeLightbox = () => {
+    setLightboxImage(null)
+    // Return focus to the triggering image so it never falls back to <body>.
+    lightboxTriggerRef.current?.focus()
+  }
+
+  const handleImageKeyDown = (
+    event: KeyboardEvent<HTMLDivElement>,
+    image: { src: string; alt: string }
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      openLightbox(event, image)
+    }
+  }
+  // Mobile opens as a full-screen sheet sliding up from the bottom; desktop keeps
+  // the centered scale preset. (motionPreset isn't a responsive prop, so pick it
+  // per breakpoint — the modal only renders on client interaction, so SSR is moot.)
+  const modalMotion = useBreakpointValue<'slideInBottom' | 'scale'>({
+    base: 'slideInBottom',
+    md: 'scale',
+  })
 
   if (!project) return null
 
@@ -326,41 +486,76 @@ const ProjectCaseStudyModal = ({
   }) as string[]
   const sectionColumns = project.detailSections.length > 1 ? { base: 1, lg: 2 } : 1
 
+  // Shared intro block (eyebrow + title + summary + tags). On desktop it lives in
+  // a fixed ModalHeader; on mobile the same block is rendered inside the scroll
+  // area so the case-study images get the full sheet height instead of a sliver.
+  const caseStudyIntro = (
+    <Stack spacing={4} maxW={{ base: 'full', md: '780px' }}>
+      <Text
+        fontSize="xs"
+        fontWeight="semibold"
+        color={labelColor}
+        textTransform="uppercase"
+      >
+        {t('selectedWork.caseStudy.eyebrow')}
+      </Text>
+      <Heading as="h3" size="lg">
+        {title}
+      </Heading>
+      <Text variant="description" fontSize="sm">
+        {t(`selectedWork.projects.${project.id}.caseStudy.summary`)}
+      </Text>
+      <ProjectTags tags={tags} />
+    </Stack>
+  )
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="5xl" scrollBehavior="inside" isCentered>
+    <>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={{ base: 'full', md: '5xl' }}
+      scrollBehavior="inside"
+      motionPreset={modalMotion}
+      isCentered
+      // While the lightbox is open, disable the Modal's own Escape-to-close so a
+      // single Escape dismisses only the lightbox (its capture-phase listener
+      // owns the key); the parent Modal stays open.
+      closeOnEsc={!lightboxImage}
+    >
       <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(3px)" />
       <ModalContent
         bg={surface}
         border="1px solid"
         borderColor={borderColor}
-        borderRadius="md"
+        borderRadius={{ base: 0, md: 'md' }}
         overflow="hidden"
-        mx={{ base: 4, md: 8 }}
+        mx={{ base: 0, md: 8 }}
       >
         <ModalCloseButton />
-        <ModalHeader px={{ base: 5, md: 8 }} pt={{ base: 6, md: 8 }} pb={4}>
-          <Stack spacing={4} maxW="780px">
-            <Text
-              fontSize="xs"
-              fontWeight="semibold"
-              color={labelColor}
-              textTransform="uppercase"
-            >
-              {t('selectedWork.caseStudy.eyebrow')}
-            </Text>
-            <Heading as="h3" size="lg">
-              {title}
-            </Heading>
-            <Text variant="description" fontSize="sm">
-              {t(`selectedWork.projects.${project.id}.caseStudy.summary`)}
-            </Text>
-            <ProjectTags tags={tags} />
-          </Stack>
+        {/* Desktop: fixed header. Hidden on mobile, where the same intro scrolls
+            inside the body (see below) so the images fill the full-screen sheet. */}
+        <ModalHeader
+          display={{ base: 'none', md: 'block' }}
+          px={{ base: 5, md: 8 }}
+          pt={{ base: 6, md: 8 }}
+          pb={4}
+        >
+          {caseStudyIntro}
         </ModalHeader>
 
-        <ModalBody px={{ base: 5, md: 8 }} py={2} pb={{ base: 5, md: 6 }}>
+        <ModalBody px={{ base: 5, md: 8 }} pt={{ base: 12, md: 2 }} pb={{ base: 5, md: 6 }}>
+          {/* Mobile-only: the intro scrolls with the content instead of pinning. */}
+          <Box display={{ base: 'block', md: 'none' }} mb={6}>
+            {caseStudyIntro}
+          </Box>
           <SimpleGrid columns={sectionColumns} spacing={4}>
-            {project.detailSections.map((section) => (
+            {project.detailSections.map((section) => {
+              const imageAlt = t(
+                `selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.imageAlt`
+              )
+
+              return (
               <Box
                 key={section.id}
                 border="1px solid"
@@ -370,17 +565,60 @@ const ProjectCaseStudyModal = ({
                 bg={surface}
               >
                 <Box
+                  role="button"
+                  tabIndex={0}
+                  aria-label={t('selectedWork.caseStudy.zoomImage')}
+                  onClick={(event) =>
+                    openLightbox(event, { src: section.image, alt: imageAlt })
+                  }
+                  onKeyDown={(event) =>
+                    handleImageKeyDown(event, { src: section.image, alt: imageAlt })
+                  }
                   bg={imageBg}
                   aspectRatio={4 / 3}
                   position="relative"
                   overflow="hidden"
+                  cursor="pointer"
+                  _focusVisible={{
+                    outline: '2px solid',
+                    outlineColor: accentColor,
+                    outlineOffset: '-2px',
+                  }}
+                  sx={{
+                    // Mirror ProjectCard's .cta-arrow: hidden by default, revealed on
+                    // hover/focus-visible. On touch (no hover) it stays faintly visible.
+                    '.zoom-affordance': {
+                      opacity: 0,
+                      transform: 'scale(0.9)',
+                      transition: `opacity 250ms ${PREMIUM_CUBIC}, transform 250ms ${PREMIUM_CUBIC}`,
+                    },
+                    '@media (hover: none)': {
+                      '.zoom-affordance': { opacity: 0.85, transform: 'scale(1)' },
+                    },
+                    '&:hover .zoom-affordance, &:focus-visible .zoom-affordance': {
+                      opacity: 1,
+                      transform: 'scale(1)',
+                    },
+                  }}
                 >
-                  <ProjectImage
-                    src={section.image}
-                    alt={t(
-                      `selectedWork.projects.${project.id}.caseStudy.sections.${section.id}.imageAlt`
-                    )}
-                  />
+                  <ProjectImage src={section.image} alt={imageAlt} />
+                  <Box
+                    className="zoom-affordance"
+                    aria-hidden
+                    position="absolute"
+                    top={2}
+                    right={2}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    boxSize={8}
+                    borderRadius="md"
+                    bg="blackAlpha.600"
+                    color="white"
+                    pointerEvents="none"
+                  >
+                    <Icon as={FiMaximize2} boxSize={4} />
+                  </Box>
                 </Box>
                 <Stack spacing={2} p={{ base: 4, md: 5 }}>
                   <Heading as="h4" size="sm">
@@ -393,7 +631,8 @@ const ProjectCaseStudyModal = ({
                   </Text>
                 </Stack>
               </Box>
-            ))}
+              )
+            })}
           </SimpleGrid>
         </ModalBody>
 
@@ -428,6 +667,13 @@ const ProjectCaseStudyModal = ({
         </ModalFooter>
       </ModalContent>
     </Modal>
+    <ImageLightbox
+      src={lightboxImage?.src ?? ''}
+      alt={lightboxImage?.alt ?? ''}
+      isOpen={Boolean(lightboxImage)}
+      onClose={closeLightbox}
+    />
+    </>
   )
 }
 

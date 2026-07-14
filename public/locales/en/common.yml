@@ -51,6 +51,7 @@ selectedWork:
     openCrmDemo: "Open CRM Demo"
   caseStudy:
     eyebrow: "Case study"
+    zoomImage: "Enlarge image"
   projects:
     scooter:
       title: "Scooter Rental"
